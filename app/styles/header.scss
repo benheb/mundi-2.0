@@ -1,11 +1,16 @@
 .header {
-  border-bottom: 1px solid #e5e5e5;
+  //border-bottom: 1px solid #e5e5e5;
   margin-bottom: 2em;
 
   /* Make the masthead heading the same height as the navigation */
   h1 {
     a {
-      color: $navbar-default-link-color;
+      color: #000;
+      font-family: 'Unica One', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 55px;
+      font-weight: bold;
+      letter-spacing: 7.4375px;
+      text-transform: uppercase;
       &:hover, &:focus, &:active {
         text-decoration: none;
       }
