@@ -1,0 +1,22 @@
+.header {
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 2em;
+
+  /* Make the masthead heading the same height as the navigation */
+  h1 {
+    a {
+      color: $navbar-default-link-color;
+      &:hover, &:focus, &:active {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 1em;
+  margin-top: 2em;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
