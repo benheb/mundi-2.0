@@ -12,7 +12,7 @@ There is a new page that administrators can add: a dashboard. This dashboard wil
 
 The narrative page would include more charts and a map of the data, along with text and pictures, if wanted. Users could interact with the charts and the maps to display different attributes, and could share the views. 
 
-User flow: ![flow](https://slack-files.com/files-tmb/T068ABVUL-F0AMSQK46-afb43c0fda/page-flow_1024.png)
+User flow as of 9/15: ![flow](https://slack-files.com/files-tmb/T068ABVUL-F0AMSQK46-afb43c0fda/page-flow_1024.png)
 
 
 # Opendata-tng
