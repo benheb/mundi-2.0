@@ -13,9 +13,11 @@
     "loader.js": "ember-cli/loader.js#3.2.1",
     "qunit": "~1.18.0",
     "moment": ">= 2.8.0",
-    "moment-timezone": ">= 0.1.0"
+    "moment-timezone": ">= 0.1.0",
+    "d3": "~3.5.6"
   },
   "devDependencies": {
-    "bootstrap-sass": "bootstrap-sass-official#~3.3.5"
+    "bootstrap-sass": "bootstrap-sass-official#~3.3.5",
+    "d3": "~3.5.6"
   }
 }
