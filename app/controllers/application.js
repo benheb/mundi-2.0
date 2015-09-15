@@ -18,8 +18,8 @@ export default Ember.Controller.extend({
   }.observes('currentPath'),
 
   actions: {
-    search: function() {
-      this.transitionToRoute('datasets', { queryParams: { q: this.get('q'), page: 1 } });
+    search: function(q) {
+      this.transitionToRoute('datasets', { queryParams: { q: q, page: 1 } });
     }
   }
 

@@ -11,20 +11,15 @@ export default Ember.Route.extend({
     }
   },
 
-  // actions: {
-  //   // queryParamsDidChange: function(/*params*/) {
-  //   //   // NOTE: this should not be necessary because we are using refreshModel above
-  //   //   // but it wasn't working even tho i know it can work: http://emberjs.jsbin.com/sazixodoxe#/datasets?page=
-  //   //   this.refresh();
-  //   },
-  //   gotoDataset: function (dataset) {
-  //     this.controllerFor('datasets').transitionToRoute('dataset', dataset);
-  //   }
-  // },
+  actions: {
+    gotoDataset: function (dataset) {
+      this.controllerFor('datasets').transitionToRoute('dataset', dataset);
+    }
+  },
 
   model: function (params) {
     // NOTE: I think this is a bug - queryParams are available on transition but params is an empty object
-    let ctrl = this.controllerFor('datasets/index');
+    let ctrl = this.controllerFor('datasets');
     let queryParams = {
       per_page: ctrl.get('perPage')
     };
@@ -38,11 +33,14 @@ export default Ember.Route.extend({
   // This method will be executed each time the model is reloaded.
   setupController: function(controller, model) {
     this._super(controller, model); // Do not forget this call
+
+    let ctrl = this.controllerFor('datasets');
     
-    // // NOTE: i don't know why we can't just call controller.___
-    // let ctrl = this.controllerFor('datasets');
-    controller.set('totalCount', model.meta.stats.total_count);
-    controller.set('count', model.meta.stats.count);
+    ctrl.set('page', +controller.get('page'));
+    ctrl.set('q', controller.get('q'));
+
+    ctrl.set('totalCount', model.meta.stats.total_count);
+    ctrl.set('count', model.meta.stats.count);
   }
 
 });
