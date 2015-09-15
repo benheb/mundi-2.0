@@ -12,6 +12,18 @@ var items = [{
   }, {
     title: "Dead Animal Collection",
     count: ""
+  }, {
+    title: "Streetlight Repair Investigation",
+    count: ""
+  }, {
+    title: "Illegal Dumping",
+    count: ""
+  }, {
+    title: "Tree Inspection",
+    count: ""
+  }, {
+    title: "Bulk Collection",
+    count: ""
 }];
 
 export default Ember.Route.extend({
@@ -30,7 +42,11 @@ function callAjax() {
     'Alley Repair',
     'Parking Meter Repair',
     'Pothole', 
-    'Dead Animal Collection'
+    'Dead Animal Collection',
+    'Streetlight Repair Investigation',
+    'Illegal Dumping',
+    'Tree Inspection',
+    'Bulk Collection'
   ];
 
   $.each(fields, function(i, field) {
