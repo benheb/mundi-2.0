@@ -1,0 +1,23 @@
+<form id="search-form" class="form-inline" {{action "search" on="submit"}} role="search">
+  <div class="col-xs-12 col-sm-5">
+    <div class="form-group" id="home-search-region">
+      <label for="umbrella-search-field">
+        Find
+      </label>
+      {{input value=q class="form-control" placeholder="" id="umbrella-search-field" autocomplete="off"}}
+    </div>
+  </div>
+  <div class="col-xs-9 col-sm-5">
+    <div class="form-group" id="location-region">
+      <div class="locator">
+        <label for="location-text">
+          Near
+        </label>
+        <input id="location-text" type="text" class="form-control" placeholder="" autocomplete="off">
+      </div><!-- /locator -->
+    </div><!-- /.form-group -->
+  </div>
+  <div class="col-xs-3 col-sm-2">
+    <button id="search-button" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+  </div>
+</form>
