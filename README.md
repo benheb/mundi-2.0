@@ -4,10 +4,15 @@
 
 **Goal:** To design open data around the individual and immediately put the data to work. 
 
-There will be six pages: a [**homepage**](https://github.com/ArcGIS/opendata-tng/issues/1) with five tabs across the top; [**catalog**](https://github.com/ArcGIS/opendata-tng/issues/2), [**my data**](https://github.com/ArcGIS/opendata-tng/issues/8), [**developers**](https://github.com/ArcGIS/opendata-tng/issues/3), [**help**](https://github.com/ArcGIS/opendata-tng/issues/4), and [**contact**](https://github.com/ArcGIS/opendata-tng/issues/5). These five pages are outlined in issues in this repo and open for comment and iterations during the week 9/8/2015. 
+There will be six pages: a [**homepage**](https://github.com/ArcGIS/opendata-tng/issues/1); **dashboard**, **data narratives**, [**my data**](https://github.com/ArcGIS/opendata-tng/issues/8), [**developers**](https://github.com/ArcGIS/opendata-tng/issues/3), [**help**](https://github.com/ArcGIS/opendata-tng/issues/4), and [**contact**](https://github.com/ArcGIS/opendata-tng/issues/5). These pages are outlined in issues in this repo and open for comment and iterations.
 
-![img_20150908_085717](https://cloud.githubusercontent.com/assets/3474250/9735307/d4b4b734-5607-11e5-98d4-1f8208e73482.jpg)
+The homepage remains as we know it to be - search function, dataset categories that lead to search results, whatever the organization wants to showcase. 
 
+There is a new page that administrators can add: a dashboard. This dashboard will have "blocks" for datasets -- they can be stats (for key performance indicators), charts, map views. Clicking on a dataset will take the user to that dataset's narrative ((example)[https://dashboard.edmonton.ca/en/stat/goals/mei7-q2k3/u8rv-dkj4/3v8e-jpxe]). 
+
+The narrative page would include more charts and a map of the data, along with text and pictures, if wanted. Users could interact with the charts and the maps to display different attributes, and could share the views. 
+
+User flow: ![flow](https://slack-files.com/files-tmb/T068ABVUL-F0AMSQK46-afb43c0fda/page-flow_1024.png)
 
 
 # Opendata-tng
