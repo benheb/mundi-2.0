@@ -1,6 +1,6 @@
 #!/bin/bash
 git branch -D gh-pages
-git push origin --delete gh-pages
+git push upstream --delete gh-pages
 git checkout -b gh-pages
 ember build --environment production
 git rm -rf app config tests
