@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import ajax from 'ic-ajax';
 
 var items = [{
     title: "Alley Repair",
@@ -49,15 +50,13 @@ function callAjax() {
     'Bulk Collection'
   ];
 
-  $.each(fields, function(i, field) {
-    $.when($.ajax({
+  fields.forEach(function (field, i) {
+    ajax({
       url: 'http://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_APPS/SR_30days_Open/MapServer/0/query?where=SERVICECODEDESCRIPTION+%3D+%27'+field+'%27&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=%5B%5D&returnGeometry=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=true&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&f=json',
-      type: 'GET',
-      async: false
-
-    })).then(function(result) {
-      var output = JSON.parse(result);
-      items[ i ].count = output.count.toLocaleString();
-    });
-  }); 
+      dataType: 'json'
+    })
+      .then(function (result) {
+        Ember.set(items[i], 'count', result.count);
+      });
+  });
 }
