@@ -6,11 +6,9 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('catalog');
-  this.route('my-data');
-  this.route('developers');
-  this.route('help');
-  this.route('contact');
+  this.route('dashboard');
+  this.resource('datasets', function () {});
+  this.resource('dataset', { path: '/datasets/:id' });
 });
 
 export default Router;
