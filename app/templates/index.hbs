@@ -1,39 +1,37 @@
-<div class="container">
-      <div class="row">
-        <div class="col-xs-12">
-          <form id="search-form" class="form-inline" action="/datasets" role="search">
-                <div class="col-xs-12 col-sm-5">
-                  <div class="form-group" id="home-search-region">
-  
-                      <label for="umbrella-search-field">
-                        Find
-                      </label> 
-                      <input type="text" class="form-control" placeholder="" name="q" id="umbrella-search-field" autocomplete="off">
-                  </div>
-                </div>
-                <div class="col-xs-9 col-sm-5">
-                  <div class="form-group" id="location-region">
-                      <div class="locator">
-      
-                          <label for="location-text">
-                            Near
-                          </label>
-                          <input id="location-text" type="text" class="form-control" placeholder="" autocomplete="off">
+<div class="row">
+  <div class="col-xs-12">
+    <form id="search-form" class="form-inline" action="/datasets" role="search">
+      <div class="col-xs-12 col-sm-5">
+        <div class="form-group" id="home-search-region">
+            <label for="umbrella-search-field">
+              Find
+            </label> 
+            <input type="text" class="form-control" placeholder="" name="q" id="umbrella-search-field" autocomplete="off">
+        </div>
+      </div>
+      <div class="col-xs-9 col-sm-5">
+        <div class="form-group" id="location-region">
+            <div class="locator">
 
-                    </div><!-- /locator -->
-                  </div><!-- /.form-group -->
-                </div>
-                <div class="col-xs-3 col-sm-2">
-                  <button id="search-button" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-                </div>
-            </form>
-          </div>
-	</div><!-- /.row -->
+                <label for="location-text">
+                  Near
+                </label>
+                <input id="location-text" type="text" class="form-control" placeholder="" autocomplete="off">
+
+          </div><!-- /locator -->
+        </div><!-- /.form-group -->
+      </div>
+      <div class="col-xs-3 col-sm-2">
+        <button id="search-button" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+      </div>
+    </form>
+  </div>
+</div><!-- /.row -->
 
 <div class="row text-block">
 	<div class="col-xs-12 text-center">
 		<h1>Search. Discover. Use.</h1>
-		<p>We want to ensure the District’s data is as open, discoverable and usable as possible in hopes of fostering greater participation and collaboration. Search the site's datasets by topic, or explore featured datasets or review the full list of DC Data sets.</p>
+		<p class="col-md-8 col-md-offset-2">We want to ensure the District’s data is as open, discoverable and usable as possible in hopes of fostering greater participation and collaboration. Search the site's datasets by topic, or explore featured datasets or review the full list of DC Data sets.</p>
 	</div>
 </div><!-- /.row -->
 <div class="row">
@@ -155,24 +153,6 @@
             <h2>Recreation<br /></h2>
         </div>
     </div>
-    <div class="col-xs-12 col-sm-6 col-md-2 ">
-        <div class="category-box text-center">
-            <span class="glyphicon glyphicon-road"></span>
-            <h2>Transportation<br /></h2>
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-2 ">
-        <div class="category-box text-center">
-            <span class="glyphicon glyphicon-random"></span>
-            <h2>Utility & Communication</h2>
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-2 ">
-        <div class="category-box text-center">
-            <span class="glyphicon glyphicon-picture"></span>
-            <h2>Orthos, Ariel Imagery, & Lidar</h2>
-        </div>
-    </div>
 </div><!-- /.row -->
 <div class="row text-block">
 	<div class="col-xs-12 col-sm-6 text-left">
@@ -189,5 +169,3 @@
 		<p>For years, the District of Columbia has provided public access to the Districts data through the Internet. The District is utilizing open source technology to increase public access to the vast amount of information it creates and receives from our agency partners. In doing so, we hope residents can make more informed decisions about their government and our community.</p>
 	</div>
 </div><!-- /.row -->
-</div><!-- /.container -->
-{{outlet}}
