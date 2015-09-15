@@ -2,9 +2,13 @@
 <p>Data collected from 311 service requests over the last 30 days in the District of Columbia</p>
 
 <div class="row" id="dashboard">
-  {{#each model as |item|}}
+  {{#each model.items as |item|}}
      {{#dashboard-item title=item.title}}
        <div class="dash-number">{{format-number item.count}}</div>
      {{/dashboard-item}}
   {{/each}}
+
+  <div class="col-md-6">{{dashboard-chart width=550 height=160 data=model.data}}</div>
+  <div class="col-md-6">{{dashboard-chart width=550 height=160 data=model.data}}</div>
+
 </div>
