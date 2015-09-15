@@ -1,0 +1,17 @@
+#dashboard {
+  .dash-card {
+    border:1px solid #EEE;
+    text-align: center;
+    min-height: 150px;
+    overflow: hidden;
+    height:auto;
+    padding:5px;
+    .dash-title {
+      font-family: Karla, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+    .dash-number {
+      font-size:3.5em;
+      font-weight: 600;
+    }
+  }
+}

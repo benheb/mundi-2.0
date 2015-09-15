@@ -1,3 +1,9 @@
-<h1>Dashboard...</h1>
+<h3 class="dash-title">Service Requests Last 30 Days</h3>
 
-{{outlet}}
+<div class="row" id="dashboard">
+  {{#each model as |item|}}
+     {{#dashboard-item title=item.title}}
+       <div class="dash-number">{{item.count}}</div>
+     {{/dashboard-item}}
+  {{/each}}
+</div>
