@@ -6,7 +6,8 @@ export default Ember.Controller.extend({
 
   bodyClass: null,
   subHeaders: {
-    'dashboard': 'Community Dashboard'
+    'dashboard': 'Community Dashboard',
+    'narrative': 'Dataset Narrative'
   },
   subHeader: '',
 

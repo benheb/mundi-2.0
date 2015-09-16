@@ -266,6 +266,27 @@ export default Ember.Component.extend({
   }),
 
   didInsertElement: function(){
+
+    this.chart.override = {
+      'marks': [
+        { 'properties': {
+            'hover': {'fill': { 'value': '#2B4888'}},
+            'update': {'fill': { 'value': '#2B4888'}}
+          }
+        }
+      ]
+    }
+
+    this.statusChart.override = {
+      'marks': [
+        { 'properties': {
+            'hover': {'fill': { 'value': '#2B4888'}},
+            'update': {'fill': { 'value': '#2B4888'}}
+          }
+        }
+      ]
+    }
+
     this.chart.show({ elementId: '#chart'});
     this.statusChart.show({ elementId: '#chart-status'});
   }

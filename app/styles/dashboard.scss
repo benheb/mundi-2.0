@@ -1,4 +1,7 @@
 #dashboard {
+  a {
+    color:#444;
+  }
   .dashboard-item {
     margin-bottom: 15px;
   }
@@ -9,6 +12,15 @@
     overflow: hidden;
     height:auto;
     padding:5px;
+    -webkit-transition: background-color 1000ms linear;
+    -moz-transition: background-color 1000ms linear;
+    -o-transition: background-color 1000ms linear;
+    -ms-transition: background-color 1000ms linear;
+    transition: background-color 1000ms linear;
+    &:hover {
+      background-color:#EEE;
+      cursor: pointer;
+    }
     .dash-title {
       font-family: Karla, 'Helvetica Neue', Helvetica, Arial, sans-serif;
     }
