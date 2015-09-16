@@ -1,69 +1,272 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  tagName: 'svg',
-  attributeBindings: 'width height'.w(),
-  margin: {top: 20, right: 20, bottom: 30, left: 40},
-  
-  w: function(){
-    return this.get('width') - this.get('margin.left') - this.get('margin.right');
-  }.property('width'),
-
-  h: function(){
-    return this.get('height') - this.get('margin.top') - this.get('margin.bottom');
-  }.property('height'),  
-
-  transformG: function(){
-    return "translate(" + this.get('margin.left') + "," + this.get('margin.top') + ")";
-  }.property(),
-    
-  transformX: function(){
-    return "translate(0,"+ this.get('h') +")";
-  }.property('h'),   
-
-  draw: function(){
-    var formatPercent = d3.format(".0%");
-    var width = this.get('w');
-    var height = this.get('h');
-    var data = this.get('data');
-    var svg = d3.select('#'+this.get('elementId'));
-    var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.1);
-    var y = d3.scale.linear().range([height, 0]);
-    var xAxis = d3.svg.axis().scale(x).orient("bottom");
-    var yAxis = d3.svg.axis().scale(y).orient("left").ticks(5).tickFormat(formatPercent);
-    
-    x.domain(data.map(function(d) { return d.letter; }));
-    y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
-
-    svg.select(".axis.x").call(xAxis);
-    svg.select(".axis.y").call(yAxis);
-
-    svg.select(".rects").selectAll("rect")
-      .data(data)
-    .enter().append("rect")
-      .attr("class", "bar")
-      .attr("x", function(d) { return x(d.letter); })
-      .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y(d.frequency); })
-      .attr("height", function(d) { return height - y(d.frequency); });
-  },
+  statusChart: new Cedar({
+    "type": "bar",
+    "specification": {
+      "inputs": [
+        { "name": "x", "type": [ "string" ], "required": true },
+        { "name": "y", "type": [ "numeric" ], "required": true }
+      ],
+      "query": {},
+      "template":{
+        "padding": "strict",
+        "axes": [
+          {
+            "type": "x",
+            "scale": "x",
+            "titleOffset": 45,
+            "title": "{x.label}",          
+            "properties": {
+              "title": {
+                "fontSize": {"value": 15},
+                "fill": {"value": "#999"},
+                "fontWeight": {"value": "normal"}
+              },          
+              "axis": {
+                 "stroke": {"value": "#dbdad9"},
+                 "strokeWidth": {"value": 1.5}
+              },
+              "ticks": {
+                 "stroke": {"value": "#dbdad9"}
+              },
+              "labels": {
+                "fill": {"value": "#999"},
+                "angle": {"value": -50},
+                "align": {"value": "right"},
+                "baseline": {"value": "middle"}
+              }
+            }
+          },
+          {
+            "type": "y",
+            "scale": "y",
+            "titleOffset": 45,
+            "title": "{y.label}",
+            "properties": {
+              "title": {
+                "fontSize": {"value": 15},
+                "fill": {"value": "#999"},
+                "fontWeight": {"value": "normal"}
+              },          
+              "axis": {
+                 "stroke": {"value": "#dbdad9"},
+                 "strokeWidth": {"value": 1.5}
+              },
+              "ticks": {
+                 "stroke": {"value": "#dbdad9"}
+              },
+              "labels": {
+                "fill": {"value": "#999"}
+              }
+            }
+          }      
+        ],
+        "data": [
+          {
+            "name": "table",
+            "format": {"property": "features"}
+          }
+        ],    
+        "marks": [
+          {
+            "from": {"data": "table"},
+            "properties": {
+              "enter": {
+              },
+              "update": {
+                "width": {"band": true, "offset": -1, "scale": "x"},
+                "x": {"field": "attributes.{x.field}", "scale": "x"},
+                "y": {"field": "attributes.{y.field}", "scale": "y"},
+                "y2": {"scale": "y", "value": 0 },            
+                "fill": {"value": "#0079c1"}
+              },
+              "hover": {
+                "fill": {"value": "#29b6ea"}
+              }
+            },
+            "type": "rect"
+          }
+        ],    
+        "scales": [
+          {
+            "domain": {
+              "data": "table",
+              "field": "attributes.{x.field}"
+            },
+            "name": "x",
+            "range": "width",
+            "type": "ordinal",
+            "padding": 0.25
+          },
+          {
+            "domain": {
+              "data": "table",
+              "field": "attributes.{y.field}"
+            },
+            "name": "y",
+            "nice": true,
+            "range": "height"
+          }
+        ]
+      }
+    },
+    "dataset": {
+      "url":"http://services.arcgis.com/bkrWlSKcjUDFDtgw/ArcGIS/rest/services/All_Service_Requests_Last_30_Days/FeatureServer/0",
+      "query": {
+        "groupByFieldsForStatistics": "STATUS_COD",
+        "outStatistics": [{
+          "statisticType": "count", 
+          "onStatisticField": "STATUS_COD", 
+          "outStatisticFieldName": "STATUS_COD_count"
+        }]
+      },
+      "mappings":{
+        "x": {"field":"STATUS_COD","label":"Status of Service Request"},
+        "y": {"field":"STATUS_COD_count","label":"Count"}
+      }
+    }
+  }),
+  chart: new Cedar({
+    "type": "bar-horizontal",
+    "specification": {
+      "inputs": [
+        { "name": "x", "type": [ "numeric", "string" ], "required": true },
+        { "name": "y", "type": [ "string" ], "required": true }
+      ],
+      "query": {
+        "orderByFields": "{x.field} DESC",
+        "groupByFieldsForStatistics": "{y.field}",
+        "outStatistics": [{
+            "statisticType": "sum",
+            "onStatisticField": "{x.field}",
+            "outStatisticFieldName": "{x.field}"
+        }]
+      },
+      "template":{
+        "padding": "strict",
+        "axes": [
+          {
+            "type": "x",
+            "scale": "x",
+            "titleOffset": 45,
+            "title": "{x.label}",
+            "tickPadding": 10,        
+            "properties": {
+              "title": {
+                "fontSize": {"value": 15},
+                "fill": {"value": "#999"},
+                "fontWeight": {"value": "normal"}
+              },
+              "axis": {
+                 "stroke": {"value": "#dbdad9"},
+                 "strokeWidth": {"value": 1.5}
+              },
+              "ticks": {
+                 "stroke": {"value": "#dbdad9"}
+              },
+              "labels": {
+                "fill": {"value": "#999"},
+                "angle": {"value": 0},
+                "baseline": {"value": "middle"}
+              }
+            }
+          },
+          {
+            "type": "y",
+            "scale": "y",
+            "titleOffset": 25,
+            "title": "{y.label}",
+            "padding": 0.25,
+            "properties": {
+              "title": {
+                "fontSize": {"value": 15},
+                "fill": {"value": "#999"},
+                "fontWeight": {"value": "normal"}
+              },
+              "axis": {
+                 "stroke": {"value": "#dbdad9"},
+                 "strokeWidth": {"value": 1.5}
+              },
+              "ticks": {
+                 "stroke": {"value": "#dbdad9"}
+              },
+              "labels": {
+                "fill": {"value": "#999"},
+                "angle": {"value": 0},
+                "baseline": {"value": "middle"}
+              }
+            }
+          }      
+        ],
+        "data": [
+          {
+            "name": "table",
+            "format": {"property": "features"}
+          }
+        ],    
+        "marks": [
+          {
+            "from": {"data": "table"},
+            "properties": {
+              "enter": {
+                "height": {"band": true, "offset": -1, "scale": "y"},
+                "y": {"scale": "y", "field": "attributes.{y.field}"},
+                "x2": {"scale": "x", "field": "attributes.{x.field}"},
+                "x": {"scale": "x", "value": 0 }
+              },
+              "hover": {
+                "fill": {"value": "#29b6ea"}
+              },
+              "update": {
+                "fill": {"value": "#0079c1"}
+              }
+            },
+            "type": "rect"
+          }
+        ],    
+        "scales": [
+          {
+            "domain": {
+              "data": "table",
+              "field": "attributes.{y.field}"
+            },
+            "name": "y",
+            "range": "height",
+            "type": "ordinal",
+            "padding": 0.25
+          },
+          {
+            "domain": {
+              "data": "table",
+              "field": "attributes.{x.field}"
+            },
+            "name": "x",
+            "nice": true,
+            "range": "width"
+          }
+        ]
+      }
+    },
+    "dataset": {
+      "url":"http://services.arcgis.com/bkrWlSKcjUDFDtgw/ArcGIS/rest/services/All_Service_Requests_Last_30_Days/FeatureServer/0",
+      "query": {
+        "groupByFieldsForStatistics": "ORGANIZATI",
+        "outStatistics": [{
+          "statisticType": "count", 
+          "onStatisticField": "ORGANIZATI", 
+          "outStatisticFieldName": "ORGANIZATI_count"
+        }]
+      },
+      "mappings":{
+        "y": {"field":"ORGANIZATI","label":"Organization"},
+        "x": {"field":"ORGANIZATI_count","label":"Number of Requests"}
+      }
+    }
+  }),
 
   didInsertElement: function(){
-    this.draw();
+    this.chart.show({ elementId: '#chart'});
+    this.statusChart.show({ elementId: '#chart-status'});
   }
 });
-
-
-var CHART_DATA = [
-  {  "letter":"A", "frequency":0.01492 },
-  {  "letter":"B", "frequency":0.08167 },
-  {  "letter":"C", "frequency":0.02780 },
-  {  "letter":"D", "frequency":0.04253 },
-  {  "letter":"E", "frequency":0.12702 },
-  {  "letter":"F", "frequency":0.02288 },
-  {  "letter":"G", "frequency":0.02022 },
-  {  "letter":"H", "frequency":0.06094 },
-  {  "letter":"I", "frequency":0.06973 },
-  {  "letter":"J", "frequency":0.00153 },
-  {  "letter":"K", "frequency":0.00747 }
-];

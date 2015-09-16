@@ -1,5 +1,3 @@
-<h3 class="dash-title">Service Requests Last 30 Days</h3>
-<p>Data collected from 311 service requests over the last 30 days in the District of Columbia</p>
 
 <div class="row" id="dashboard">
   {{#each model.items as |item|}}
@@ -8,7 +6,17 @@
      {{/dashboard-item}}
   {{/each}}
 
-  <div class="col-md-6">{{dashboard-chart width=550 height=160 data=model.data}}</div>
-  <div class="col-md-6">{{dashboard-chart width=550 height=160 data=model.data}}</div>
+  <div class="col-md-6">
+    <div class="dash-card">
+      <h4 class="dash-title">Status of 311 Requests DC (last 30 days)</h4>
+      {{dashboard-chart id="chart-status"}}
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="dash-card">
+      <h4 class="dash-title">311 Service Requests by Org (last 30 days)</h4>
+      <div id="chart"></div>
+    </div>
+  </div>
 
 </div>
