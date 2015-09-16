@@ -3,35 +3,51 @@ import ajax from 'ic-ajax';
 
 var items = [{
     title: "Alley Repair",
-    count: ""
+    count: "",
+    itemId: '14faf3d4bfbe4ca4a713bf203a985151_0'
   }, {
     title: "Pothole",
-    count: ""
+    count: "",
+    itemId: '14faf3d4bfbe4ca4a713bf203a985151_0'
   }, {
     title: "Dead Animal Collection",
-    count: ""
+    count: "",
+    itemId: '14faf3d4bfbe4ca4a713bf203a985151_0'
   }, {
     title: "Streetlight Repair Investigation",
-    count: ""
+    count: "",
+    itemId: '14faf3d4bfbe4ca4a713bf203a985151_0'
   }, {
     title: "Tree Inspection",
-    count: ""
+    count: "",
+    itemId: '14faf3d4bfbe4ca4a713bf203a985151_0'
   }, {
     title: 'Bulk Collection',
-    count: ''
+    count: '',
+    itemId: '14faf3d4bfbe4ca4a713bf203a985151_0'
   }, {
     title: 'Vision Zero Safety (Transportation) Reports',
-    count: ''
+    count: '',
+    itemId: '3f28bc3ad77f49079efee0ac05d8464c_0'
   },
   {
     title: 'Number of Green Sites and Resources',
-    count: ''
+    count: '',
+    itemId: '9927e456ac024b11811323812934edbb_12'
   }
 ];
 
 export default Ember.Route.extend({
+  actions: {
+    gotoNarrative: function (itemId) {
+      console.log('HERE?! item id', itemId);
+      this.controllerFor('dashboard').transitionToRoute('narrative', itemId);
+    }
+  },
+
   model: function() {
     callAjax();
+    console.log('items', items);
     return {'items': items};
   }
 });
