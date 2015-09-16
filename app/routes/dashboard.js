@@ -5,9 +5,6 @@ var items = [{
     title: "Alley Repair",
     count: ""
   }, {
-    title: "Parking Meter Repair",
-    count: ""
-  }, {
     title: "Pothole",
     count: ""
   }, {
@@ -17,39 +14,32 @@ var items = [{
     title: "Streetlight Repair Investigation",
     count: ""
   }, {
-    title: "Illegal Dumping",
-    count: ""
-  }, {
     title: "Tree Inspection",
     count: ""
   }, {
-    title: "Bulk Collection",
-    count: ""
-}];
-
-var data = [
-  {  "letter":"A", "frequency":0.01492 },
-  {  "letter":"B", "frequency":0.08167 },
-  {  "letter":"C", "frequency":0.02780 },
-  {  "letter":"D", "frequency":0.04253 },
-  {  "letter":"E", "frequency":0.12702 },
-  {  "letter":"F", "frequency":0.02288 },
-  {  "letter":"G", "frequency":0.02022 },
-  {  "letter":"H", "frequency":0.06094 },
-  {  "letter":"I", "frequency":0.06973 },
-  {  "letter":"J", "frequency":0.00153 },
-  {  "letter":"K", "frequency":0.00747 }
+    title: 'Bulk Collection',
+    count: ''
+  }, {
+    title: 'Vision Zero Safety (Transportation) Reports',
+    count: ''
+  },
+  {
+    title: 'Number of Green Sites and Resources',
+    count: ''
+  }
 ];
 
 export default Ember.Route.extend({
   model: function() {
     callAjax();
-    return {'items': items, 'data': data};
+    return {'items': items};
   }
 });
 
 function callAjax() {
 
+
+  //311 stats 
   $.when($.ajax({
     url: 'http://services.arcgis.com/bkrWlSKcjUDFDtgw/ArcGIS/rest/services/All_Service_Requests_Last_30_Days/FeatureServer/0/query?where=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Meter&outFields=&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=true&returnExtentOnly=false&returnDistinctValues=false&orderByFields=&groupByFieldsForStatistics=SERVICEC_1&outStatistics=%5B%7B%0D%0A++++%22statisticType%22%3A+%22count%22%2C%0D%0A++++%22onStatisticField%22%3A+%22SERVICEC_1%22%2C+%0D%0A++++%22outStatisticFieldName%22%3A+%22SERVICE_count%22%0D%0A%7D%5D&resultOffset=&resultRecordCount=10&returnZ=false&returnM=false&quantizationParameters=&f=json',
     type: 'GET',
@@ -65,5 +55,35 @@ function callAjax() {
       })
     });
   });
+
+
+  $.when($.ajax({
+    url: 'http://services.arcgis.com/bkrWlSKcjUDFDtgw/arcgis/rest/services/Vision_Zero_Safety_Transportation/FeatureServer/0/query?where=1%3D1&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Meter&outFields=&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=true&returnExtentOnly=false&returnDistinctValues=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&quantizationParameters=&f=json',
+    type: 'GET',
+    async: false
+
+  })).then(function(result) {
+    var output = JSON.parse(result);
+    $.each(items, function(j, item) {
+      if ( item.title === 'Vision Zero Safety (Transportation) Reports') {
+        Ember.set(item, 'count', output.count.toLocaleString());
+      }
+    });
+  });
+
+  $.when($.ajax({
+    url: 'http://services.arcgis.com/bkrWlSKcjUDFDtgw/arcgis/rest/services/Green_Sites_or_Resources/FeatureServer/0/query?where=1%3D1&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Meter&outFields=&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=true&returnExtentOnly=false&returnDistinctValues=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&quantizationParameters=&f=json',
+    type: 'GET',
+    async: false
+
+  })).then(function(result) {
+    var output = JSON.parse(result);
+    $.each(items, function(j, item) {
+      if ( item.title === 'Number of Green Sites and Resources') {
+        Ember.set(item, 'count', output.count.toLocaleString());
+      }
+    });
+  });
+
 
 }

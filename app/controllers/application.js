@@ -5,6 +5,10 @@ export default Ember.Controller.extend({
   q: '',
 
   bodyClass: null,
+  subHeaders: {
+    'dashboard': 'Community Dashboard'
+  },
+  subHeader: '',
 
   currentPathDidChange: function() {
     let path = this.get('currentPath');
@@ -14,7 +18,11 @@ export default Ember.Controller.extend({
     //   className += ' ' + parts[0];
     // }
     let className = 'page-' + parts[0];
+    let sub = this.subHeaders[parts[0]];
+
     this.set('bodyClass', className);
+    this.set('subHeader', sub);
+
   }.observes('currentPath'),
 
   actions: {
