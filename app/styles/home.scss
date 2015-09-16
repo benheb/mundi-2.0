@@ -7,6 +7,10 @@ h2 {
 	font-size: 26px;
 }
 
+h3 {
+  font-size: 20px;
+}
+
 /*** SEARCH BAR ------------------------- */
 #search-form {
   font-family: sans-serif ;
@@ -75,18 +79,31 @@ h2 {
     }
   }
 }
-/*** CTA ------------------------- */
+/*** Dashboard ------------------------- */
 .cta {
-	width: 50%;
+	width: 100%;
 	margin: 15px auto;
 	padding: 10px;
-	background-color: #2B4888;
-	color: #fff;
+	background-color: #D5DAE7;
+	color: #2B4888;
 	font-size: 18px;
 	border-radius: 5px;
   &:hover {
-    color: #fff;
+    color: #2B4888;
   }
+}
+
+.dashboard-box {
+  width: 100%;
+  margin: 10px;
+  padding: 10px;
+  background-color: #2B4888;
+  color: #fff;
+}
+
+.db-img {
+  margin-top: 18px;
+  border-radius: 15px;
 }
 
 /*** CATEGORIES ------------------------- */
