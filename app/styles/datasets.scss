@@ -1,3 +1,6 @@
+body {
+	font-family: 'Century Gothic';
+}
 .page-datasets {
   .table-responsive {
     min-height: 778px;
@@ -5,4 +8,96 @@
       cursor: pointer;
     }
   }
+}
+
+/*** Filters ----------------------- */
+#sidebar-left {
+  box-sizing: border-box;
+
+  #filter-search-results {
+  overflow-x: hidden;
+    .checkbox label {
+      display: block;
+      padding-left: 0px;
+      width: 100%;
+      margin: 5px auto;
+      color: #007AC2;
+      span {
+        font-weight: bold;
+      }
+    }
+    .checkbox input[type="checkbox"]{
+      display: none;
+    }
+    .filter-type-group {
+      .checkbox label {
+        padding-left: 20px;
+      }
+      .checkbox input[type="checkbox"] {
+      display: inline;
+      }
+    }
+    label.selected-checkbox {
+      background-color: lighten(#007AC2, 52);
+      border-left-color: darken(#007AC2, 10);
+      border-left-style: solid;
+      border-left-width: 5px;
+      width: 100%;
+      padding: 5px;
+      padding-left: 5px !important;
+      color: #000;
+      font-weight: normal;
+      input[type="checkbox"] {
+          display: none !important;
+        }
+    }
+    input {
+      margin-top: 5px;
+    }
+    .filter-headings {
+      border-top: 1px solid #ccc;
+      padding-top: 8px;
+      width: 100%;
+    }
+  }
+}
+
+/*** Search Results ----------------------- */
+#search-results {
+	list-style-type: none;
+	list-style-position: outside;
+	padding: 0px;
+	margin: 0px;
+
+	img {
+		width: 100px;
+		height: 70px;
+		border: 1px solid #b3b3b3;
+		margin: 30px 0px 30px 10px;
+	}
+
+	li {
+		margin-bottom: 15px;
+	}
+
+	.result-name {
+		font-weight: bold;
+		font-size: 20px;
+		margin-bottom: 10px;
+	}
+
+	.desc-blurb {
+	max-height: 50px;
+	overflow: hidden;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-size: 12px;
+	}
+
+	span {
+		margin-right: 15px;
+	}
+	span i {
+		color: #4d4d4d;
+	}
 }
