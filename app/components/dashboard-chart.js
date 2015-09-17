@@ -1,116 +1,62 @@
 import Ember from 'ember';
 
+var potholeData = {
+  features:[
+    {
+      "attributes": {
+        "Month": 'January',
+        "Potholes": 107
+      }
+    },
+    {
+      "attributes": {
+        "Month": 'February',
+        "Potholes": 120
+      }
+    },
+    {
+      "attributes": {
+        "Month": 'March',
+        "Potholes": 100
+      }
+    },
+    {
+      "attributes": {
+        "Month": 'April',
+        "Potholes": 190
+      }
+    },
+    {
+      "attributes": {
+        "Month": 'May',
+        "Potholes": 350
+      }
+    },
+    {
+      "attributes": {
+        "Month": 'June',
+        "Potholes": 260
+      }
+    },
+    {
+      "attributes": {
+        "Month": 'July',
+        "Potholes": 190
+      }
+    },
+    {
+      "attributes": {
+        "Month": 'August',
+        "Potholes":180
+      }
+    }
+  ]
+}
+
 export default Ember.Component.extend({
   statusChart: new Cedar({
     "type": "bar",
-    "specification": {
-      "inputs": [
-        { "name": "x", "type": [ "string" ], "required": true },
-        { "name": "y", "type": [ "numeric" ], "required": true }
-      ],
-      "query": {},
-      "template":{
-        "padding": "strict",
-        "axes": [
-          {
-            "type": "x",
-            "scale": "x",
-            "titleOffset": 45,
-            "title": "{x.label}",          
-            "properties": {
-              "title": {
-                "fontSize": {"value": 15},
-                "fill": {"value": "#999"},
-                "fontWeight": {"value": "normal"}
-              },          
-              "axis": {
-                 "stroke": {"value": "#dbdad9"},
-                 "strokeWidth": {"value": 1.5}
-              },
-              "ticks": {
-                 "stroke": {"value": "#dbdad9"}
-              },
-              "labels": {
-                "fill": {"value": "#999"},
-                "angle": {"value": -50},
-                "align": {"value": "right"},
-                "baseline": {"value": "middle"}
-              }
-            }
-          },
-          {
-            "type": "y",
-            "scale": "y",
-            "titleOffset": 45,
-            "title": "{y.label}",
-            "properties": {
-              "title": {
-                "fontSize": {"value": 15},
-                "fill": {"value": "#999"},
-                "fontWeight": {"value": "normal"}
-              },          
-              "axis": {
-                 "stroke": {"value": "#dbdad9"},
-                 "strokeWidth": {"value": 1.5}
-              },
-              "ticks": {
-                 "stroke": {"value": "#dbdad9"}
-              },
-              "labels": {
-                "fill": {"value": "#999"}
-              }
-            }
-          }      
-        ],
-        "data": [
-          {
-            "name": "table",
-            "format": {"property": "features"}
-          }
-        ],    
-        "marks": [
-          {
-            "from": {"data": "table"},
-            "properties": {
-              "enter": {
-              },
-              "update": {
-                "width": {"band": true, "offset": -1, "scale": "x"},
-                "x": {"field": "attributes.{x.field}", "scale": "x"},
-                "y": {"field": "attributes.{y.field}", "scale": "y"},
-                "y2": {"scale": "y", "value": 0 },            
-                "fill": {"value": "#0079c1"}
-              },
-              "hover": {
-                "fill": {"value": "#29b6ea"}
-              }
-            },
-            "type": "rect"
-          }
-        ],    
-        "scales": [
-          {
-            "domain": {
-              "data": "table",
-              "field": "attributes.{x.field}"
-            },
-            "name": "x",
-            "range": "width",
-            "type": "ordinal",
-            "padding": 0.25
-          },
-          {
-            "domain": {
-              "data": "table",
-              "field": "attributes.{y.field}"
-            },
-            "name": "y",
-            "nice": true,
-            "range": "height"
-          }
-        ]
-      }
-    },
+    "specification": 'https://raw.githubusercontent.com/Esri/cedar/develop/src/charts/bar.json',
     "dataset": {
       "url":"http://services.arcgis.com/bkrWlSKcjUDFDtgw/ArcGIS/rest/services/All_Service_Requests_Last_30_Days/FeatureServer/0",
       "query": {
@@ -129,125 +75,7 @@ export default Ember.Component.extend({
   }),
   chart: new Cedar({
     "type": "bar-horizontal",
-    "specification": {
-      "inputs": [
-        { "name": "x", "type": [ "numeric", "string" ], "required": true },
-        { "name": "y", "type": [ "string" ], "required": true }
-      ],
-      "query": {
-        "orderByFields": "{x.field} DESC",
-        "groupByFieldsForStatistics": "{y.field}",
-        "outStatistics": [{
-            "statisticType": "sum",
-            "onStatisticField": "{x.field}",
-            "outStatisticFieldName": "{x.field}"
-        }]
-      },
-      "template":{
-        "padding": "strict",
-        "axes": [
-          {
-            "type": "x",
-            "scale": "x",
-            "titleOffset": 45,
-            "title": "{x.label}",
-            "tickPadding": 10,        
-            "properties": {
-              "title": {
-                "fontSize": {"value": 15},
-                "fill": {"value": "#999"},
-                "fontWeight": {"value": "normal"}
-              },
-              "axis": {
-                 "stroke": {"value": "#dbdad9"},
-                 "strokeWidth": {"value": 1.5}
-              },
-              "ticks": {
-                 "stroke": {"value": "#dbdad9"}
-              },
-              "labels": {
-                "fill": {"value": "#999"},
-                "angle": {"value": 0},
-                "baseline": {"value": "middle"}
-              }
-            }
-          },
-          {
-            "type": "y",
-            "scale": "y",
-            "titleOffset": 25,
-            "title": "{y.label}",
-            "padding": 0.25,
-            "properties": {
-              "title": {
-                "fontSize": {"value": 15},
-                "fill": {"value": "#999"},
-                "fontWeight": {"value": "normal"}
-              },
-              "axis": {
-                 "stroke": {"value": "#dbdad9"},
-                 "strokeWidth": {"value": 1.5}
-              },
-              "ticks": {
-                 "stroke": {"value": "#dbdad9"}
-              },
-              "labels": {
-                "fill": {"value": "#999"},
-                "angle": {"value": 0},
-                "baseline": {"value": "middle"}
-              }
-            }
-          }      
-        ],
-        "data": [
-          {
-            "name": "table",
-            "format": {"property": "features"}
-          }
-        ],    
-        "marks": [
-          {
-            "from": {"data": "table"},
-            "properties": {
-              "enter": {
-                "height": {"band": true, "offset": -1, "scale": "y"},
-                "y": {"scale": "y", "field": "attributes.{y.field}"},
-                "x2": {"scale": "x", "field": "attributes.{x.field}"},
-                "x": {"scale": "x", "value": 0 }
-              },
-              "hover": {
-                "fill": {"value": "#29b6ea"}
-              },
-              "update": {
-                "fill": {"value": "#0079c1"}
-              }
-            },
-            "type": "rect"
-          }
-        ],    
-        "scales": [
-          {
-            "domain": {
-              "data": "table",
-              "field": "attributes.{y.field}"
-            },
-            "name": "y",
-            "range": "height",
-            "type": "ordinal",
-            "padding": 0.25
-          },
-          {
-            "domain": {
-              "data": "table",
-              "field": "attributes.{x.field}"
-            },
-            "name": "x",
-            "nice": true,
-            "range": "width"
-          }
-        ]
-      }
-    },
+    "specification": 'https://raw.githubusercontent.com/Esri/cedar/develop/src/charts/bar-horizontal.json',
     "dataset": {
       "url":"http://services.arcgis.com/bkrWlSKcjUDFDtgw/ArcGIS/rest/services/All_Service_Requests_Last_30_Days/FeatureServer/0",
       "query": {
@@ -264,9 +92,21 @@ export default Ember.Component.extend({
       }
     }
   }),
+  potholeChart: new Cedar({
+    "type": "bar",
+    "dataset":{
+      "data": potholeData,
+      "mappings":{
+        "x": {"field":"Month","label":"Month (2015)"},
+        "y": {"field":"Potholes","label":"Potholes Filled"}
+      }
+    },
+    "specification": 'https://raw.githubusercontent.com/Esri/cedar/develop/src/charts/bar.json'
+  }),
 
-  didInsertElement: function(){
 
+  didInsertElement: function(param){ 
+    
     this.chart.override = {
       'marks': [
         { 'properties': {
@@ -287,8 +127,6 @@ export default Ember.Component.extend({
       ]
     }
 
-    console.log('show me!');
-    this.chart.show({ elementId: '#chart'});
-    this.statusChart.show({ elementId: '#chart-status'});
+    this[this.element.id].show({ elementId: '#'+this.element.id, height: 300 });
   }
 });
