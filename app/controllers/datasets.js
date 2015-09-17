@@ -21,6 +21,14 @@ export default Ember.Controller.extend({
     return Math.ceil(this.get('totalCount') / this.get('perPage'));
   }.property('totalCount'),
 
+  showPagination: function () {
+    return this.get('totalPages') > 1;
+  }.property('totalPages'),
+
+  showRequestDataset: function () {
+    return this.get('totalCount') === 0;
+  }.property('totalCount'),  
+
   prevPage: function() {
     return this.get('page') - 1;
   }.property('page'),

@@ -105,50 +105,58 @@
         </form><!-- /filter-search-results -->
     </aside>
   </div>
+
+
   <div class="col-xs-12 col-sm-9">
-  <h2>
-      Your search for <em>"{{q}}"</em> yielded {{format-number totalCount}} datasets
-  </h2>
-  <ul id="search-results">
-      {{outlet}}
-  </ul>
+    <h2>
+        Your search for <em>"{{q}}"</em> yielded {{format-number totalCount}} datasets
+    </h2>
+    <ul id="search-results">
+        {{outlet}}
+    </ul>
 
+    {{#if showPagination}}
+      <nav>
+        <ul class="pagination">
+          {{!-- If we're on the first page, do not display the link --}}
+          {{#if isFirstPage}}
+            <li class="disabled">
+              <a>&laquo;</a>
+            </li>
+          {{else}}
+            <li>
+              {{#link-to (query-params page=prevPage)}}&laquo;{{/link-to}}
+            </li>
+          {{/if}}
 
-<nav>
-  <ul class="pagination">
-    {{!-- If we're on the first page, do not display the link --}}
-    {{#if isFirstPage}}
-      <li class="disabled">
-        <a>&laquo;</a>
-      </li>
-    {{else}}
-      <li>
-        {{#link-to (query-params page=prevPage)}}&laquo;{{/link-to}}
-      </li>
+          {{!--
+            For each page, display a link leading to it.
+            We could be smart and disable the link for the current page,
+            just like we're doing for the "previous"/"next" links.
+          --}}
+          {{#each pageRange as |num|}}
+            <li class="{{num.className}}">
+              {{#link-to (query-params page=num.page)}}{{num.page}}{{/link-to}}
+            </li>
+          {{/each}}
+
+          {{!-- If we're on the last page, do not display the link --}}
+          {{#if isLastPage}}
+            <li class="disabled">
+              <a>&raquo;</a>
+            </li>
+          {{else}}
+            <li>
+              {{#link-to (query-params page=nextPage)}}&raquo;{{/link-to}}
+            </li>
+          {{/if}}
+        </ul>
+      </nav>
     {{/if}}
 
-    {{!--
-      For each page, display a link leading to it.
-      We could be smart and disable the link for the current page,
-      just like we're doing for the "previous"/"next" links.
-    --}}
-    {{#each pageRange as |num|}}
-      <li class="{{num.className}}">
-        {{#link-to (query-params page=num.page)}}{{num.page}}{{/link-to}}
-      </li>
-    {{/each}}
-
-    {{!-- If we're on the last page, do not display the link --}}
-    {{#if isLastPage}}
-      <li class="disabled">
-        <a>&raquo;</a>
-      </li>
-    {{else}}
-      <li>
-        {{#link-to (query-params page=nextPage)}}&raquo;{{/link-to}}
-      </li>
+    {{#if showRequestDataset}}
+      {{od-request-dataset}}
     {{/if}}
-  </ul>
-</nav>
-</div><!-- /col -->
+
+  </div><!-- /col -->
 </div><!-- /row -->
