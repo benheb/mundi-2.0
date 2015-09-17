@@ -25,8 +25,12 @@ var json = {
 export default Ember.Route.extend({
 
   model: function (params) {
-    //return this.store.findRecord('dataset', params.id);
-    return json[params.id];
-  }
+    return this.store.findRecord('dataset', params.id);
+  },
 
+  setupController: function(controller, model) {
+    this._super(controller, model);
+    controller.set('page', json[model.get('id')]);
+  }
+  
 });

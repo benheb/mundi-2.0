@@ -12,24 +12,28 @@
   </div>
   <div id="feature1" class="narrative-feature-box col-md-6">
     <h4 class="narrative-feature-title">
-      {{model.section1.feature1.feature_title}}
+      {{page.section1.feature1.feature_title}}
     </h4>
     <span class="narrative-feature-stat">
-      {{model.section1.feature1.feature_number}}
+      {{page.section1.feature1.feature_number}}
     </span>
     <span class="narrative-feature-sub-title">
-      {{{model.section1.feature1.feature_sub_title}}}
+      {{{page.section1.feature1.feature_sub_title}}}
     </span>
   </div>
 
   <div id="feature2" class="narrative-feature-box col-md-6">
     <h4 class="narrative-feature-title">
-      {{model.section1.feature2.feature_title}}
+      {{page.section1.feature2.feature_title}}
     </h4>
-    <!-- <div id="{{model.section1.feature2.feature_chart_id}}"></div> -->
-    {{dashboard-chart id=model.section1.feature2.feature_chart_id}}
+    <!-- <div id="{{page.section1.feature2.feature_chart_id}}"></div> -->
+    {{dashboard-chart id=page.section1.feature2.feature_chart_id}}
   </div>
 
+</div>
+
+<div class="row">
+  {{esri-map model=model id="narrative-map"}}
 </div>
 
 {{outlet}}

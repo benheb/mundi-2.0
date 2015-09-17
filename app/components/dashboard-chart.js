@@ -127,7 +127,6 @@ export default Ember.Component.extend({
       ]
     }
 
-    console.log('this[this.element.id]', this[this.element.id]);
     this[this.element.id].show({ elementId: '#'+this.element.id, height: 300 });
   }
 });
