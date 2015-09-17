@@ -5,3 +5,21 @@
   font-weight: 700;
   font-size:2.8em;
 }
+
+#narrative-map {
+  height:400px;
+  width:100%;
+  background:#FEFEFE;
+  border:1px solid #EEE;
+  color:#999;
+  margin-top:40px;
+  overflow: hidden;
+  margin-bottom:40px;
+}
+
+#narrative-description {
+  width: 100%;
+  text-align: center;
+  padding: 1%;
+  display: block;
+}
