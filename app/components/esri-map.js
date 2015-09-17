@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import Map from 'esri/Map';
 import MapView from 'esri/views/MapView';
+import SceneView from 'esri/views/SceneView';
 import FeatureLayer from 'esri/layers/FeatureLayer';
 import PopupTemplate from 'esri/widgets/PopupTemplate';
 import Extent from 'esri/geometry/Extent';
