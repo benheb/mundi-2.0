@@ -14,7 +14,8 @@ export default Ember.Component.extend({
     let dataset = this.get('model');
 
     let mapOpts = {
-      basemap: 'dark-gray'
+      basemap: 'dark-gray',
+      smartNavigation: false
     };
 
     let map = new Map(mapOpts);
