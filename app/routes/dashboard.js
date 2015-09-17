@@ -1,39 +1,38 @@
 import Ember from 'ember';
 import ajax from 'ic-ajax';
 
-var items = [{
-    title: "Alley Repair",
-    count: "",
-    itemId: '14faf3d4bfbe4ca4a713bf203a985151_0'
-  }, {
-    title: "Pothole",
-    count: "",
-    itemId: '14faf3d4bfbe4ca4a713bf203a985151_0'
-  }, {
-    title: "Dead Animal Collection",
-    count: "",
-    itemId: '14faf3d4bfbe4ca4a713bf203a985151_0'
-  }, {
-    title: "Streetlight Repair Investigation",
-    count: "",
-    itemId: '14faf3d4bfbe4ca4a713bf203a985151_0'
-  }, {
-    title: "Tree Inspection",
-    count: "",
-    itemId: '14faf3d4bfbe4ca4a713bf203a985151_0'
-  }, {
-    title: 'Bulk Collection',
+var items = [
+  {
+    title: 'Currently in D.C.',
     count: '',
-    itemId: '14faf3d4bfbe4ca4a713bf203a985151_0'
+    itemId: '',
+    description: ''
   }, {
-    title: 'Vision Zero Safety (Transportation) Reports',
+    title: "311 Service Requests",
+    count: "",
+    itemId: '14faf3d4bfbe4ca4a713bf203a985151_0',
+    description: 'in the past 30 days'
+  }, {
+    title: 'Key Performan Indicators',
+    count: '744',
+    itemId: 'aab8213fd7de4e548ffecdd4820815a3_0',
+    description: '<i class="glyphicon glyphicon-arrow-up"></i> up from last year'
+  }, {
+    title: 'Crime Incidents',
+    count: '1,208',
+    itemId: '',
+    description: '<i class="glyphicon glyphicon-arrow-down"></i> down from last month'
+  }, {
+    title: 'Vision Zero',
     count: '',
-    itemId: '3f28bc3ad77f49079efee0ac05d8464c_0'
+    itemId: '3f28bc3ad77f49079efee0ac05d8464c_0',
+    description: 'safety reports in the past three months'
   },
   {
-    title: 'Number of Green Sites and Resources',
+    title: 'Green Sites',
     count: '',
-    itemId: '9927e456ac024b11811323812934edbb_12'
+    itemId: '9927e456ac024b11811323812934edbb_12',
+    description: 'green amenities in the district'
   }
 ];
 
@@ -55,21 +54,23 @@ export default Ember.Route.extend({
 function callAjax() {
 
 
+  $.getJSON( "http://api.wunderground.com/api/2d16ecfa44430b7f/conditions/q/DC/Washington.json", function( data ) {
+    var temp = data.current_observation.temp_f;
+    var weather = data.current_observation.weather;
+    Ember.set(items[0], 'count', Math.round(temp) + '&deg;');
+    Ember.set(items[0], 'description', 'Weather: '+ weather);
+  });
+
+
   //311 stats 
   $.when($.ajax({
-    url: 'http://services.arcgis.com/bkrWlSKcjUDFDtgw/ArcGIS/rest/services/All_Service_Requests_Last_30_Days/FeatureServer/0/query?where=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Meter&outFields=&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=true&returnExtentOnly=false&returnDistinctValues=false&orderByFields=&groupByFieldsForStatistics=SERVICEC_1&outStatistics=%5B%7B%0D%0A++++%22statisticType%22%3A+%22count%22%2C%0D%0A++++%22onStatisticField%22%3A+%22SERVICEC_1%22%2C+%0D%0A++++%22outStatisticFieldName%22%3A+%22SERVICE_count%22%0D%0A%7D%5D&resultOffset=&resultRecordCount=10&returnZ=false&returnM=false&quantizationParameters=&f=json',
+    url: 'http://services.arcgis.com/bkrWlSKcjUDFDtgw/ArcGIS/rest/services/All_Service_Requests_Last_30_Days/FeatureServer/0/query?where=1%3D1&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Meter&outFields=&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=true&returnExtentOnly=false&returnDistinctValues=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&resultOffset=&resultRecordCount=10&returnZ=false&returnM=false&quantizationParameters=&f=json',
     type: 'GET',
     async: false
 
   })).then(function(result) {
     var output = JSON.parse(result);
-    $.each(output.features, function(i, feature) {
-      $.each(items, function(j, item) {
-        if ( feature.attributes.SERVICEC_1 === item.title ) {
-          Ember.set(item, 'count', feature.attributes.SERVICE_count.toLocaleString());
-        }
-      })
-    });
+    Ember.set(items[1], 'count', output.count.toLocaleString());
   });
 
 
@@ -81,7 +82,7 @@ function callAjax() {
   })).then(function(result) {
     var output = JSON.parse(result);
     $.each(items, function(j, item) {
-      if ( item.title === 'Vision Zero Safety (Transportation) Reports') {
+      if ( item.title === 'Vision Zero') {
         Ember.set(item, 'count', output.count.toLocaleString());
       }
     });
@@ -95,7 +96,7 @@ function callAjax() {
   })).then(function(result) {
     var output = JSON.parse(result);
     $.each(items, function(j, item) {
-      if ( item.title === 'Number of Green Sites and Resources') {
+      if ( item.title === 'Green Sites') {
         Ember.set(item, 'count', output.count.toLocaleString());
       }
     });

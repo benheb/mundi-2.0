@@ -1,22 +1,26 @@
 
-<div class="row" id="dashboard">
-  {{#each model.items as |item|}}
-     {{#dashboard-item title=item.title itemId=item.itemId action="gotoNarrative"}}
-       <div class="dash-number">{{format-number item.count}}</div>
-     {{/dashboard-item}}
-  {{/each}}
-
-  <div class="col-md-6">
-    <div class="dash-card">
-      <h4 class="dash-title">Status of 311 Requests DC (last 30 days)</h4>
-      {{dashboard-chart id="chart-status"}}
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="dash-card">
-      <h4 class="dash-title">311 Service Requests by Org (last 30 days)</h4>
-      <div id="chart"></div>
-    </div>
+<div id="dashboard">
+  <div class="row">
+    {{#each model.items as |item|}}
+       {{#dashboard-item title=item.title itemId=item.itemId action="gotoNarrative"}}
+         <div class="dash-number">{{{format-number item.count}}}</div>
+         <div class="dash-description">{{{item.description}}}</div>
+       {{/dashboard-item}}
+    {{/each}}
   </div>
 
+  <div class="row">
+    <div class="col-md-6">
+      <div class="dash-card">
+        <h4 class="dash-title">Status of 311 Requests DC (last 30 days)</h4>
+        {{dashboard-chart id="chart-status"}}
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="dash-card">
+        <h4 class="dash-title">311 Service Requests by Org (last 30 days)</h4>
+        <div id="chart"></div>
+      </div>
+    </div>
+  </div>
 </div>
