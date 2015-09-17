@@ -13,7 +13,7 @@ var items = [
     itemId: '14faf3d4bfbe4ca4a713bf203a985151_0',
     description: 'in the past 30 days'
   }, {
-    title: 'Key Performan Indicators',
+    title: 'Key Performance Indicators',
     count: '744',
     itemId: 'aab8213fd7de4e548ffecdd4820815a3_0',
     description: '<i class="glyphicon glyphicon-arrow-up"></i> up from last year'
@@ -22,6 +22,16 @@ var items = [
     count: '1,208',
     itemId: '',
     description: '<i class="glyphicon glyphicon-arrow-down"></i> down from last month'
+  }, {
+    title: 'Capital Projects',
+    count: '69',
+    itemId: 'ff2e0d5bcdda4c7d93dd36051cd79521_24',
+    description: 'projects from 5 agencies'
+  }, {
+    title: 'Public Schools',
+    count: '42,240',
+    itemId: '4ac321b2d409438ebd76a6569ad94034_5',
+    description: 'students enrolled'
   }, {
     title: 'Vision Zero',
     count: '',
