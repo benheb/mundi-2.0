@@ -23,3 +23,20 @@
   padding: 1%;
   display: block;
 }
+
+.narrative-feature-box {
+  .narrative-feature-title {
+  }
+  .narrative-feature-sub-title {
+    font-size: 1.3em;
+    margin-left:-0.5em;
+  }
+  .narrative-feature-stat {
+    font-size: 11.5em;
+    margin-top: -48px;
+    font-weight: 500;
+    color: #444;
+    font-family: Karla, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    display: inline-block;
+  }
+}

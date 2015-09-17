@@ -1,9 +1,35 @@
 
-<h1 id="narrative-header"> {{model.dataset}} </h1>
+<h1 id="narrative-header"> {{model.name}} </h1>
 
 <span id="narrative-description">This data layer shows 311 Service Requests in the last 30 days for all service request types.</span>
 
-{{esri-map id="narrative-map" model=model.dataset}}
 
+<div class="row">
+  <div class="col-md-12">
+    <h2>
+      {{model.section1.section_title}}
+    </h2>
+  </div>
+  <div id="feature1" class="narrative-feature-box col-md-6">
+    <h4 class="narrative-feature-title">
+      {{model.section1.feature1.feature_title}}
+    </h4>
+    <span class="narrative-feature-stat">
+      {{model.section1.feature1.feature_number}}
+    </span>
+    <span class="narrative-feature-sub-title">
+      {{{model.section1.feature1.feature_sub_title}}}
+    </span>
+  </div>
+
+  <div id="feature2" class="narrative-feature-box col-md-6">
+    <h4 class="narrative-feature-title">
+      {{model.section1.feature2.feature_title}}
+    </h4>
+    <!-- <div id="{{model.section1.feature2.feature_chart_id}}"></div> -->
+    {{dashboard-chart id=model.section1.feature2.feature_chart_id}}
+  </div>
+
+</div>
 
 {{outlet}}
