@@ -287,6 +287,7 @@ export default Ember.Component.extend({
       ]
     }
 
+    console.log('show me!');
     this.chart.show({ elementId: '#chart'});
     this.statusChart.show({ elementId: '#chart-status'});
   }
