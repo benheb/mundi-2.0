@@ -4,7 +4,7 @@
     <img src="{{dataset.thumbnailUrl}}" alt="thumbnail" class="pull-right" />
     <br />Shared by <a href="#">{{dataset.owner}}</a> from <em>{{dataset.mainGroupTitle}}</em>. 
     Updated: {{moment-from-now dataset.updatedAt}}.
-    <br /><div class="desc-blurb">{{dataset.description}}</div>
+    <br /><div class="desc-blurb">{{sanitize-html dataset.description}}</div>
     <span class="favorites"><i class="glyphicon glyphicon-star"></i> Favorites</span>
     <span class="license"><i class="glyphicon glyphicon-lock"></i> License</span>
     <span class="type"><i class="glyphicon glyphicon-file"></i> {{dataset.itemType}}</span>
