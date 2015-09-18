@@ -1,0 +1,9 @@
+<div class="form-group filter-tags-group">
+  <label class="filter-headings">{{title}}</label>
+  <div class="checkbox">
+    {{#each viewModels as |item|}}
+      {{od-results-filter-item action="change" model=item}}
+    {{/each}}
+    <a href="#" {{action "toggleShowAll"}}>{{showMoreLabel}} <i class="glyphicon {{showMoreClass}}"></i></a>
+  </div>
+</div>

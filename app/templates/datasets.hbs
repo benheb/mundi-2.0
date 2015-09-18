@@ -22,28 +22,7 @@
                 <a href="#">Show More <i class="icon-sort-down-2"></i></a>
             </div><!-- /checkbox -->
           </div><!-- /form-group -->
-          <div class="form-group filter-tags-group">
-            <label class="filter-headings">Tags</label>
-            <div class="checkbox">
-                <label>
-                  <input type="checkbox" value="">
-                  Natural Energy <span>(33)</span>
-                </label>
-                <label>
-                  <input type="checkbox" value="">
-                  Nuclear Power Plants <span>(12)</span>
-                </label>
-                <label>
-                  <input type="checkbox" value="">
-                  Coal Mining <span>(6)</span>
-                </label>
-                 <label>
-                  <input type="checkbox" value="">
-                  Fracking <span>(2)</span>
-                </label>
-                <a href="#">Show More <i class="icon-sort-down-2"></i></a>
-            </div><!-- /checkbox -->
-          </div><!-- /form-group -->
+          {{od-results-filter title="Tags" type="tags" model=tags action="doSearch"}}
           <div class="form-group filter-categories-group">
             <label class="filter-headings">Categories</label>
             <div class="checkbox">

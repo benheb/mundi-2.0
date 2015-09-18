@@ -8,6 +8,9 @@ export default Ember.Route.extend({
     },
     q: {
       refreshModel: true
+    },
+    keyword: {
+      refreshModel: true
     }
   },
 
@@ -18,7 +21,6 @@ export default Ember.Route.extend({
   },
 
   model: function (params) {
-    // NOTE: I think this is a bug - queryParams are available on transition but params is an empty object
     let ctrl = this.controllerFor('datasets');
     let queryParams = {
       per_page: ctrl.get('perPage')
@@ -26,21 +28,42 @@ export default Ember.Route.extend({
     if (params) {
       queryParams = Ember.merge(queryParams, params);
     }
+    
     return this.store.query('dataset', queryParams);
   },
 
   // Here, we're passing metadata to the controller
   // This method will be executed each time the model is reloaded.
-  setupController: function(controller, model) {
+  setupController: function(controller, model, queryParams) {
     this._super(controller, model); // Do not forget this call
 
     let ctrl = this.controllerFor('datasets');
-    
-    ctrl.set('page', +controller.get('page'));
-    ctrl.set('q', controller.get('q'));
 
-    ctrl.set('totalCount', model.meta.stats.total_count);
-    ctrl.set('count', model.meta.stats.count);
+    // TODO: this should be refactored
+    var urlTags = queryParams.keyword || queryParams.queryParams.keyword || '';
+    urlTags = urlTags.split(',').map(function (item) { return item.trim(); });
+    var tags = model.meta.stats.top_tags
+      .map(function (item) {
+        item.checked = false;
+        return item;
+      });
+
+    urlTags.forEach(function (item) {
+      if (item) {
+        tags.unshift({
+          name: item,
+          checked: true
+        });
+      }
+    });
+
+    ctrl.setProperties({
+      page: +controller.get('page'),
+      q: controller.get('q'),
+      totalCount: model.meta.stats.total_count,
+      count: model.meta.stats.count,
+      tags: tags
+    });
   }
 
 });
