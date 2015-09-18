@@ -27,7 +27,7 @@
 }
 
 .container .jumbotron {
-	//position: relative;
+	position: relative;
 	height: 480px;
 	width: 100%;
 	padding: 0px;
@@ -35,10 +35,10 @@
 }
 
 .map-goes-here {
-	//position: absolute;
-	//background-image: url('../images/map-placeholder.png');
-	//background-size: cover;
-	//background-position: top center;
+	position: absolute;
+	background-image: url('../images/map-placeholder.png');
+	background-size: cover;
+	background-position: top center;
 	height: 100%;
 	width: 100%;
 }
@@ -111,12 +111,28 @@ img.thumb {
 	margin-right: 15px;
 }
 
+#field-desc {
+	.name {
+		text-align: right;
+		font-weight: bold;
+		padding-right: 15px;
+	}
+	th:last-child {
+		font-weight: normal;
+	}
+}
+
 .right-sidebar {
 	h2 {
 		font-size: 20px;
 	}
 	.placeholder-img {
 		margin-right: 10px;
+	}
+	.metadata span {
+		background-color: #4d4d4d;
+		color: #fff;
+		padding: 4px;
 	}
 }
 

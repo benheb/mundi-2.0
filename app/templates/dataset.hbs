@@ -14,14 +14,16 @@
 	</div>
 </nav>
 
+<!--
   <div class="row" style="height: 480px">
     {{esri-map model=model}}
   </div>
+ -->
 
-
-<!--
 <div class="jumbotron">
-	<div class="map-goes-here">
+
+	<div class="map-goes-here"></div>
+		
 		<div class="container">
 		<div class="dropdown pull-right">
 		  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -48,8 +50,7 @@
 		</ul>
 		</div>
 	</div>
-  </div>
-</div>-->
+</div>
 
 <div class="row">
 		<div class="col-xs-12 col-sm-8 page-body">
@@ -69,59 +70,59 @@
 				<table id="field-desc">
 					<tbody>
 						<tr>
-							<th>Attribute</th>
+							<th class="name">Attribute</th>
 							<th>Description</th>
 						</tr>
 						<tr>
-							<td>Service Code</td>
+							<td class="name">Service Code</td>
 							<td>The code associated with the specific request, used for internal tracking</td>
 						</tr>
 						<tr>
-							<td>Service Code Description</td>
+							<td class="name">Service Code Description</td>
 							<td>Readable description of what the code means</td>
 						</tr>
 						<tr>
-							<td>Service Type</td>
+							<td class="name">Service Type</td>
 							<td>The category the request falls under</td>
 						</tr>
 						<tr>
-							<td>Organization Acronym</td>
+							<td class="name">Organization Acronym</td>
 							<td>The agency that will respond to the request</td>
 						</tr>
 						<tr>
-							<td>Service Call Count</td>
+							<td class="name">Service Call Count</td>
 							<td>How many times this particular request was made</td>
 						</tr>
 						<tr>
-							<td>Add Date</td>
+							<td class="name">Add Date</td>
 							<td>When the request was added to the system</td>
 						</tr>
 						<tr>
-							<td>Resolution Date</td>
+							<td class="name">Resolution Date</td>
 							<td>When the request was resolved</td>
 						</tr>
 						<tr>
-							<td>Service Due Date</td>
+							<td class="name">Service Due Date</td>
 							<td>When the request is due to be resolved</td>
 						</tr>
 						<tr>
-							<td>Service Order Date</td>
+							<td class="name">Service Order Date</td>
 							<td>When the service was ordered for the request</td>
 						</tr>
 						<tr>
-							<td>Service Order Status</td>
+							<td class="name">Service Order Status</td>
 							<td>The current status of the request</td>
 						</tr>
 						<tr>
-							<td>Priority</td>
+							<td class="name">Priority</td>
 							<td>The prioirty level of the request, standard or high</td>
 						</tr>
 						<tr>
-							<td>Street Address</td>
+							<td class="name">Street Address</td>
 							<td>The street address of the request</td>
 						</tr>
 						<tr>
-							<td>Details</td>
+							<td class="name">Details</td>
 							<td>Any additional details included with the request</td>
 						</tr>
 					</tbody>
@@ -164,10 +165,10 @@
 				<br /><br />
 				<button class="btn btn-default">Bookmark This</button>
 			</div>
-			<div class="col-xs-12">
+			<div class="col-xs-12 metadata">
 			<h2>Details</h2>
-			<p><span class="badge">{{model.displayFields}}</span> Attributes</p>
-			<p><span class="badge">{{model.recordCount}}</span> Rows</p>
+			<p><span>244</span> Attributes</p>
+			<p><span>{{model.recordCount}}</span> Rows</p>
 			<p><a href="{{model.metadataUrl}}">Metadata</a></p>
 			<p><a href="#">License</a></p>
 			</div>
