@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   q: '',
 
   actions: {
-    search: function () {
+    search () {
       this.sendAction('action', this.get('q'));
     }
   }

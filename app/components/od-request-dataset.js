@@ -10,23 +10,23 @@ export default Ember.Component.extend({
 
   disableButton: false,
 
-  _setShowForm: function (val) {
+  _setShowForm (val) {
     this.set('showRequestButton', !val);
     this.set('showForm', val);
     this.set('showConfirmation', !val);
   },
 
-  _setShowConfirmation: function (val) {
+  _setShowConfirmation (val) {
     this.set('showRequestButton', !val);
     this.set('showForm', !val);
     this.set('showConfirmation', val);
   },
 
   actions: {
-    setShowForm: function (val) {
+    setShowForm (val) {
       this._setShowForm(val);
     },
-    submitForm: function () {
+    submitForm () {
       // submit form data via xhr...
       // but we don't have an api so simulate it
       this.set('disableButton', true);

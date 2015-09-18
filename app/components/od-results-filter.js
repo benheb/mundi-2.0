@@ -39,7 +39,7 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    change: function (name, checked) {
+    change (name, checked) {
       // contstruct a queryparams object to send up to the controller
       var stringAry = this.get('model')
         .filterBy('checked', true)
@@ -50,9 +50,7 @@ export default Ember.Component.extend({
         stringAry.push(name);
       } else {
         //we're removing one
-        stringAry = stringAry.filter(function (item) {
-          return item !== name;
-        });
+        stringAry = stringAry.filter(item => item !== name);
       }
 
       var queryParams = {
@@ -66,7 +64,7 @@ export default Ember.Component.extend({
       this.sendAction('action', queryParams);
     },
 
-    toggleShowAll: function () {
+    toggleShowAll () {
       this.set('isShowingAll', !this.get('isShowingAll'));
     }
   }

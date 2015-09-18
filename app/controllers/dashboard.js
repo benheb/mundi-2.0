@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
 
   actions: {
-    gotoNarrative: function(itemId) {
+    gotoNarrative (itemId) {
       this.transitionToRoute('narrative', itemId);
     }
   }

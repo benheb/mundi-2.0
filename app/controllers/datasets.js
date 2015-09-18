@@ -66,7 +66,7 @@ export default Ember.Controller.extend({
 
 
   actions: {
-    doSearch: function (queryParams) {
+    doSearch (queryParams) {
       this.transitionToRoute('datasets', { queryParams: queryParams });
     },
 

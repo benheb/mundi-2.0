@@ -1,7 +1,5 @@
 import Ember from 'ember';
 
-export function formatNumber(params/*, hash*/) {
-  return params.toLocaleString();
-}
+// export function params => params.toLocaleString();
 
-export default Ember.Helper.helper(formatNumber);
+export default Ember.Helper.helper(params => params.toLocaleString());

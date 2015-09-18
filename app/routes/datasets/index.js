@@ -15,7 +15,7 @@ export default Ember.Route.extend({
   },
 
   actions: {
-    gotoDataset: function (dataset) {
+    gotoDataset (dataset) {
       this.controllerFor('datasets').transitionToRoute('dataset', dataset);
     }
   },

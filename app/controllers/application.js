@@ -5,10 +5,12 @@ export default Ember.Controller.extend({
   q: '',
 
   bodyClass: null,
+
   subHeaders: {
     'dashboard': 'Community Dashboard',
     'narrative': 'Dataset Narrative'
   },
+  
   subHeader: '',
 
   currentPathDidChange: function() {
@@ -27,8 +29,8 @@ export default Ember.Controller.extend({
   }.observes('currentPath'),
 
   actions: {
-    search: function(q) {
-      this.transitionToRoute('datasets', { queryParams: { q: q, page: 1 } });
+    search (q) {
+      this.transitionToRoute('datasets', { queryParams: { q: q, page: 1, keyword: '' } });
     }
   }
 
