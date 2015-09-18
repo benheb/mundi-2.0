@@ -1,36 +1,45 @@
 
 <h1 id="narrative-header"> {{model.name}} </h1>
 
-<span id="narrative-description">This data layer shows 311 Service Requests in the last 30 days for all service request types.</span>
+<span id="narrative-description">{{page.description}}</span>
 
+<hr />
 
 <div class="row">
-  <div class="col-md-12">
-    <h2>
-      {{model.section1.section_title}}
-    </h2>
+  <div class="col-md-11 narrative-text-block">
+    {{page.text1}}
   </div>
-  <div id="feature1" class="narrative-feature-box col-md-6">
-    <h4 class="narrative-feature-title">
-      {{page.section1.feature1.feature_title}}
-    </h4>
-    <span class="narrative-feature-stat">
-      {{page.section1.feature1.feature_number}}
-    </span>
-    <span class="narrative-feature-sub-title">
-      {{{page.section1.feature1.feature_sub_title}}}
-    </span>
-  </div>
-
-  <div id="feature2" class="narrative-feature-box col-md-6">
-    <h4 class="narrative-feature-title">
-      {{page.section1.feature2.feature_title}}
-    </h4>
-    <!-- <div id="{{page.section1.feature2.feature_chart_id}}"></div> -->
-    {{dashboard-chart id=page.section1.feature2.feature_chart_id}}
-  </div>
-
 </div>
+
+{{#if page.section1 }}
+  <div class="row">
+    <div class="col-md-12">
+      <h2>
+        {{page.section1.section_title}}
+      </h2>
+    </div>
+    <div id="feature1" class="narrative-feature-box col-md-6">
+      <h4 class="narrative-feature-title">
+        {{page.section1.feature1.feature_title}}
+      </h4>
+      <span class="narrative-feature-stat">
+        {{page.section1.feature1.feature_number}}
+      </span>
+      <span class="narrative-feature-sub-title">
+        {{{page.section1.feature1.feature_sub_title}}}
+      </span>
+    </div>
+
+    <div id="feature2" class="narrative-feature-box col-md-6">
+      <h4 class="narrative-feature-title">
+        {{page.section1.feature2.feature_title}}
+      </h4>
+      <!-- <div id="{{page.section1.feature2.feature_chart_id}}"></div> -->
+      {{dashboard-chart id=page.section1.feature2.feature_chart_id}}
+    </div>
+
+  </div>
+{{/if}}
 
 <div class="row">
   {{esri-map model=model id="narrative-map"}}
