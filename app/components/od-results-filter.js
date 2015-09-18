@@ -19,7 +19,7 @@ export default Ember.Component.extend({
   }.property('isShowingAll'),
 
   viewModels: function () {
-    let atLeast = 5;
+    const atLeast = 5;
     
     let model = this.get('model');
     let isShowingAll = this.get('isShowingAll');
