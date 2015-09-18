@@ -10,12 +10,14 @@ export default Ember.Controller.extend({
   // defaults
   page: 1,
   q: null,
+  keyword: null,
   perPage: 5,
 
   // These properties will be set by the parent route
-  stats: null,
   totalCount: null,
   count: null,
+
+  tags: null,
 
   // The following properties will be used for the display of the pagination links
   totalPages: function() {
@@ -60,6 +62,14 @@ export default Ember.Controller.extend({
     }
 
     return result;
-  }.property('totalPages', 'page')
+  }.property('totalPages', 'page'),
+
+
+  actions: {
+    doSearch: function (queryParams) {
+      this.transitionToRoute('datasets', { queryParams: queryParams });
+    },
+
+  }
 
 });

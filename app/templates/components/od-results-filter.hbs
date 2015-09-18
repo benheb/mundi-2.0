@@ -1,12 +1,9 @@
 <div class="form-group filter-tags-group">
   <label class="filter-headings">{{title}}</label>
   <div class="checkbox">
-    {{#each model as |item|}}
-      <label>
-        <input type="checkbox" value="">
-        {{item.name}} <span>({{item.count}})</span>
-        </label>
+    {{#each viewModels as |item|}}
+      {{od-results-filter-item action="change" model=item}}
     {{/each}}
-    <a href="#">Show More <i class="icon-sort-down-2"></i></a>
-  </div><!-- /checkbox -->
-</div><!-- /form-group -->
+    <a href="#" {{action "toggleShowAll"}}>{{showMoreLabel}} <i class="glyphicon {{showMoreClass}}"></i></a>
+  </div>
+</div>

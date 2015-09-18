@@ -7,7 +7,8 @@ export default Ember.Controller.extend({
   // We could map the parameter to a different property name if we wanted.
   queryParams: [
     'page',
-    'q'
+    'q',
+    'keyword'
   ]
 
 });
