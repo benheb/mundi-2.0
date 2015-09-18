@@ -1,5 +1,5 @@
 .nav-pills {
-	margin-top: 5px;
+	margin-top: 8px;
 	margin-right: 20px;
 	font-size: 12px;
 }
@@ -25,14 +25,13 @@
 	padding: 3px 5px 3px 3px;
 	margin-left: 5px;
 }
-/*
+
 .container .jumbotron {
-	position: relative;
+	//position: relative;
 	height: 480px;
 	width: 100%;
 	padding: 0px;
 	border-radius: 0px;
-	outline: 1px solid red;
 }
 
 .map-goes-here {
@@ -40,9 +39,8 @@
 	//background-image: url('../images/map-placeholder.png');
 	//background-size: cover;
 	//background-position: top center;
-	//height: 100%;
-	//width: 100%;
-	outline: 1px solid yellow;
+	height: 100%;
+	width: 100%;
 }
 
 .jumbotron .container {
@@ -56,7 +54,7 @@
 	background: -o-linear-gradient(top, transparent 0%, transparent 75%, #a1a1a1 100%);
 	background: -ms-linear-gradient(top, transparent 0%, transparent 75%, #a1a1a1 100%);
 	background: linear-gradient(to bottom, transparent 0%, transparent 75%, #a1a1a1 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='transparent', endColorstr='#a1a1a1', GradientType=0 );*//*
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='transparent', endColorstr='#a1a1a1', GradientType=0 );*/
 }
 
 .zoom-in,
@@ -105,7 +103,7 @@
 	color: #000;
 	border-radius: 0px;
 }
-*/
+
 
 img.thumb {
 	height: 100px;
@@ -116,6 +114,9 @@ img.thumb {
 .right-sidebar {
 	h2 {
 		font-size: 20px;
+	}
+	.placeholder-img {
+		margin-right: 10px;
 	}
 }
 
@@ -133,6 +134,9 @@ img.thumb {
 		input {
 		margin: 5px auto;
 		}
+	}
+	#dropdownMenu2 li {
+		padding: 10px;
 	}
 }
 

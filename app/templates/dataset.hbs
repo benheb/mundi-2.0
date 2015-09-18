@@ -14,11 +14,42 @@
 	</div>
 </nav>
 
-<div class="container">
-  <div class="row">
+  <div class="row" style="height: 480px">
     {{esri-map model=model}}
   </div>
-</div>
+
+
+<!--
+<div class="jumbotron">
+	<div class="map-goes-here">
+		<div class="container">
+		<div class="dropdown pull-right">
+		  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+		    <span class="glyphicon glyphicon-option-horizontal"></span>
+		  </button>
+		  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+		    <li><a href="#"><span class="glyphicon glyphicon-globe"></span> Basemaps</a></li>
+		    <li><a href="#"><span class="glyphicon glyphicon-adjust"></span> Vizualization (Mundi)</a></li>
+		    <li><a href="#"><span class="glyphicon glyphicon-map-marker"></span> Find Location</a></li>
+		  </ul>
+		</div>
+		<button class="zoom-in" arialabel="Zoom In">+</button>
+		<br /><button class="zoom-out" arialabel="Zoom Out">-</button>
+
+		<div class="grounded">
+		<h1>{{model.name}}</h1>
+		<h2>{{model.owner}}</h2>
+
+
+		<ul class="nav nav-tabs">
+		  <li role="presentation" class="active"><a href="#">Overview</a></li>
+		  <li role="presentation"><a href="#">Data</a></li>
+		  <li role="presentation"><a href="#">Charts</a></li>
+		</ul>
+		</div>
+	</div>
+  </div>
+</div>-->
 
 <div class="row">
 		<div class="col-xs-12 col-sm-8 page-body">
@@ -26,7 +57,7 @@
 				<img src="{{model.thumbnailUrl}}" alt="thumbnail" class="pull-left thumb" />
 				<img src="images/Map32.png" alt="feature service" class="type" />
 				<br />{{model.itemType}} by <a href="#">{{model.owner}}</a>
-				<br />Updated: {{model.UpdatedAt}}
+				<br />Updated: {{moment-from-now dataset.updatedAt}}
 			</div>
 			<div class="col-xs-12">
 				<h3>Description</h3>
@@ -35,13 +66,70 @@
 			</div>
 			<div class="col-xs-12">
 				<h3>Dataset Attributes</h3>
-				<p>{{# each model.fields as |field|}}
-  					{{field.name}}
-					{{/ each}}</p>
-				<a href="#">More<span class="glyphicon glyphicon-triangle-bottom"></span></a>
+				<table id="field-desc">
+					<tbody>
+						<tr>
+							<th>Attribute</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Service Code</td>
+							<td>The code associated with the specific request, used for internal tracking</td>
+						</tr>
+						<tr>
+							<td>Service Code Description</td>
+							<td>Readable description of what the code means</td>
+						</tr>
+						<tr>
+							<td>Service Type</td>
+							<td>The category the request falls under</td>
+						</tr>
+						<tr>
+							<td>Organization Acronym</td>
+							<td>The agency that will respond to the request</td>
+						</tr>
+						<tr>
+							<td>Service Call Count</td>
+							<td>How many times this particular request was made</td>
+						</tr>
+						<tr>
+							<td>Add Date</td>
+							<td>When the request was added to the system</td>
+						</tr>
+						<tr>
+							<td>Resolution Date</td>
+							<td>When the request was resolved</td>
+						</tr>
+						<tr>
+							<td>Service Due Date</td>
+							<td>When the request is due to be resolved</td>
+						</tr>
+						<tr>
+							<td>Service Order Date</td>
+							<td>When the service was ordered for the request</td>
+						</tr>
+						<tr>
+							<td>Service Order Status</td>
+							<td>The current status of the request</td>
+						</tr>
+						<tr>
+							<td>Priority</td>
+							<td>The prioirty level of the request, standard or high</td>
+						</tr>
+						<tr>
+							<td>Street Address</td>
+							<td>The street address of the request</td>
+						</tr>
+						<tr>
+							<td>Details</td>
+							<td>Any additional details included with the request</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-4 right-sidebar">
+			<div class="col-xs-12 primary-cta">
 				<div class="dropdown">
 				  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 				    Download Files <span class="caret"></span>
@@ -60,7 +148,7 @@
 				    <li><a href="#">Resource #2</a></li>
 				  </ul>
 				</div>
-
+				<br />
 				<div class="dropdown">
 				  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 				    APIs <span class="caret"></span>
@@ -69,20 +157,37 @@
 				    <li>GeoJSON <input type="text"></li>
 				    <li>GeoService <input type="text"></li>
 				    <li>OGC WMS <input type="text"></li>
-				  <li class="dropdown-header">Full Dataset</li>
-				  	<li><a href="#">Spreadsheet</a></li>
-				    <li><a href="#">KML</a></li>
-				    <li><a href="#">Shapefile</a></li>
-				  <li class="dropdown-header">Additional Resources</li>
-				  	<li><a href="#">Resource #1</a></li>
-				    <li><a href="#">Resource #2</a></li>
 				  </ul>
 				</div>
-
-				<button>Comments {{model.views}}</button>
-				<button>Bookmark This</button>
+				<br />
+				<button class="btn btn-default">Comments(4)</button>
+				<br /><br />
+				<button class="btn btn-default">Bookmark This</button>
+			</div>
+			<div class="col-xs-12">
+			<h2>Details</h2>
+			<p><span class="badge">{{model.displayFields}}</span> Attributes</p>
+			<p><span class="badge">{{model.recordCount}}</span> Rows</p>
+			<p><a href="{{model.metadataUrl}}">Metadata</a></p>
+			<p><a href="#">License</a></p>
+			</div>
+			<div class="col-xs-12">
+			<h2>Tags</h2>
+			<p>{{model.tags}}</p>
+			</div>
+			<div class="col-xs-12">
+			<h2>ArcGIS</h2>
+			<button class="btn btn-default">Item</button>
+			<button class="btn btn-default">WebMap</button>
+			<button class="btn btn-default">Storymap</button>
+			</div>
+			<div class="col-xs-12">
+			<h2>How others use this data</h2>
+			<img src="http://placehold.it/60x40" class="pull-left placeholder-img">
+			<a href="#">A Survey of Demographics</a>
+			<br />Storymap - US Census
+			</div>
 		</div>
-		<footer>{{outlet}}</footer>
-	</div><!-- /row -->
 
-{{outlet}}
+	</div><!-- /row -->
+<footer>{{outlet}}</footer>
