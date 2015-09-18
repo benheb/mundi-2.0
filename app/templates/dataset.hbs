@@ -14,17 +14,16 @@
 	</div>
 </nav>
 
-<!--
-  <div class="row" style="height: 480px">
+
+  <!-- <div class="row" style="height: 480px">
     {{esri-map model=model}}
-  </div>
- -->
+  </div> -->
 
 <div class="jumbotron">
 
-	<div class="map-goes-here"></div>
+	{{esri-map model=model}}
 		
-		<div class="container">
+	<div class="container">
 		<div class="dropdown pull-right">
 		  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 		    <span class="glyphicon glyphicon-option-horizontal"></span>
@@ -35,19 +34,17 @@
 		    <li><a href="#"><span class="glyphicon glyphicon-map-marker"></span> Find Location</a></li>
 		  </ul>
 		</div>
-		<button class="zoom-in" arialabel="Zoom In">+</button>
-		<br /><button class="zoom-out" arialabel="Zoom Out">-</button>
 
 		<div class="grounded">
-		<h1>{{model.name}}</h1>
-		<h2>{{model.owner}}</h2>
+  		<h1>{{model.name}}</h1>
+  		<h2>{{model.owner}}</h2>
 
 
-		<ul class="nav nav-tabs">
-		  <li role="presentation" class="active"><a href="#">Overview</a></li>
-		  <li role="presentation"><a href="#">Data</a></li>
-		  <li role="presentation"><a href="#">Charts</a></li>
-		</ul>
+  		<ul class="nav nav-tabs">
+  		  <li role="presentation" class="active"><a href="#">Overview</a></li>
+  		  <li role="presentation"><a href="#">Data</a></li>
+  		  <li role="presentation"><a href="#">Charts</a></li>
+  		</ul>
 		</div>
 	</div>
 </div>
