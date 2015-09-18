@@ -41,6 +41,8 @@ export default Ember.Route.extend({
 
     ctrl.set('totalCount', model.meta.stats.total_count);
     ctrl.set('count', model.meta.stats.count);
+
+    ctrl.set('stats', model.meta.stats);
   }
 
 });

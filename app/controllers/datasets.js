@@ -13,6 +13,7 @@ export default Ember.Controller.extend({
   perPage: 5,
 
   // These properties will be set by the parent route
+  stats: null,
   totalCount: null,
   count: null,
 
