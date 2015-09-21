@@ -91,6 +91,13 @@
 		border-radius: 0px;
 	}
 
+  .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    color: #555555;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+    cursor: default;
+  }
 
 	img.thumb {
 		height: 100px;

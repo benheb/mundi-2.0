@@ -37,160 +37,96 @@
 
 
   		<ul class="nav nav-tabs">
-  		  <li role="presentation" class="active"><a href="#">Overview</a></li>
-  		  <li role="presentation"><a href="#">Data</a></li>
-  		  <li role="presentation"><a href="#">Charts</a></li>
+        {{#active-link}}
+          {{link-to "Overview" 'dataset.overview' model}}
+        {{/active-link}}
+        {{#active-link}}
+          {{link-to "Data" "dataset.data" model}}
+        {{/active-link}}
+        {{#active-link}}
+          {{link-to "Charts" "dataset.chart" model}}
+        {{/active-link}}
   		</ul>
 		</div>
 	</div>
 </div>
 
-<div class="row">
-		<div class="col-xs-12 col-sm-8 page-body">
-			<div class="col-xs-12">
-				<img src="{{model.thumbnailUrl}}" alt="thumbnail" class="pull-left thumb" />
-				<img src="images/Map32.png" alt="feature service" class="type" />
-				<br />{{model.itemType}} by <a href="#">{{model.owner}}</a>
-				<br />Updated: {{moment-from-now dataset.updatedAt}}
-				<br /><span class="glyphicon glyphicon-star"></span><a href="#">Favorite</a>
-			</div>
-			<div class="col-xs-12">
-				<h3>Description</h3>
-				<p>{{model.description}}</p>
-				<a href="#">More<span class="glyphicon glyphicon-triangle-bottom"></span></a>
-			</div>
-			<div class="col-xs-12">
-				<h3>Dataset Attributes</h3>
-				<table id="field-desc">
-					<tbody>
-						<tr>
-							<th class="name">Attribute</th>
-							<th>Description</th>
-						</tr>
-						<tr>
-							<td class="name">Service Code</td>
-							<td>The code associated with the specific request, used for internal tracking</td>
-						</tr>
-						<tr>
-							<td class="name">Service Code Description</td>
-							<td>Readable description of what the code means</td>
-						</tr>
-						<tr>
-							<td class="name">Service Type</td>
-							<td>The category the request falls under</td>
-						</tr>
-						<tr>
-							<td class="name">Organization Acronym</td>
-							<td>The agency that will respond to the request</td>
-						</tr>
-						<tr>
-							<td class="name">Service Call Count</td>
-							<td>How many times this particular request was made</td>
-						</tr>
-						<tr>
-							<td class="name">Add Date</td>
-							<td>When the request was added to the system</td>
-						</tr>
-						<tr>
-							<td class="name">Resolution Date</td>
-							<td>When the request was resolved</td>
-						</tr>
-						<tr>
-							<td class="name">Service Due Date</td>
-							<td>When the request is due to be resolved</td>
-						</tr>
-						<tr>
-							<td class="name">Service Order Date</td>
-							<td>When the service was ordered for the request</td>
-						</tr>
-						<tr>
-							<td class="name">Service Order Status</td>
-							<td>The current status of the request</td>
-						</tr>
-						<tr>
-							<td class="name">Priority</td>
-							<td>The prioirty level of the request, standard or high</td>
-						</tr>
-						<tr>
-							<td class="name">Street Address</td>
-							<td>The street address of the request</td>
-						</tr>
-						<tr>
-							<td class="name">Details</td>
-							<td>Any additional details included with the request</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-4 right-sidebar">
-			<div class="col-xs-12 primary-cta">
-				<div class="dropdown">
-				  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-				    Download Files <span class="caret"></span>
-				  </button>
-				  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-				  <li class="dropdown-header">Full Dataset</li>
-				    <li><a href="#">Spreadsheet</a></li>
-				    <li><a href="#">KML</a></li>
-				    <li><a href="#">Shapefile</a></li>
-				  <li class="dropdown-header">Full Dataset</li>
-				  	<li><a href="#">Spreadsheet</a></li>
-				    <li><a href="#">KML</a></li>
-				    <li><a href="#">Shapefile</a></li>
-				  <li class="dropdown-header">Additional Resources</li>
-				  	<li><a href="#">Resource #1</a></li>
-				    <li><a href="#">Resource #2</a></li>
-				  </ul>
-				</div>
-				<br />
-				<div class="dropdown">
-				  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-				    APIs <span class="caret"></span>
-				  </button>
-				  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-				    <li>GeoJSON <input type="text"></li>
-				    <li>GeoService <input type="text"></li>
-				    <li>OGC WMS <input type="text"></li>
-				  </ul>
-				</div>
-				<br />
-				<button class="btn btn-default">Comments(4)</button>
-				<br /><br />
-				<button class="btn btn-default">Favorite</button>
-				<br /><br />
-				<button class="btn btn-default">Share</button>
-			</div>
-			<div class="col-xs-12 metadata">
-			<h2>Details</h2>
-			<p><span>244</span> Attributes</p>
-			<p><span>{{model.recordCount}}</span> Rows</p>
-			<p><a href="{{model.metadataUrl}}">Metadata</a></p>
-			<p><a href="#">License</a></p>
-			</div>
-			<div class="col-xs-12">
-			<h2>Tags</h2>
-			<p>{{model.tags}}</p>
-			</div>
-			<div class="col-xs-12">
-			<h2>ArcGIS</h2>
-			<button class="btn btn-default">Item</button>
-			<button class="btn btn-default">WebMap</button>
-			<button class="btn btn-default">Storymap</button>
-			</div>
-			<div class="col-xs-12">
-			<h2>How others use this data</h2>
-			<img src="http://placehold.it/60x40" class="pull-left placeholder-img">
-			<a href="#">A Survey of Demographics</a>
-			<br />Storymap - US Census
-			</div>
-		</div>
+  <div class="row">
+    {{outlet}}
 
-	</div><!-- /row -->
+    <div class="col-xs-12 col-sm-4 right-sidebar">
+      <div class="col-xs-12 primary-cta">
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Download Files <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <li class="dropdown-header">Full Dataset</li>
+            <li><a href="#">Spreadsheet</a></li>
+            <li><a href="#">KML</a></li>
+            <li><a href="#">Shapefile</a></li>
+          <li class="dropdown-header">Full Dataset</li>
+            <li><a href="#">Spreadsheet</a></li>
+            <li><a href="#">KML</a></li>
+            <li><a href="#">Shapefile</a></li>
+          <li class="dropdown-header">Additional Resources</li>
+            <li><a href="#">Resource #1</a></li>
+            <li><a href="#">Resource #2</a></li>
+          </ul>
+        </div>
+        <br />
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            APIs <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <li>GeoJSON <input type="text"></li>
+            <li>GeoService <input type="text"></li>
+            <li>OGC WMS <input type="text"></li>
+          </ul>
+        </div>
+        <br />
+        <button class="btn btn-default">Comments(4)</button>
+        <br /><br />
+        <button class="btn btn-default">Favorite</button>
+        <br /><br />
+        <button class="btn btn-default">Share</button>
+      </div>
+      <div class="col-xs-12 metadata">
+      <h2>Details</h2>
+      <p><span>244</span> Attributes</p>
+      <p><span>{{model.recordCount}}</span> Rows</p>
+      <p><a href="{{model.metadataUrl}}">Metadata</a></p>
+      <p><a href="#">License</a></p>
+      </div>
+      <div class="col-xs-12">
+      <h2>Tags</h2>
+      <p>{{model.tags}}</p>
+      </div>
+      <div class="col-xs-12">
+      <h2>ArcGIS</h2>
+      <button class="btn btn-default">Item</button>
+      <button class="btn btn-default">WebMap</button>
+      <button class="btn btn-default">Storymap</button>
+      </div>
+      <div class="col-xs-12">
+      <h2>How others use this data</h2>
+      <img src="http://placehold.it/60x40" class="pull-left placeholder-img">
+      <a href="#">A Survey of Demographics</a>
+      <br />Storymap - US Census
+      </div>
+    </div>
+
+  </div><!-- /row -->
+
+
+
+
+
 
   <button {{action "toggleSidebar"}}>Show sidebar</button>
   {{#od-sidebar showSidebar=showSidebar}}
     content for sidebar goes here!
   {{/od-sidebar}}
 
-<footer>{{outlet}}</footer>
+<footer></footer>
