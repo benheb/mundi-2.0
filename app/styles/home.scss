@@ -7,6 +7,12 @@ h2 {
 	font-size: 26px;
 }
 
+.page-index {
+  .header .navbar .navbar-form {
+    display: none;
+  }
+}
+
 /*** SEARCH BAR ------------------------- */
 #search-form {
   font-family: sans-serif ;

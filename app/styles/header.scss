@@ -19,6 +19,26 @@
   small {
     font-family: Karla, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
+
+  .nav-pills {
+    margin-top: 6px;
+    margin-right: 20px;
+    font-size: 12px;
+  }
+
+  .nav-pills>li {
+    margin-right: 10px;
+  }
+
+  .nav-pills>li>a,
+  .nav-pills>li:hover>a{
+    background-color: #2B4888;
+    color: #fff;
+  }
+
+  .navbar-form {
+    padding: 0px;
+  }
 }
 
 /* Custom page footer */
