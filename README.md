@@ -14,6 +14,9 @@ The narrative page would include more charts and a map of the data, along with t
 
 User flow as of 9/15: ![flow](https://slack-files.com/files-tmb/T068ABVUL-F0AMSQK46-afb43c0fda/page-flow_1024.png)
 
+User flow with projects and Mundi: 
+
+![mundi-process-flow](https://cloud.githubusercontent.com/assets/7389593/9993137/2a3fb230-6044-11e5-911e-a0e3adc193fa.png)
 
 # Opendata-tng
 
