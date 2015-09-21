@@ -20,35 +20,35 @@ export default Ember.Controller.extend({
   tags: null,
 
   // The following properties will be used for the display of the pagination links
-  totalPages: function() {
+  totalPages: Ember.computed('totalCount', function() {
     return Math.ceil(this.get('totalCount') / this.get('perPage'));
-  }.property('totalCount'),
+  }),
 
-  showPagination: function () {
+  showPagination: Ember.computed('totalPages', function () {
     return this.get('totalPages') > 1;
-  }.property('totalPages'),
+  }),
 
-  showRequestDataset: function () {
+  showRequestDataset: Ember.computed('totalCount', function () {
     return this.get('totalCount') === 0;
-  }.property('totalCount'),  
+  }),  
 
-  prevPage: function() {
+  prevPage: Ember.computed('page', function() {
     return this.get('page') - 1;
-  }.property('page'),
+  }),
 
-  nextPage: function() {
+  nextPage: Ember.computed('page', function() {
     return this.get('page') + 1;
-  }.property('page'),
+  }),
 
-  isFirstPage: function() {
+  isFirstPage: Ember.computed('page', function() {
     return this.get('page') === 1;
-  }.property('page'),
+  }),
 
-  isLastPage: function() {
+  isLastPage: Ember.computed('page', 'totalPages', function() {
     return this.get('page') >= this.get('totalPages');
-  }.property('page', 'totalPages'),
+  }),
 
-  pageRange: function () {
+  pageRange: Ember.computed('page', 'totalPages', function () {
     let result = Ember.A();
 
     let currentPage = this.get('page');
@@ -62,7 +62,7 @@ export default Ember.Controller.extend({
     }
 
     return result;
-  }.property('totalPages', 'page'),
+  }),
 
 
   actions: {

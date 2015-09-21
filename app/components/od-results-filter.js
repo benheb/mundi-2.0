@@ -10,15 +10,15 @@ export default Ember.Component.extend({
 
   isShowingAll: false,
 
-  showMoreLabel: function () {
+  showMoreLabel: Ember.computed('isShowingAll', function () {
     return this.get('isShowingAll') ? 'Show Fewer' : 'Show More';
-  }.property('isShowingAll'),
+  }),
 
-  showMoreClass: function () {
+  showMoreClass: Ember.computed('isShowingAll', function () {
     return this.get('isShowingAll') ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down';
-  }.property('isShowingAll'),
+  }),
 
-  viewModels: function () {
+  viewModels: Ember.computed('isShowingAll', 'model.[]', function () {
     const atLeast = 5;
     
     let model = this.get('model');
@@ -32,7 +32,7 @@ export default Ember.Component.extend({
       return model.slice(0, showCount);
     }
 
-  }.property('isShowingAll', 'model.[]'),
+  }),
 
   _keyMap: {
     tags: 'keyword'
