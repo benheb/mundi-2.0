@@ -6,8 +6,11 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+
   this.route('dashboard');
+
   this.resource('datasets', function () {});
+  
   this.resource('dataset', { path: '/datasets/:id' }, function () {
     this.route('overview', { path: '/' });
     this.route('data');
@@ -17,6 +20,9 @@ Router.map(function() {
   this.route('narrative', {
     path: '/narrative/:id'
   });
+
+  this.route('my-data');
+
 });
 
 export default Router;
