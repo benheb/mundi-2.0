@@ -8,7 +8,11 @@ var Router = Ember.Router.extend({
 Router.map(function() {
   this.route('dashboard');
   this.resource('datasets', function () {});
-  this.resource('dataset', { path: '/datasets/:id' });
+  this.resource('dataset', { path: '/datasets/:id' }, function () {
+    this.route('overview', { path: '/' });
+    this.route('data');
+    this.route('chart');
+  });
 
   this.route('narrative', {
     path: '/narrative/:id'
