@@ -187,4 +187,10 @@
 		</div>
 
 	</div><!-- /row -->
+
+  <button {{action "toggleSidebar"}}>Show sidebar</button>
+  {{#od-sidebar showSidebar=showSidebar}}
+    content for sidebar goes here!
+  {{/od-sidebar}}
+
 <footer>{{outlet}}</footer>
