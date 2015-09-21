@@ -8,16 +8,12 @@
 			  <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
 			</form>
 			<ul class="nav nav-pills pull-right">
-			  <li role="presentation"><a href="#">My Activity</a></li>
+			  <li role="presentation"><a href="#">My Data</a></li>
 			  <li role="presentation"><a href="#">Sign In</a></li>
 			</ul>
 	</div>
 </nav>
 
-
-  <!-- <div class="row" style="height: 480px">
-    {{esri-map model=model}}
-  </div> -->
 
 <div class="jumbotron">
 
@@ -56,6 +52,7 @@
 				<img src="images/Map32.png" alt="feature service" class="type" />
 				<br />{{model.itemType}} by <a href="#">{{model.owner}}</a>
 				<br />Updated: {{moment-from-now dataset.updatedAt}}
+				<br /><span class="glyphicon glyphicon-star"></span><a href="#">Favorite</a>
 			</div>
 			<div class="col-xs-12">
 				<h3>Description</h3>
@@ -160,7 +157,9 @@
 				<br />
 				<button class="btn btn-default">Comments(4)</button>
 				<br /><br />
-				<button class="btn btn-default">Bookmark This</button>
+				<button class="btn btn-default">Favorite</button>
+				<br /><br />
+				<button class="btn btn-default">Share</button>
 			</div>
 			<div class="col-xs-12 metadata">
 			<h2>Details</h2>

@@ -1,155 +1,148 @@
-.nav-pills {
-	margin-top: 8px;
-	margin-right: 20px;
-	font-size: 12px;
-}
+.page-dataset {
 
-.nav-pills>li {
-	margin-right: 10px;
-}
-
-.nav-pills>li>a,
-.nav-pills>li:hover>a{
-	background-color: #2B4888;
-	color: #fff;
-}
-
-.navbar-form {
-	padding: 0px;
-}
-
-.notifications .badge {
-	background-color: #E51937;
-	color: #fff;
-	border-radius: 10px;
-	padding: 3px 5px 3px 3px;
-	margin-left: 5px;
-}
-
-.container .jumbotron {
-	position: relative;
-	height: 480px;
-	width: 100%;
-	padding: 0px;
-	border-radius: 0px;
-}
-
-.page-dataset .esri-map-component {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-}
-
-.jumbotron .container {
-	height: 100%;
-	position: relative;
-	width: 100%;
-	padding: 15px;
-	/*background: -moz-linear-gradient(top, transparent 0%, transparent 75%, #a1a1a1 100%);
-	background: -webkit-gradient(left top, left bottom, color-stop(0%, transparent), color-stop(75%, transparent), color-stop(100%, #a1a1a1));
-	background: -webkit-linear-gradient(top, transparent 0%, transparent 75%, #a1a1a1 100%);
-	background: -o-linear-gradient(top, transparent 0%, transparent 75%, #a1a1a1 100%);
-	background: -ms-linear-gradient(top, transparent 0%, transparent 75%, #a1a1a1 100%);
-	background: linear-gradient(to bottom, transparent 0%, transparent 75%, #a1a1a1 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='transparent', endColorstr='#a1a1a1', GradientType=0 );*/
-}
-
-.zoom-in,
-.zoom-out {
-	width: 30px;
-	height: 30px;
-	background-color: #fff;
-	color: #000;
-	text-align: center;
-	font-size: 22px;
-	line-height: 20px;
-	margin-bottom: 10px;
-}
-
-.grounded {
-	position:absolute;
-    bottom:0;
-    left:0;
-    width: 100%;
-    padding: 0px 15px;
-}
-
-.jumbotron h1 {
-	font-size: 32px;
-	line-height: 36px;
-	margin-bottom: 8px;
-	font-weight: normal;
-}
-.jumbotron h2 {
-	font-size: 20px;
-	margin-top: 0px;
-	margin-bottom: 15px;
-	font-weight: normal;
-}
-
-.nav-tabs {
-	width: 100%;
-	border: 0px;
-	li {
-	margin-right: 5px;
+	.nav-pills {
+		margin-top: 6px;
+		margin-right: 20px;
+		font-size: 12px;
 	}
-}
 
-.nav-tabs > li > a {
-	background-color: #c4c4c4;
-	color: #000;
-	border-radius: 0px;
-}
-
-
-img.thumb {
-	height: 100px;
-	width: 150px;
-	margin-right: 15px;
-}
-
-#field-desc {
-	.name {
-		text-align: right;
-		font-weight: bold;
-		padding-right: 15px;
-	}
-	th:last-child {
-		font-weight: normal;
-	}
-}
-
-.right-sidebar {
-	h2 {
-		font-size: 20px;
-	}
-	.placeholder-img {
+	.nav-pills>li {
 		margin-right: 10px;
 	}
-	.metadata span {
-		background-color: #4d4d4d;
+
+	.nav-pills>li>a,
+	.nav-pills>li:hover>a{
+		background-color: #2B4888;
 		color: #fff;
-		padding: 4px;
-	}
-}
-
-.primary-cta {
-
-	button {
-	width: 100%;
-	background-color: #2B4888;
-	color: #fff;
-	border: 0px;
 	}
 
-	.dropdown-menu {
-	right: 0px;
-		input {
-		margin: 5px auto;
+	.navbar-form {
+		padding: 0px;
+	}
+
+	.notifications .badge {
+		background-color: #E51937;
+		color: #fff;
+		border-radius: 10px;
+		padding: 3px 5px 3px 3px;
+		margin-left: 5px;
+	}
+
+	.jumbotron {
+		position: relative;
+		height: 480px;
+		width: 100%;
+		padding: 0px;
+		border-radius: 0px;
+	}
+
+	.esri-map-component {
+	  position: absolute;
+	  height: 100%;
+	  width: 100%;
+	}
+
+	.jumbotron .container {
+		position: static;
+		width: 100%;
+		padding: 15px;
+		/*background: -moz-linear-gradient(top, transparent 0%, transparent 75%, #a1a1a1 100%);
+		background: -webkit-gradient(left top, left bottom, color-stop(0%, transparent), color-stop(75%, transparent), color-stop(100%, #a1a1a1));
+		background: -webkit-linear-gradient(top, transparent 0%, transparent 75%, #a1a1a1 100%);
+		background: -o-linear-gradient(top, transparent 0%, transparent 75%, #a1a1a1 100%);
+		background: -ms-linear-gradient(top, transparent 0%, transparent 75%, #a1a1a1 100%);
+		background: linear-gradient(to bottom, transparent 0%, transparent 75%, #a1a1a1 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='transparent', endColorstr='#a1a1a1', GradientType=0 );*/
+	}
+
+	.grounded {
+		position:absolute;
+	    bottom:0;
+	    left:0;
+	    width: 100%;
+	    padding: 0px 15px;
+	}
+
+	.jumbotron h1 {
+		font-size: 32px;
+		line-height: 36px;
+		margin-bottom: 8px;
+		font-weight: normal;
+	}
+	.jumbotron h2 {
+		font-size: 20px;
+		margin-top: 0px;
+		margin-bottom: 15px;
+		font-weight: normal;
+	}
+
+
+	.nav-tabs {
+		width: 100%;
+		border: 0px;
+		li {
+		margin-right: 5px;
 		}
 	}
-	#dropdownMenu2 li {
-		padding: 10px;
+
+	.nav-tabs > li > a {
+		background-color: #c4c4c4;
+		color: #000;
+		border-radius: 0px;
+	}
+
+
+	img.thumb {
+		height: 100px;
+		width: 150px;
+		margin-right: 15px;
+	}
+
+	#field-desc {
+		.name {
+			text-align: right;
+			font-weight: bold;
+			padding-right: 15px;
+		}
+		th:last-child {
+			font-weight: normal;
+		}
+	}
+
+
+	.right-sidebar {
+		h2 {
+			font-size: 20px;
+		}
+		.placeholder-img {
+			margin-right: 10px;
+		}
+		.metadata span {
+			background-color: #4d4d4d;
+			color: #fff;
+			padding: 4px;
+		}
+	}
+
+	.primary-cta {
+
+		button {
+		width: 100%;
+		background-color: #2B4888;
+		color: #fff;
+		border: 0px;
+		}
+
+		.dropdown-menu {
+		right: 0px;
+			input {
+			margin: 5px auto;
+			}
+		}
+		#dropdownMenu2 li {
+			padding: 10px;
+		}
 	}
 }
+
 
