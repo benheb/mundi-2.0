@@ -1,48 +1,68 @@
 
-<h1 id="narrative-header"> {{model.name}} </h1>
 
-<span id="narrative-description">{{page.description}}</span>
+{{#if page.service_reqs }}
 
-<hr />
+  <h1 id="narrative-header"> {{model.name}} </h1>
 
-<div class="row">
-  <div class="col-md-11 narrative-text-block">
-    {{page.text1}}
+  <span id="narrative-description">This data layer shows 311 Service Requests in the last 30 days for all service request types.</span>
+
+  <hr />
+
+  <div class="row">
+    <div class="col-md-11 narrative-text-block">
+      Here we can have a section with a lot of text. The text can explain what kind of data one may find in this dataset. It\'s also a chance for admins to help tell the story of the data, and provide context for what is being shown on the narrative page for each particular dataset.
+    </div>
   </div>
-</div>
 
-{{#if page.section1 }}
   <div class="row">
     <div class="col-md-12">
       <h2>
-        {{page.section1.section_title}}
+        Your city at work 
       </h2>
     </div>
     <div id="feature1" class="narrative-feature-box col-md-6">
       <h4 class="narrative-feature-title">
-        {{page.section1.feature1.feature_title}}
+        Potholes filled last 30 days
       </h4>
       <span class="narrative-feature-stat">
-        {{page.section1.feature1.feature_number}}
+        452
       </span>
       <span class="narrative-feature-sub-title">
-        {{{page.section1.feature1.feature_sub_title}}}
+        <i class="glyphicon glyphicon-arrow-up green"></i> up 55% from last month
       </span>
     </div>
 
     <div id="feature2" class="narrative-feature-box col-md-6">
       <h4 class="narrative-feature-title">
-        {{page.section1.feature2.feature_title}}
+        Number of Potholes Filled in D.C. by Month
       </h4>
-      <!-- <div id="{{page.section1.feature2.feature_chart_id}}"></div> -->
-      {{dashboard-chart id=page.section1.feature2.feature_chart_id}}
+      {{dashboard-chart id="potholeChart"}}
     </div>
 
   </div>
+
+  <div class="row">
+    {{esri-map model=model id="narrative-map"}}
+  </div>
+
+
+{{else if page.vision_zero }}
+
+  <h1 id="narrative-header"> {{model.name}} </h1>
+
+  <span id="narrative-description">Vision Zero Safety data</span>
+
+  <hr />
+
+  <div class="row">
+    <div class="col-md-11 narrative-text-block">
+      Vision Zero is a part of Mayor Bowser’s response to the US Department of Transportation’s Mayor’s Challenge for Safer People and Safer Streets, which aims to improve pedestrian and bicycle transportation safety by showcasing effective local actions, empowering local leaders to take action, and promoting partnerships to advance pedestrian and bicycle safety. Vision Zero requires an all-hands-on-deck approach. More than 20 District government agencies are engaged in the Vision Zero Initiative, including DDOT, Department of Public Works, the Deputy Mayor for Health and Human Services, Metropolitan Police Department, DC Taxi Cab Commission, the Department of Motor Vehicles, the DC Office on Aging, DC Public Schools, Fire and Emergency Medical Services, Homeland Security and Management, Office of Unified Communications, Department of Health, the Office of the Attorney General, Office of the Chief Technology Officer, Office of Disability Rights, Office of Planning, Office of the City Administrator, Office of the State Superintendent of Education, the Deputy Mayor for Education, Office of Policy and Legislative Affairs, and the Deputy Mayor for Planning and Economic Development.
+    </div>
+  </div>
+
+
+  <div class="row">
+    {{esri-map model=model id="narrative-map"}}
+  </div>
+
 {{/if}}
-
-<div class="row">
-  {{esri-map model=model id="narrative-map"}}
-</div>
-
-{{outlet}}
