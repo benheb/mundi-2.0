@@ -28,6 +28,10 @@ module.exports = function(defaults) {
 
   app.import('bower_components/bootstrap-sass/assets/javascripts/bootstrap.js');
 
+  app.import('bower_components/ladda/dist/spin.min.js');
+  app.import('bower_components/ladda/dist/ladda.min.css');
+  app.import('bower_components/ladda/dist/ladda.min.js');
+
   app.import('vendor/vega.js');
   app.import('vendor/cedar.min.js');
 

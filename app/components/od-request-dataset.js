@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import Ladda from 'ladda';
 
 export default Ember.Component.extend({
 
