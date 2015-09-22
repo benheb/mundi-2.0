@@ -28,9 +28,14 @@ export default Ember.Controller.extend({
 
   }.observes('currentPath'),
 
+  showSidebar: false,
+
   actions: {
     search (q) {
       this.transitionToRoute('datasets', { queryParams: { q: q, page: 1, keyword: '' } });
+    },
+    toggleSidebar () {
+      this.set('showSidebar', !this.get('showSidebar'));
     }
   }
 
