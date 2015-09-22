@@ -9,7 +9,11 @@
 		  </button>
 		  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 		    <li><a href="#"><span class="glyphicon glyphicon-globe"></span> Basemaps</a></li>
-		    <li><a href="#"><span class="glyphicon glyphicon-adjust"></span> Vizualization (Mundi)</a></li>
+		    <li>
+          {{#link-to 'mundi'model.id}}
+            <span class="glyphicon glyphicon-adjust"></span> Vizualization (Mundi)
+          {{/link-to}}
+        </li>
 		    <li><a href="#"><span class="glyphicon glyphicon-map-marker"></span> Find Location</a></li>
 		  </ul>
 		</div>

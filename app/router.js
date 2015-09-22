@@ -23,6 +23,9 @@ Router.map(function() {
 
   this.route('my-data');
 
+  this.route('mundi', {
+    path: '/mundi/:id'
+  });
 });
 
 export default Router;
