@@ -8,7 +8,8 @@ export default Ember.Controller.extend({
 
   subHeaders: {
     'dashboard': 'Community Dashboard',
-    'narrative': 'Dataset Narrative'
+    'narrative': 'Dataset Narrative',
+    'mundi': 'Mundi'
   },
   
   subHeader: '',
