@@ -18,7 +18,9 @@
           <label for="desc-input">What data are you looking for</label>
           {{input type="text" class="form-control" id="desc-input" placeholder="Description"}}
         </div>
-        <button type="submit" class="btn btn-primary {{if disableButton 'disabled'}}">Submit</button>
+        {{#od-activity-button style="contract" showLoading=showLoading type="submit" class="btn btn-primary"}}
+          Submit
+        {{/od-activity-button}}
       </form>
     {{/if}}
 

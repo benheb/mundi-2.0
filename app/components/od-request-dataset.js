@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import Ladda from 'ladda';
 
 export default Ember.Component.extend({
 
@@ -9,7 +8,7 @@ export default Ember.Component.extend({
 
   showConfirmation: false,
 
-  disableButton: false,
+  showLoading: false,
 
   _setShowForm (val) {
     this.set('showRequestButton', !val);
@@ -21,6 +20,7 @@ export default Ember.Component.extend({
     this.set('showRequestButton', !val);
     this.set('showForm', !val);
     this.set('showConfirmation', val);
+    this.set('showLoading', !val);
   },
 
   actions: {
@@ -30,7 +30,7 @@ export default Ember.Component.extend({
     submitForm () {
       // submit form data via xhr...
       // but we don't have an api so simulate it
-      this.set('disableButton', true);
+      this.set('showLoading', true);
 
       Ember.run.later(this, '_setShowConfirmation', true, 1200);
     }
