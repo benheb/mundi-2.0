@@ -1,3 +1,64 @@
 {{#od-sidebar showSidebar=showSidebar}}
-  content for sidebar goes here!
+  <span class="glyphicon glyphicon-remove-circle pull-right"></span>
+    <h1>My Data</h1>
+    <br />{{link-to "Go to all My Data" "my-data"}}
+
+    <h2>Recent Activity</h2>
+    <ul class="notifications">
+    	<li><p>
+    		<span class="note-type">Download</span><br />
+    		<label><input type="checkbox" class="pull-left" /><a href="#">Federal Land (Approximate)</a></label> is at 41%: Gathering the data.
+	    	<br /><img src="images/progressbar-placeholder.png" />
+	    	<br /><div class="mods">Spreadsheet</div>
+	    	</p>
+    	</li>
+    	<li>
+    		<p>
+    		<span class="note-type">Download</span><br />
+	    	<label><input type="checkbox" class="pull-left" /><a href="#">ITSPE Vacant Land</a></label> is at 100%: <a href="#">Download Ready</a>.
+	    	<br /><div class="mods">KML</div><div class="mods">Filtered</div>
+	    	</p>
+    	</li>
+    	<li>
+    		<p>
+    		<span class="note-type">Favorite</span><br />
+			<label><input type="checkbox" class="pull-left" /><a href="#">2012 Changes to Land Boundaries in Argricultural Zones</a></label> has been added.
+			</p>
+    	</li>
+    	<li>
+    		<p>
+    		<span class="note-type">Favorite</span><br />
+    		<label><input type="checkbox" class="pull-left" /><a href="#">Areas Under Construction</a></label> has been added.
+    		</p>
+    	</li>
+    	<li>
+    		<p>
+    		<span class="note-type">Favorite</span><br />
+    		<label><input type="checkbox" class="pull-left" /><a href="#">2012 Changes to Land Boundaries in Argricultural Zones</a></label> has been added.
+    		<br /><div class="mods">Filtered</div><div class="mods">Heatmap</div>
+    		</p>   	
+	    </li>
+    	<li>	
+    		<p>
+    		<span class="note-type">Favorite</span><br />
+    		<label><input type="checkbox" class="pull-left" /><a href="#">Tax Zones</a></label> has been added.
+    		<br /><div class="mods">Filtered</div>
+    		</p>
+    	</li>
+    	<li>
+    		<p>
+    		<span class="note-type">Project</span><br />
+    		<label><input type="checkbox" class="pull-left" /><a href="#">Business Improvement District Business Growth Comparison</a></label> was last saved 10/21/2015 3:15PM.
+    		</p>
+    	</li>
+    	<li>
+    		<p>
+    		<span class="note-type">Download</span><br />
+    		<label><input type="checkbox" class="pull-left" /><a href="#">Alley Frontage Lines</a></label>
+    		is at 100%: <a href="#">Download Ready</a>.
+    		<br /><div class="mods">Shapefile</div><div class="mods">Styled</div>
+    		</p>
+    	</li>
+    </ul>
+    <button class="btn btn-primary">Map It</button> <button class="btn btn-primary">StoryMap It</button>
 {{/od-sidebar}}
