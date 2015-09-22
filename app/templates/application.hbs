@@ -12,7 +12,7 @@
           <div class="container">
             {{od-header-search action="search"}}  
             <ul class="nav nav-pills pull-right">
-              <li role="presentation">{{link-to "My Data" "my-data"}}</li>
+              <li role="presentation"><a href="" {{action "toggleSidebar"}}>My Data</a></li>
               <li role="presentation"><a href="#">Sign In</a></li>
             </ul>
           </div>
@@ -23,11 +23,11 @@
         {{outlet}}
       </div>
 
+      {{od-activities-sidebar showSidebar=showSidebar}}
 
       <div class="footer">
         <div class="col-lg-12 col-md-12">
           <p style="float:left;">♥ from the <a href="http://dc.esri.com/">Open Data team</a></p>
         </div>
-        
       </div>
     </div>
