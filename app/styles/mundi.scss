@@ -2,6 +2,9 @@
   width: 100%;
   margin: 0px;
   padding: 0px;
+  .navbar.navbar-default {
+    display: none;
+  }
   .header {
     padding-left:10px;
     padding-right:10px;
@@ -14,5 +17,25 @@
     height:100%;
     width:100%;
     position: relative;
+  }
+  .mundi-toolbar {
+    padding-left:10px;
+    padding-right:10px;
+  }
+  .tool {
+    float:right;
+    margin: 3px;
+    padding:2px;
+    padding-left:5px;
+    padding-right:5px;
+    border:1px solid #EEE;
+    border-radius:2px;
+    cursor: pointer;
+    &:hover {
+      background:#EEE;
+    } 
+  }
+  #add-data {
+    
   }
 }
