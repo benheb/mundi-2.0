@@ -13,7 +13,6 @@ export default DS.JSONAPISerializer.extend({
       payload.data = this._mapDataset(payload.data);
     }
     
-
     return payload;
   },
 
