@@ -36,6 +36,7 @@ module.exports = function(defaults) {
   app.import('vendor/vega.js');
   app.import('vendor/cedar.min.js');
   app.import('vendor/malette.js');
+  app.import('vendor/open-search.js');
 
 
   return app.toTree();
