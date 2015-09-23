@@ -1,1 +1,22 @@
-{{yield}}
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Download Files <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+  <li class="dropdown-header">Full Dataset</li>
+    <li><a href="{{baseUrl}}.csv" target="_blank" download {{action "downloadItem"}}>Spreadsheet</a></li>
+    <li><a href="{{baseUrl}}.kml" target="_blank" download>KML</a></li>
+    <li><a href="{{baseUrl}}.zip" target="_blank" download>Shapefile</a></li>
+    <li class="divider"></li>
+  <!-- <li class="dropdown-header">Filtered Dataset</li>
+    <li><a href="#">Spreadsheet</a></li>
+    <li><a href="#">KML</a></li>
+    <li><a href="#">Shapefile</a></li> -->
+  {{#if model.metadata.online_resources.length}}
+    <li class="dropdown-header">Additional Resources</li>
+      {{# each model.metadata.online_resources as |item|}}
+        <li><a href="{{item.url}}">{{item.name}}</a></li>
+      {{/each}}
+  {{/if}}
+  </ul>
+</div>
