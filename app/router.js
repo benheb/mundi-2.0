@@ -21,7 +21,12 @@ Router.map(function() {
     path: '/narrative/:id'
   });
 
-  this.route('my-data');
+  this.route('my-data', function () {
+    this.route('favorites', { path: '/' });
+    this.route('downloads');
+    this.route('groups');
+    this.route('projects');
+  });
 
   this.route('mundi', {
     path: '/mundi/:id'
