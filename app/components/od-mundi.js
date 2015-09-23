@@ -90,6 +90,12 @@ export default Ember.Component.extend({
 
       this._initMalette(options);
 
+      this.sendAction('addLegendLayer', {
+        "id": dataset.get('id'),
+        "name": dataset.get('name'),
+        "renderer": jsonStyle
+      });
+
     }.bind(this));
 
   },
@@ -154,6 +160,13 @@ export default Ember.Component.extend({
       datasetLayer.id = dataset.get('id');
 
       map.add(datasetLayer);
+
+      this.sendAction('updateLegendLayer', {
+        "id": dataset.get('id'),
+        "name": dataset.get('name'),
+        "renderer": style
+      });
+
     }.bind(this));
 
   },
