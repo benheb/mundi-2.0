@@ -12,7 +12,6 @@ export default Ember.Component.extend({
   classNames: ['esri-map-component'],
 
   didInsertElement() {
-    let dataset = this.get('model');
 
     let mapOpts = {
       basemap: 'gray',
@@ -30,7 +29,7 @@ export default Ember.Component.extend({
       width: this.element.clientWidth
     };
 
-    let extent, ext = dataset.get('extent');
+    let extent, ext = null; //ext = dataset.get('extent');
     if (ext && ext.coordinates) {
       let coords = ext.coordinates;
       extent = new Extent(coords[0][0], coords[0][1], coords[1][0], coords[1][1], { wkid: 4326 });
@@ -46,7 +45,12 @@ export default Ember.Component.extend({
     let view = new MapView(mapViewOpts);
     this.set('mapView', view);
 
-    this._addDataset(map, dataset);
+    //each ids 
+    let datasetIds = this.get('datasetIds');
+    datasetIds.forEach(function(id) {
+      this._addDataset(map, id);
+    }.bind(this));
+
   },
 
   willRemoveElement() {
@@ -61,27 +65,52 @@ export default Ember.Component.extend({
     }
   },
 
-  _addDataset: function (map, dataset) {
-    let opts = this._getDatasetLayerOpts(dataset);
-    let datasetLayer = new FeatureLayer(dataset.get('url'), opts);
-    datasetLayer.id = dataset.get('id');
+  _addDataset: function (map, id) {
 
-    map.add(datasetLayer);
+    this.store.findRecord('dataset', id).then(function(dataset) {
+      this._setExtent(dataset);
 
-    this.dataset = dataset; 
+      let opts = this._getDatasetLayerOpts(dataset);
+      let datasetLayer = new FeatureLayer(dataset.get('url'), opts);
+      datasetLayer.id = dataset.get('id');
 
-    let jsonStyle = this._getRenderer(dataset);
-    jsonStyle = jsonStyle.toJson();
+      map.add(datasetLayer);
 
-    let options = {};
-    options.json = jsonStyle;
-    options.name = dataset.get('name');
-    options.fields = dataset.get('fields');;
-    options.type = this._getType(dataset.get('geometryType'));
-    options.layerId = dataset.get('id');
+      this.dataset = dataset; 
 
-    this._initMalette(options);
+      let jsonStyle = this._getRenderer(dataset);
+      jsonStyle = jsonStyle.toJSON();
 
+      let options = {};
+      options.json = jsonStyle;
+      options.name = dataset.get('name');
+      options.fields = dataset.get('fields');;
+      options.type = this._getType(dataset.get('geometryType'));
+      options.layerId = dataset.get('id');
+
+      this._initMalette(options);
+
+    }.bind(this));
+
+  },
+
+
+  _onAddDataset: function(params) {
+    let datasetIds = this.get('datasetIds');
+    this._addDataset(this.map, datasetIds[datasetIds.length - 1]);
+  }.observes('datasetIds.[]'),
+
+
+  _setExtent: function(dataset) {
+    let extent, ext = dataset.get('extent');
+    if (ext && ext.coordinates) {
+      let coords = ext.coordinates;
+      extent = new Extent(coords[0][0], coords[0][1], coords[1][0], coords[1][1], { wkid: 4326 });
+    }
+
+    if (extent) {
+      this.get('mapView').extent = extent;
+    }
   },
 
 

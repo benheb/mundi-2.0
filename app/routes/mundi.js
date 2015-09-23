@@ -3,7 +3,12 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
   model: function (params) {
-    return this.store.findRecord('dataset', params.id);
+    return params.id;
+  },
+
+  setupController: function(controller, model) {
+    this._super(controller, model);
+    controller.get('datasetIds').pushObject(model);
   }
 
 });

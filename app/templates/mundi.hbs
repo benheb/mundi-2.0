@@ -1,6 +1,10 @@
 <div id="mundi-container">
   <div class="mundi-toolbar">
-    {{od-add-data}}
+    <div id="add-data" class="tool" {{action "toggleAddData"}}><i class="glyphicon glyphicon-search"></i> Add</div>
   </div>
-  {{od-mundi model=model}}
+
+  {{od-search-container showAddData=showAddData action="addMundiData"}}
+  
+  {{od-mundi datasetIds=datasetIds store=store}}
+
 </div>
