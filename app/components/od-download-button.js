@@ -1,19 +1,18 @@
 import Ember from 'ember';
-import DS from 'ember-data';
-import ENV from 'opendata-tng/config/environment';
 
 export default Ember.Component.extend({
 
-  baseUrl: Ember.computed('model.id', function () {
-    let model = this.get('model');
-    let url = ENV.APP.API;
-    url += DS.JSONAPIAdapter.prototype.buildURL('dataset', model.get('id'));
-    return url;
-  }),
+  classNames: [ 'dropdown' ],
 
   actions: {
-    downloadItem(item) {
-      debugger;
+    downloadItem(model, url) {
+      console.debug('>>>>> downloading ' + model.get('name') + ' from ' + url);
+      // NOTE: we need to return false from the click handler on the anchor tag
+      //       so the browser doesn't follow the link
+      //       but that means the dropdown doesn't close, so...
+      Ember.$(this.element).find('.dropdown-toggle').dropdown('toggle');
+
+      this.sendAction('action', model, url);
     }
   }
 

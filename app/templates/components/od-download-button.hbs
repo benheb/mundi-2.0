@@ -1,12 +1,11 @@
-<div class="dropdown">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    Download Files <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  Download Files <span class="caret"></span>
+</button>
+<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
   <li class="dropdown-header">Full Dataset</li>
-    <li><a href="{{baseUrl}}.csv" target="_blank" download {{action "downloadItem"}}>Spreadsheet</a></li>
-    <li><a href="{{baseUrl}}.kml" target="_blank" download>KML</a></li>
-    <li><a href="{{baseUrl}}.zip" target="_blank" download>Shapefile</a></li>
+    <li>{{#od-download-item model=model fileType="csv" action="downloadItem"}}Spreadsheet{{/od-download-item}}</li>
+    <li>{{#od-download-item model=model fileType="kml" action="downloadItem"}}KML{{/od-download-item}}</li>
+    <li>{{#od-download-item model=model fileType="zip" action="downloadItem"}}Shapefile{{/od-download-item}}</li>
     <li class="divider"></li>
   <!-- <li class="dropdown-header">Filtered Dataset</li>
     <li><a href="#">Spreadsheet</a></li>
@@ -18,5 +17,4 @@
         <li><a href="{{item.url}}">{{item.name}}</a></li>
       {{/each}}
   {{/if}}
-  </ul>
-</div>
+</ul>

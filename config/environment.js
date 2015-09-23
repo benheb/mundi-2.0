@@ -59,9 +59,11 @@ module.exports = function(environment) {
   if (environment === 'production' || environment === 'prod') {
     ENV.baseUrl = '/opendata-tng';
     ENV.rootUrl = '/opendata-tng';
+
     // ENV.APP.API = 'http://opendata.dc.gov';
-    ENV.APP.API = 'http://opendataqa.arcgis.com';
-    agoUrl = 'http://www.arcgis.com';
+
+    ENV.APP.API = 'http://opendata.dc.gov';
+    ENV.APP.agoUrl = 'http://www.arcgis.com';
 
     ENV.locationType = 'hash';
   }
