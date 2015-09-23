@@ -37,6 +37,8 @@ module.exports = function(defaults) {
   app.import('vendor/cedar.min.js');
   app.import('vendor/malette.js');
   app.import('vendor/open-search.js');
+  app.import('vendor/sortable.js');
+  app.import('vendor/legend.js');
 
 
   return app.toTree();

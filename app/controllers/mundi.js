@@ -4,6 +4,7 @@ export default Ember.Controller.extend({
   showAddData: false, 
 
   datasetIds: [],
+  legendLayers: [],
 
   actions: {
     toggleAddData() {
@@ -11,6 +12,15 @@ export default Ember.Controller.extend({
     },
     addMundiData(id) {
       this.get('datasetIds').pushObject(id);
+    },
+    toggleSidebar () {
+      this.set('showSidebar', !this.get('showSidebar'));
+    },
+    addLegendLayer(layer) {
+      this.get('legendLayers').pushObject(layer);
+    },
+    updateLegendLayer(layer) {
+      this.get('legendLayers').pushObject(layer);
     }
   }
 

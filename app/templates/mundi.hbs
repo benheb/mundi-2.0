@@ -1,10 +1,15 @@
 <div id="mundi-container">
   <div class="mundi-toolbar">
+    <div class="tool" {{action "toggleSidebar"}}>My Data</div>
     <div id="add-data" class="tool" {{action "toggleAddData"}}><i class="glyphicon glyphicon-search"></i> Add</div>
   </div>
 
   {{od-search-container showAddData=showAddData action="addMundiData"}}
+
+  {{od-legend-container legendLayers=legendLayers}}
   
-  {{od-mundi datasetIds=datasetIds store=store}}
+  {{od-mundi datasetIds=datasetIds store=store addLegendLayer="addLegendLayer" updateLegendLayer="updateLegendLayer"}}
 
 </div>
+
+{{od-activities-sidebar showSidebar=showSidebar}}
