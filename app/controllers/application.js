@@ -31,6 +31,9 @@ export default Ember.Controller.extend({
 
   showSidebar: false,
 
+  activitySortingDesc: [ 'createdAt:desc' ],
+  sortedActivities: Ember.computed.sort('activities', 'activitySortingDesc'),
+
   actions: {
     search (q) {
       this.transitionToRoute('datasets', { queryParams: { q: q, page: 1, keyword: '' } });

@@ -3,6 +3,15 @@
     <h1>My Data</h1>
     <br />{{link-to "Go to all My Data" "my-data"}}
 
+
+    <h2>For Realz</h2>
+      <ul>
+        {{#each sortedActivities as |item|}}
+          <li>{{item.activityType}}:&nbsp;{{item.datasetId}}</li>
+        {{/each}}
+      </ul>
+    <hr>
+
     <h2>Recent Activity</h2>
     <ul class="notifications">
     	<li><p>

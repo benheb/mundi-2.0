@@ -22,10 +22,6 @@ export default Ember.Controller.extend({
   actions: {
     toggleSidebar () {
       this.set('showSidebar', !this.get('showSidebar'));
-    },
-    downloadItem(model, url) {
-      console.debug('>>>>> [dataset controller] downloading ' + model.get('name') + ' from ' + url);
-      return true;
     }
   }
 
