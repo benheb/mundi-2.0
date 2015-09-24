@@ -18,6 +18,10 @@ export default Ember.Component.extend({
   actions: {
     favoriteItem: function (datasetId) {
       this.sendAction('action', datasetId);
+
+      // NOTE: this bothers me - i would think the data binding would take care of this
+      //       it does elsewhere...
+      this.set('isFavorite', !this.get('isFavorite'));
     }
   }
 
