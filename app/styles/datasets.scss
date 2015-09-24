@@ -64,6 +64,9 @@ body {
 
 /*** Search Results ----------------------- */
 #search-results {
+  .favorites i {
+    cursor: pointer;
+  }
 	list-style-type: none;
 	list-style-position: outside;
 	padding: 0px;

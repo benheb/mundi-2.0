@@ -17,9 +17,25 @@ export default Ember.Route.extend({
       record.save();
     },
 
-    favoriteItem(model) {
-      var record = this.store.createRecord('activity', { activityType: 'favorite', datasetId: model.get('id') });
-      record.save();
+    favoriteItem(datasetId) {
+      var isFavorite = false;
+
+      var existing = this.store.filter('activity', function (item) { 
+        return item.get('activityType') === 'favorite' && item.get('datasetId') === datasetId;
+      });
+      
+      existing.then(function (items) {
+        items.forEach(function (item) {
+          isFavorite = true;
+          item.deleteRecord();
+          item.save();
+        }.bind(this));
+
+        if (!isFavorite) {
+          var record = this.store.createRecord('activity', { activityType: 'favorite', datasetId: datasetId });
+          record.save();
+        }
+      }.bind(this));
     }
 
   }

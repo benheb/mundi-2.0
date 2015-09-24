@@ -14,12 +14,6 @@ export default Ember.Route.extend({
     }
   },
 
-  actions: {
-    gotoDataset (dataset) {
-      this.controllerFor('datasets').transitionToRoute('dataset', dataset);
-    }
-  },
-
   model: function (params) {
     let ctrl = this.controllerFor('datasets');
     let queryParams = {
@@ -56,6 +50,17 @@ export default Ember.Route.extend({
         });
       }
     });
+
+
+
+    // NOTE: not sure if this is the best way to do this...
+    //       we need the favorites so we can know if each dataset should be shown as a favorite
+    this.store.filter('activity', function (item) { return item.get('activityType') === 'favorite'; })
+      .then(function (result) {
+        controller.set('favorites', result);
+      }.bind(this));
+
+
 
     ctrl.setProperties({
       page: +controller.get('page'),
