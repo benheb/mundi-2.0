@@ -269,9 +269,9 @@
 
     var url;
     if ( page ) {
-      url = 'http://opendata.arcgis.com/datasets.json?q='+this.value+'&page='+page+'&sort_by=relevance';
+      url = 'http://opendata.dc.gov/datasets.json?q='+this.value+'&page='+page+'&sort_by=relevance';
     } else {
-      url = 'http://opendata.arcgis.com/datasets.json?q='+this.value+'&sort_by=relevance'
+      url = 'http://opendata.dc.gov/datasets.json?q='+this.value+'&sort_by=relevance'
     }
 
     var oReq = new XMLHttpRequest();

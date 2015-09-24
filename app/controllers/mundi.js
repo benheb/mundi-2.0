@@ -5,22 +5,34 @@ export default Ember.Controller.extend({
 
   datasetIds: [],
   legendLayers: [],
+  test: [],
 
   actions: {
     toggleAddData() {
       this.set('showAddData', !this.get('showAddData'))
     },
     addMundiData(id) {
-      this.get('datasetIds').pushObject(id);
+      this.get('datasetIds').addObject(id);
     },
     toggleSidebar () {
       this.set('showSidebar', !this.get('showSidebar'));
     },
     addLegendLayer(layer) {
-      this.get('legendLayers').pushObject(layer);
+      this.get('legendLayers').addObject(layer);
     },
     updateLegendLayer(layer) {
-      this.get('legendLayers').pushObject(layer);
+      
+      var l = this.get('legendLayers');
+      var t = [];
+      l.forEach(function(obj, i) {
+        if ( obj.id === layer.id ) {
+          obj = layer;
+        }
+        t.addObject(obj);
+      }.bind(this));
+
+      this.set('legendLayers', []);
+      this.set('legendLayers', t);
     }
   }
 

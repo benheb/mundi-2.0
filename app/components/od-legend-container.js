@@ -20,23 +20,14 @@ export default Ember.Component.extend({
   _onAddDataset: function(params) {
 
     let legendLayers = this.get('legendLayers');
-    console.log('legendLayers', legendLayers);
     
-    legendLayers.forEach(function(layer) {  
-      if ( !this.layersInLegend.contains( layer.id )) {
-        this.layersInLegend.push(layer.id);
-        this.legend.addLayer({
-          "id": layer.id,
-          "name": layer.name,
-          "renderer": layer.renderer
-        });
-      } else {
-        this.legend.updateLayer({
-          'id': layer.id,
-          'name': layer.name,
-          'renderer': layer.renderer
-        });
-      }
+    legendLayers.forEach(function(layer) {
+      console.log('update: ', layer);
+      this.legend.updateLayer({
+        'id': layer.id,
+        'name': layer.name,
+        'renderer': layer.renderer
+      });
     }.bind(this));
 
   }.observes('legendLayers.[]')
