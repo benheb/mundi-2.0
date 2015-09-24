@@ -8,7 +8,7 @@ export default Ember.Route.extend({
 
   setupController: function(controller, model) {
     this._super(controller, model);
-    controller.get('datasetIds').pushObject(model);
+    controller.set('datasetIds', Ember.A([model]));
   }
 
 });

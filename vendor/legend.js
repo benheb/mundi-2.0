@@ -48,7 +48,7 @@
 
 
   Legend.prototype.addLayer = function(layer, blockEventing) {
-    console.log('add layer: ', layer);
+    //console.log('add layer: ', layer);
     var el = document.getElementById( 'legend-component-content' );
     var item = this._createElement('li', el, layer.id, '', 'legend-item', true);
 
@@ -198,7 +198,7 @@
 
 
   Legend.prototype._buildGraduatedRamp = function(el, stops, id, colors) {
-    console.log('BUILD GRADUATED renderer', stops, 'colors', colors);
+    //console.log('BUILD GRADUATED renderer', stops, 'colors', colors);
     var self = this;
 
     if ( colors ) {

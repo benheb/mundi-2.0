@@ -92,7 +92,7 @@ var Malette = (function () {
   function Malette(container, options) {
     _classCallCheck(this, Malette);
 
-    console.log('init Malette, options: ', options);
+    //console.log('init Malette, options: ', options);
     var self = this;
 
     //store options
@@ -1131,7 +1131,7 @@ var Malette = (function () {
 
         this.style.layerId = this.state.layerId;
         this.style.defaultSymbol = this.style.symbol;
-        console.log('emit --->>>', this.style);
+        //console.log('emit --->>>', this.style);
         this.emit('style-change', this.style);
       } else {
 

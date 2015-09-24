@@ -5,27 +5,22 @@ export default Ember.Component.extend({
   layersInLegend: [],
 
   didInsertElement() {
-    let legend = new Legend('legend-container', {
+    this.set('layersInLegend', []);
+    this.set('legendLayers', []);
+    
+    let legend = null; 
+    legend = new Legend('legend-container', {
       editable: false,
       layers: []
     });
 
-    legend.on('remove-layer', function(id) {
-      this.removeLayerFromMap( id );
-    }.bind(this));
-
-    legend.on('reorder-layers', function(obj) {
-      thiis._reorderLayers( obj );
-    }.bind(this));
-
-    this.legend = legend; 
+    this.set('legend', legend);
   },
 
   _onAddDataset: function(params) {
-    
+
     let legendLayers = this.get('legendLayers');
-    console.log('params', legendLayers);
-    var layer = legendLayers[legendLayers.length - 1];
+    console.log('legendLayers', legendLayers);
     
     legendLayers.forEach(function(layer) {  
       if ( !this.layersInLegend.contains( layer.id )) {
@@ -43,8 +38,6 @@ export default Ember.Component.extend({
         });
       }
     }.bind(this));
-
-    console.log('legendLayers', legendLayers);
 
   }.observes('legendLayers.[]')
 

@@ -68,8 +68,7 @@ export default Ember.Component.extend({
   _addDataset: function (map, id) {
 
     this.store.findRecord('dataset', id).then(function(dataset) {
-      this._setExtent(dataset);
-
+      
       let opts = this._getDatasetLayerOpts(dataset);
       let datasetLayer = new FeatureLayer(dataset.get('url'), opts);
       datasetLayer.id = dataset.get('id');
@@ -96,6 +95,8 @@ export default Ember.Component.extend({
         "renderer": jsonStyle
       });
 
+      this._setExtent(dataset);
+
     }.bind(this));
 
   },
@@ -115,7 +116,9 @@ export default Ember.Component.extend({
     }
 
     if (extent) {
-      this.get('mapView').extent = extent;
+      setTimeout(function() {
+        this.get('mapView').extent = extent;
+      }.bind(this),300);
     }
   },
 
