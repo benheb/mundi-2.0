@@ -1,10 +1,117 @@
 <div class="row favorites">
   <div class="col-xs-12 section-header">
-    <h2>Favorites</h2>
     {{#each model as |item|}}
-      <div>
+      <p>
         <i class="glyphicon glyphicon-star toggle-favorite" {{action "favoriteItem" item.datasetId}}></i>&nbsp;{{item.datasetId}}
-      </div>
+      </p>
     {{/each}}
   </div>
 </div>
+<hr />
+<div class="favorites">
+	<div class="row">
+	  <div class="col-xs-12 section-header">
+	    <h2>Favorites</h2>
+	    <button class="btn btn-primary pull-right"> Delete</button>
+	    <div class="btn-group pull-right">
+	      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	        Add to Project <span class="caret"></span>
+	      </button>
+	      <ul class="dropdown-menu">
+	        <li><a href="#">Urbanomics</a></li>
+	        <li><a href="#">Regulations</a></li>
+	        <li><a href="#">I Love Metro and Public Transportation</a></li>
+	        <li role="separator" class="divider"></li>
+    		<li><a href="#">New Project</a></li>
+	      </ul>
+	    </div>
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="col-xs-12 col-sm-3">
+	    <div class="favorite-item selected">
+	    <div class="caption"><span class="glyphicon glyphicon-globe"></span> Unfilterd <span class="pull-right">4 days ago</span></div>
+	      <img src="images/350x260lines-placeholder.jpg" alt="" class=" img-responsive">
+	        <h3><a href="#">Metro Lines</a></h3>
+	        <div class="additional">
+	        	<span class="text-muted">In projects: None</span>
+	          	<a href="#"><span class="glyphicon glyphicon-share pull-right"></span></a>
+	        </div>
+	    </div>
+	  </div>
+	  <div class="col-xs-12 col-sm-3">
+	    <div class="favorite-item">
+	    <div class="caption"><span class="glyphicon glyphicon-globe"></span> Filtered <span class="pull-right">1 month ago</span></div>
+	      <img src="images/350x260chart-placeholder.jpg" alt="" class=" img-responsive">
+	        <h3><a href="#">DC Wells as Distributed By Type</a></h3>
+	        <div class="additional">
+	        	<span class="text-muted">In projects: None</span>
+	          	<a href="#"><span class="glyphicon glyphicon-share pull-right"></span></a>
+	        </div>
+	    </div>
+	  </div>
+	  <div class="col-xs-12 col-sm-3">
+	    <div class="favorite-item">
+	    <div class="caption"><span class="glyphicon glyphicon-globe"></span> Unfilterd <span class="pull-right">22 min ago</span></div>
+	      <img src="images/350x260dots-placeholder.jpg" alt="" class=" img-responsive">
+	        <h3><a href="#">DC Broadband - Max Advertised Wireline Download Speed</a></h3>
+	        <div class="additional">
+	        	<span class="text-muted">In projects: None</span>
+	          	<a href="#"><span class="glyphicon glyphicon-share pull-right"></span></a>
+	        </div>
+	    </div>
+	  </div>
+	  <div class="col-xs-12 col-sm-3">
+	    <div class="favorite-item">
+	    <div class="caption"><span class="glyphicon glyphicon-globe"></span> Unfilterd <span class="pull-right">4 days ago</span></div>
+	      <img src="images/350x260lines-placeholder.jpg" alt="" class=" img-responsive">
+	        <h3><a href="#">Metro Lines</a></h3>
+	        <div class="additional">
+	   			<span class="text-muted">In projects: Urbanomics</span>
+	          	<a href="#"><span class="glyphicon glyphicon-share pull-right"></span></a>
+	        </div>
+	    </div>
+	  </div>
+	  	</div>
+	<div class="row">
+	  <div class="col-xs-12 col-sm-3">
+	    <div class="favorite-item">
+	    <div class="caption"><span class="glyphicon glyphicon-globe"></span> Filtered <span class="pull-right">1 month ago</span></div>
+	      <img src="images/350x260chart-placeholder.jpg" alt="" class=" img-responsive">
+	        <h3><a href="#">DC Wells as Distributed By Type</a></h3>
+	        <div class="additional">
+	        	<span class="text-muted">In projects: Regulations</span>
+	          	<a href="#"><span class="glyphicon glyphicon-share pull-right"></span></a>
+	        </div>
+	    </div>
+	  </div>
+	  <div class="col-xs-12 col-sm-3">
+	    <div class="favorite-item">
+	    <div class="caption"><span class="glyphicon glyphicon-globe"></span> Unfilterd <span class="pull-right">22 min ago</span></div>
+	      <img src="images/350x260dots-placeholder.jpg" alt="" class=" img-responsive">
+	        <h3><a href="#">DC Broadband - Max Advertised Wireline Download Speed</a></h3>
+	        <div class="additional">
+	        	<span class="text-muted">In projects: None</span>
+	          	<a href="#"><span class="glyphicon glyphicon-share pull-right"></span></a>
+	        </div>
+	    </div>
+	  </div>
+	  <div class="col-xs-12 col-sm-3">
+	    <div class="favorite-item">
+	    <div class="caption"><span class="glyphicon glyphicon-globe"></span> Unfilterd <span class="pull-right">4 days ago</span></div>
+	      <img src="images/350x260lines-placeholder.jpg" alt="" class=" img-responsive">
+	        <h3><a href="#">Metro Lines</a></h3>
+	        <div class="additional">
+	        	<span class="text-muted">In projects: I Love Metro and Public Transporation</span>
+	          	<a href="#"><span class="glyphicon glyphicon-share pull-right"></span></a>
+	        </div>
+	    </div>
+	  </div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<button class="btn btn-default center-block">Load More</button>
+		</div>
+	</div>
+</div>
+>>>>>>> refacting projects, plus favorites static content
