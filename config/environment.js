@@ -28,8 +28,11 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-      API: 'http://opendata.dc.gov'
-      //API: 'http://opendataqa.arcgis.com'
+      API: 'http://opendata.dc.gov',
+      agoUrl: 'http://www.arcgis.com'
+
+      // API: 'http://opendataqa.arcgis.com',
+      //agoUrl: 'http://qaext.arcgis.com'
     }
   };
 
@@ -56,7 +59,12 @@ module.exports = function(environment) {
   if (environment === 'production' || environment === 'prod') {
     ENV.baseUrl = '/opendata-tng';
     ENV.rootUrl = '/opendata-tng';
+
+    // ENV.APP.API = 'http://opendata.dc.gov';
+
     ENV.APP.API = 'http://opendata.dc.gov';
+    ENV.APP.agoUrl = 'http://www.arcgis.com';
+
     ENV.locationType = 'hash';
   }
 

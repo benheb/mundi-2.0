@@ -1,5 +1,10 @@
-<div class="row">
+<div class="row favorites">
   <div class="col-xs-12 section-header">
     <h2>Favorites</h2>
+    {{#each model as |item|}}
+      <div>
+        <i class="glyphicon glyphicon-star toggle-favorite" {{action "favoriteItem" item.datasetId}}></i>&nbsp;{{item.datasetId}}
+      </div>
+    {{/each}}
   </div>
 </div>

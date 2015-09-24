@@ -43,24 +43,7 @@
 
     <div class="col-xs-12 col-sm-4 right-sidebar">
       <div class="col-xs-12 primary-cta">
-        <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Download Files <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <li class="dropdown-header">Full Dataset</li>
-            <li><a href="#">Spreadsheet</a></li>
-            <li><a href="#">KML</a></li>
-            <li><a href="#">Shapefile</a></li>
-          <li class="dropdown-header">Full Dataset</li>
-            <li><a href="#">Spreadsheet</a></li>
-            <li><a href="#">KML</a></li>
-            <li><a href="#">Shapefile</a></li>
-          <li class="dropdown-header">Additional Resources</li>
-            <li><a href="#">Resource #1</a></li>
-            <li><a href="#">Resource #2</a></li>
-          </ul>
-        </div>
+        {{od-download-button model=model action="downloadItem"}}
         <br />
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -75,13 +58,13 @@
         <br />
         <button class="btn btn-default">Comments(4)</button>
         <br /><br />
-        <button class="btn btn-default">Favorite</button>
+        <button class="btn btn-default" {{action "favoriteItem" model.id}}>Favorite</button>
         <br /><br />
         <button class="btn btn-default">Share</button>
       </div>
       <div class="col-xs-12 metadata">
       <h2>Details</h2>
-      <p><span>244</span> Attributes</p>
+      <p><span>{{model.fields.length}}</span> Attributes</p>
       <p><span>{{model.recordCount}}</span> Rows</p>
       <p><a href="{{model.metadataUrl}}">Metadata</a></p>
       <p><a href="#">License</a></p>
@@ -92,8 +75,8 @@
       </div>
       <div class="col-xs-12">
       <h2>ArcGIS</h2>
-      <button class="btn btn-default">Item</button>
-      <button class="btn btn-default">WebMap</button>
+      <a href="{{model.landingPage}}" target="_blank" class="btn btn-default">Item</a>
+      <a href="{{agoMapUrl}}" target="_blank" class="btn btn-default">Web Map</a>
       <button class="btn btn-default">Storymap</button>
       </div>
       <div class="col-xs-12">

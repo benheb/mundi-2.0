@@ -37,6 +37,7 @@ export default DS.Model.extend({
   commentsEnabled: DS.attr('boolean'),
   serviceSpatialReference: {},//{}
   metadataUrl: DS.attr('string'),
+  metadata: DS.attr(),//{}
   orgId: DS.attr('string'),
   useStandardizedQueries: DS.attr('boolean')
 
