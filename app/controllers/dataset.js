@@ -17,12 +17,6 @@ export default Ember.Controller.extend({
 
       return agoMapUrl;
     }
-  }),
-
-  actions: {
-    toggleSidebar () {
-      this.set('showSidebar', !this.get('showSidebar'));
-    }
-  }
+  })
 
 });

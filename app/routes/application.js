@@ -36,6 +36,11 @@ export default Ember.Route.extend({
           record.save();
         }
       }.bind(this));
+    },
+    
+    toggleSidebar () {
+      var ctrl = this.controllerFor('application');
+      ctrl.set('showSidebar', !ctrl.get('showSidebar'));
     }
 
   }
