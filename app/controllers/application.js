@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  needs: ['mundi'],
 
   q: '',
 
@@ -37,6 +38,9 @@ export default Ember.Controller.extend({
   actions: {
     search (q) {
       this.transitionToRoute('datasets', { queryParams: { q: q, page: 1, keyword: '' } });
+    },
+    favoriteSelected(id) {
+      this.get('controllers.mundi').send('favoriteSelected', id);
     }
   }
 

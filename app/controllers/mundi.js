@@ -1,21 +1,25 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  needs: ['application'],
+
   showAddData: false, 
 
   datasetIds: [],
   legendLayers: [],
   test: [],
+  favorited: [],
 
   actions: {
+    favoriteSelected(id) {
+      console.log('favoriteSelected!')
+      this.sendAction('action', id);
+    },
     toggleAddData() {
       this.set('showAddData', !this.get('showAddData'))
     },
     addMundiData(id) {
       this.get('datasetIds').addObject(id);
-    },
-    toggleSidebar () {
-      this.set('showSidebar', !this.get('showSidebar'));
     },
     addLegendLayer(layer) {
       this.get('legendLayers').addObject(layer);
@@ -33,6 +37,9 @@ export default Ember.Controller.extend({
 
       this.set('legendLayers', []);
       this.set('legendLayers', t);
+    },
+    favoriteSelected(id) {
+      this.get('datasetIds').addObject(id);
     }
   }
 

@@ -22,7 +22,6 @@ export default Ember.Component.extend({
     let legendLayers = this.get('legendLayers');
     
     legendLayers.forEach(function(layer) {
-      console.log('update: ', layer);
       this.legend.updateLayer({
         'id': layer.id,
         'name': layer.name,

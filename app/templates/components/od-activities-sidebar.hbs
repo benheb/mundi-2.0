@@ -7,7 +7,7 @@
     <h2>For Realz</h2>
       <ul>
         {{#each sortedActivities as |item|}}
-          <li>{{item.activityType}}:&nbsp;{{item.datasetId}}</li>
+          <li {{action "favoriteSelected" item.datasetId}} id="item-{{item.datasetId}}">{{item.activityType}}:&nbsp;{{item.datasetId}}</li>
         {{/each}}
       </ul>
     <hr>
