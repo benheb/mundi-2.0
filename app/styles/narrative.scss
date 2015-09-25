@@ -17,6 +17,34 @@
   margin-bottom:40px;
 }
 
+.jumbotron {
+    position: relative;
+    height: 480px;
+    width: 100%;
+    padding: 0px;
+    border-radius: 0px;
+  }
+
+.primary-cta {
+
+    button {
+    width: 100%;
+    background-color: #2B4888;
+    color: #fff;
+    border: 0px;
+    }
+
+    .dropdown-menu {
+    right: 0px;
+      input {
+      margin: 5px auto;
+      }
+    }
+    #dropdownMenu2 li {
+      padding: 10px;
+    }
+  }
+
 .narrative-text-block {
   line-height: 23px;
   font-size: 16px;
@@ -45,4 +73,13 @@
     font-family: Karla, 'Helvetica Neue', Helvetica, Arial, sans-serif;
     display: inline-block;
   }
+}
+
+.icon {
+  padding-right:2px;
+}
+
+.page-narrative button a,
+.page-narrative button a:hover {
+  color:#fff;
 }

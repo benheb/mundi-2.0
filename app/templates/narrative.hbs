@@ -36,6 +36,8 @@
       <h4 class="narrative-feature-title">
         Number of Potholes Filled in D.C. by Month
       </h4>
+      <a href="#"><span class="glyphicon glyphicon-share pull-right"></span></a>
+      <a href="#"><span class="glyphicon glyphicon-star-empty pull-right icon"></span></a>
       {{dashboard-chart id="potholeChart"}}
     </div>
 
@@ -43,6 +45,29 @@
 
   <div class="row">
     {{esri-map model=model id="narrative-map"}}
+
+    <div class="container">
+    <div class="dropdown pull-right">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <span class="glyphicon glyphicon-option-horizontal"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="#"><span class="glyphicon glyphicon-globe"></span> Basemaps</a></li>
+        <li>
+          {{#link-to 'mundi'model.id}}
+            <span class="glyphicon glyphicon-adjust"></span> Vizualization (Mundi)
+          {{/link-to}}
+        </li>
+        <li><a href="#"><span class="glyphicon glyphicon-map-marker"></span> Find Location</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+  <div>
+    <button type="button" class="btn btn-primary btn-lg btn-block">
+      {{link-to "Explore this entire dataset" 'dataset'}}
+    </button>
   </div>
 
 
