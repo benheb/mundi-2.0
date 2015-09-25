@@ -5,6 +5,8 @@
        {{#dashboard-item title=item.title itemId=item.itemId action="gotoNarrative"}}
          <div class="dash-number">{{{format-number item.count}}}</div>
          <div class="dash-description">{{{item.description}}}</div>
+         <a href="#"><span class="glyphicon glyphicon-share pull-right"></span></a>
+         <a href="#"><span class="glyphicon glyphicon-star-empty pull-right icon"></span></a>
        {{/dashboard-item}}
     {{/each}}
   </div>
@@ -14,12 +16,14 @@
       <div class="dash-card">
         <h4 class="dash-title">Status of 311 Requests DC (last 30 days)</h4>
         {{dashboard-chart id="statusChart"}}
+        <a href="#"><span class="glyphicon glyphicon-share pull-right"></span></a>
       </div>
     </div>
     <div class="col-md-6">
       <div class="dash-card">
         <h4 class="dash-title">311 Service Requests by Org (last 30 days)</h4>
         {{dashboard-chart id="chart"}}
+        <a href="#"><span class="glyphicon glyphicon-share pull-right"></span></a>
       </div>
     </div>
   </div>
