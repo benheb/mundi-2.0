@@ -107,7 +107,6 @@ export default Ember.Component.extend({
     this._addDataset(this.map, datasetIds[datasetIds.length - 1]);
   }.observes('datasetIds.[]'),
 
-
   _setExtent: function(dataset) {
     let extent, ext = dataset.get('extent');
     if (ext && ext.coordinates) {
