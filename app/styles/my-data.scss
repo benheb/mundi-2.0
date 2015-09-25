@@ -19,8 +19,16 @@
 	.section-header {
 		margin-bottom: 30px;
 
+		.btn-group {
+			display: inline-block;
+		}
 		button {
 		margin-top: 20px;
+		margin-left: 5px;
+		}
+
+		.dropdown-menu a {
+			color: #337ab7;
 		}
 	}
 	.project {
@@ -34,12 +42,14 @@
 		.nav > li > a {
 			padding: 5px 10px;
 		}
-		.type {
-			background-color: #ccc;
-			color: #000;
-			border-radius: 5px;
-			padding: 2px 5px;
+		h3 {
+			border-bottom: 1px solid #ddd;
+			padding-bottom: 5px;
 			margin-bottom: 5px;
+			width: 100%;
+		}
+		.project-type {
+			font-size: 36px;
 		}
 		.glyphicon {
 			margin-right: 5px;
@@ -49,6 +59,53 @@
 			border-right: 1px solid #ddd;
 			border-bottom: 1px solid #ddd;
 			margin-bottom: 40px;
+		}
+	}
+	.favorites {
+		.favorite-item {
+			position: relative;
+			margin-bottom: 30px;
+			-webkit-box-shadow: -1px 0px 23px -4px rgba(0,0,0,0.75);
+			-moz-box-shadow: -1px 0px 23px -4px rgba(0,0,0,0.75);
+			box-shadow: -1px 0px 23px -4px rgba(0,0,0,0.75);
+			max-width: 350px;
+		}
+		.selected {
+			border: 2px solid cyan;
+			box-shadow: none;
+		}
+		.caption {
+			position: absolute;
+			padding: 5px;
+			width: 100%;
+			color: #000;
+			min-height: 60px;
+			font-size: 11px;
+			background: transparent;
+    		//background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJo…gaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=");
+    		background: -moz-linear-gradient(top,rgba(255,255,255,1) 0%,transparent 100%);
+    		background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(255,255,255,1)),color-stop(100%,transparent));
+    		background: -webkit-linear-gradient(top,rgba(255,255,255,1) 0%,transparent 100%);
+    		background: -o-linear-gradient(top,rgba(255,255,255,1) 0%,transparent 100%);
+    		background: -ms-linear-gradient(top,rgba(255,255,255,1) 0%,transparent 100%);
+    		background: linear-gradient(to bottom,rgba(255,255,255,1) 0%,rgba(0,0,0,0) 100%);
+		}
+		img {
+			margin-top: 5px;
+			border-bottom: 1px solid #e6e6e6;
+		}
+		h3 {
+			margin: 5px;
+			height: 40px;
+			overflow-x: hidden;
+		}
+		.additional {
+			border-top: 1px solid #e6e6e6;
+			padding: 5px;
+			font-size: 11px;
+			.text-muted {
+				text-overflow: ellipsis;
+			}
 		}
 	}
 

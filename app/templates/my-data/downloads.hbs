@@ -1,10 +1,49 @@
 <div class="row">
   <div class="col-xs-12 section-header">
     <h2>Downloads</h2>
+    <button class="btn btn-primary pull-right"> Clear</button>
+	    <div class="btn-group pull-right">
+	      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	        Add to Project <span class="caret"></span>
+	      </button>
+	      <ul class="dropdown-menu">
+	        <li><a href="#">Urbanomics</a></li>
+	        <li><a href="#">Regulations</a></li>
+	        <li><a href="#">I Love Metro and Public Transportation</a></li>
+	        <li role="separator" class="divider"></li>
+    		<li><a href="" data-toggle="modal" data-target="#newProjectModal">New Project</a></li>
+	      </ul>
+	    </div>
     <ul>
       {{#each model as |item|}}
         <li>{{item.url}}</li>
       {{/each}}
     </ul>
+  </div>
+</div>
+
+<!-- New Project Modal -->
+<div class="modal fade" id="newProjectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">New Project</h4>
+      </div>
+      <div class="modal-body">
+        <h3>Project Type</h3>
+        <form>
+          <label><input type="radio">Webmap</label> <label><input type="radio">Story Map</label> <label><input type="radio">Dashboar</label>
+        </form>
+          <h3>Project Name</h3>
+        <form>
+          <label>Name</label> <input type="text" />
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary pull-right">Save changes</button>
+      </div>
+    </div>
   </div>
 </div>
