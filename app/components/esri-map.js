@@ -9,6 +9,8 @@ import SimpleRenderer from 'esri/renderers/SimpleRenderer';
 
 export default Ember.Component.extend({
 
+  annotation: Ember.inject.service('map-annotation'),
+
   classNames: ['esri-map-component'],
 
   didInsertElement() {
@@ -73,6 +75,17 @@ export default Ember.Component.extend({
     let datasetLayer = new FeatureLayer(dataset.get('url'), opts);
     this.set('datasetLayer', datasetLayer);
     map.add(datasetLayer);
+
+
+
+    Ember.run.later(this, function () {
+      var annotation = this.get('annotation');
+      annotation.start(this.get('map'), this.get('mapView'));
+
+      // Ember.run.later(this, function () {
+      //   annotation.stop();
+      // }, 1500);
+    }, 500);
   },
 
   _getDatasetInfoTemplate: function (dataset) {
