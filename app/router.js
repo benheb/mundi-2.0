@@ -15,6 +15,7 @@ Router.map(function() {
     this.route('overview', { path: '/' });
     this.route('data');
     this.route('chart');
+    this.route('conversation');
   });
 
   this.route('narrative', {
@@ -30,6 +31,10 @@ Router.map(function() {
 
   this.route('mundi', {
     path: '/mundi/:id'
+  });
+
+  this.route('explore', {
+    path: '/explore/:id'
   });
 });
 

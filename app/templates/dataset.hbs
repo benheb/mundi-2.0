@@ -15,6 +15,11 @@
           {{/link-to}}
         </li>
 		    <li><a href="#"><span class="glyphicon glyphicon-map-marker"></span> Find Location</a></li>
+        <li>
+          {{#link-to 'explore' model}}
+            <span class="glyphicon glyphicon-eye-open"></span> Explore
+          {{/link-to}}
+        </li>
 		  </ul>
 		</div>
 
@@ -32,6 +37,9 @@
         {{/active-link}}
         {{#active-link}}
           {{link-to "Charts" "dataset.chart" model}}
+        {{/active-link}}
+        {{#active-link}}
+          {{link-to "Conversation" "dataset.conversation" model}}
         {{/active-link}}
   		</ul>
 		</div>
