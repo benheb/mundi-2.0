@@ -4,7 +4,17 @@
 
 {{#if isFullScreen}}
   <div class="full-screen {{bodyClass}}">
-    {{outlet}}
+    <div class="header">
+      <h1 class="text-muted">
+        {{link-to 'Open Data' 'index'}}<small>{{subHeader}}</small>
+      </h1>
+    </div>
+    <div class="fullscreen-container">
+      {{outlet}}
+    </div>
+    <div class="footer">
+      <p>♥ from the <a href="http://dc.esri.com/">Open Data team</a></p>
+    </div>
   </div>
 {{else}}
   <div class="container {{bodyClass}}">
