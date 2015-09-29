@@ -3,7 +3,7 @@
 	{{esri-map model=model}}
 		
 	<div class="container">
-		<div class="dropdown pull-right">
+		<div class="dropdown pull-right open">
 		  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 		    <span class="glyphicon glyphicon-option-horizontal"></span>
 		  </button>
@@ -64,8 +64,6 @@
           </ul>
         </div>
         <br />
-        <button class="btn btn-default">Comments(4)</button>
-        <br /><br />
         <button class="btn btn-default" {{action "favoriteItem" model.id}}>Favorite</button>
         <br /><br />
         <button class="btn btn-default">Share</button>
@@ -85,7 +83,6 @@
       <h2>ArcGIS</h2>
       <a href="{{model.landingPage}}" target="_blank" class="btn btn-default">Item</a>
       <a href="{{agoMapUrl}}" target="_blank" class="btn btn-default">Web Map</a>
-      <button class="btn btn-default">Storymap</button>
       </div>
       <div class="col-xs-12">
       <h2>How others use this data</h2>
