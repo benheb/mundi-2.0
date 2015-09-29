@@ -15,6 +15,7 @@ Router.map(function() {
     this.route('overview', { path: '/' });
     this.route('data');
     this.route('chart');
+    this.route('conversation');
   });
 
   this.route('narrative', {
