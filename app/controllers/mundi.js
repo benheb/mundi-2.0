@@ -11,10 +11,6 @@ export default Ember.Controller.extend({
   favorited: [],
 
   actions: {
-    favoriteSelected(id) {
-      console.log('favoriteSelected!')
-      this.sendAction('action', id);
-    },
     toggleAddData() {
       this.set('showAddData', !this.get('showAddData'))
     },
