@@ -1,6 +1,11 @@
 @import "http://fonts.googleapis.com/css?family=Unica+One|Karla:400,400italic,700";
 @import "bootstrap-imports";
 
+/*html, body, body > .ember-view {
+  height: 100%;
+}*/
+
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -16,15 +21,7 @@
   color:#54ce8a;
 }
 
-.full-screen {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-
+@import "full-screen";
 @import "header";
 @import "dashboard";
 @import "home";

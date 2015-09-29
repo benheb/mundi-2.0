@@ -48,16 +48,24 @@ export default Ember.Component.extend({
     this._addDataset(map, dataset);
   },
 
-  willRemoveElement() {
-    let view = this.get('mapView');
-    if (view) {
-      view.destroy();
-    }
+  willDestroyElement() {
+    //NOTE: bugs in the jsapi beta cause this to throw errors
 
-    let map = this.get('map');
-    if (map) {
-      map.destroy();
-    }
+    // let map = this.get('map');
+    // let layer = this.get('datasetLayer');
+    // if (layer) {
+    //   map.remove(layer);
+    //   // layer.destroy();
+    // }
+
+    // let view = this.get('mapView');
+    // if (view) {
+    //   view.destroy();
+    // }
+
+    // if (map) {
+    //   map.destroy();
+    // }
   },
 
   _addDataset: function (map, dataset) {
