@@ -45,6 +45,7 @@
     "ember-local-storage": "0.0.10",
     "ember-moment": "3.6.4",
     "ember-sanitize": "0.0.6",
-    "ember-truth-helpers": "1.1.0"
+    "ember-truth-helpers": "1.1.0",
+    "emberx-select": "2.0.1"
   }
 }

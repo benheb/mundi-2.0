@@ -5,9 +5,9 @@ export default Ember.Controller.extend({
   showAnnotationOptions: true,
 
   actions: {
-    toggleAnnotationOptions () {
-      var ctrl = this.controllerFor('dataset');
-      ctrl.set('showAnnotationOptions', !ctrl.get('showAnnotationOptions'));
+    toggleAnnotationOptions (val) {
+      var show = (val === 'yes') ? true : false;
+      this.set('showAnnotationOptions', show);
     }
   }
 

@@ -29,10 +29,11 @@
     <textarea id="add-comment-textarea"></textarea>
 
     <span>Do you want to annotate the map?</span> 
-    <select>
-      <option>Yes</option>
-      <option>No</option>
-    </select>
+
+    {{#x-select value="yes" action="toggleAnnotationOptions"}}
+      {{#x-option value="yes"}}Yes{{/x-option}}
+      {{#x-option value="no"}}No{{/x-option}}
+    {{/x-select}}
 
     {{#if showAnnotationOptions}}
       <div class="annotate-option"><i class="glyphicon glyphicon-map-marker"></i> <input type="checkbox" checked="checked" /> Add a marker to the map</div>
