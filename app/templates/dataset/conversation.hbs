@@ -1,3 +1,41 @@
 <div class="col-xs-12 col-sm-8 page-body">
-  <h2>Conversation...</h2>
+  <div class="row col-md-12">
+    <div id="conversation-toolbar">
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <span class="glyphicon glyphicon-cog"></span>
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li><a href="#">Turn on all annotations</a></li>
+          <li><a href="#">Export annotations to shapefile</a></li>
+        </ul>
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <span class="glyphicon glyphicon-filter"></span>
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row col-md-12">
+    <h2>New Comment</h2>
+
+    <hr />
+
+    <textarea id="add-comment-textarea"></textarea>
+
+    <span>Do you want to annotate the map?</span> 
+    <select>
+      <option>Yes</option>
+      <option>No</option>
+    </select>
+
+    <div class="annotate-option"><i class="glyphicon glyphicon-map-marker"></i> <input type="checkbox" checked="checked" /> Add a marker to the map</div>
+    <div class="annotate-option"><i class="glyphicon glyphicon-pushpin"></i> <input type="checkbox" /> Select a feature to comment on</div>
+
+  </div>
 </div>
