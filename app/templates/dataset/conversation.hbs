@@ -34,8 +34,10 @@
       <option>No</option>
     </select>
 
-    <div class="annotate-option"><i class="glyphicon glyphicon-map-marker"></i> <input type="checkbox" checked="checked" /> Add a marker to the map</div>
-    <div class="annotate-option"><i class="glyphicon glyphicon-pushpin"></i> <input type="checkbox" /> Select a feature to comment on</div>
+    {{#if showAnnotationOptions}}
+      <div class="annotate-option"><i class="glyphicon glyphicon-map-marker"></i> <input type="checkbox" checked="checked" /> Add a marker to the map</div>
+      <div class="annotate-option"><i class="glyphicon glyphicon-pushpin"></i> <input type="checkbox" /> Select a feature to comment on</div>
+    {{/if}}
 
   </div>
 </div>
