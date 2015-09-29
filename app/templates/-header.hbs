@@ -1,0 +1,14 @@
+<div class="header">
+  <h1 class="text-muted">
+    {{link-to 'Open Data' 'index'}}<small>{{subHeader}}</small>
+  </h1>
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+      {{od-header-search action="search"}}  
+      <ul class="nav nav-pills pull-right">
+        <li role="presentation"><a href="" {{action "toggleSidebar"}}>My Data</a></li>
+        <li role="presentation"><a href="#">Sign In</a></li>
+      </ul>
+    </div>
+  </nav>
+</div>

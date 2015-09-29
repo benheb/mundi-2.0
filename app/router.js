@@ -32,6 +32,10 @@ Router.map(function() {
   this.route('mundi', {
     path: '/mundi/:id'
   });
+
+  this.route('explore', {
+    path: '/explore/:id'
+  });
 });
 
 export default Router;
