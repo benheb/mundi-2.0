@@ -78,14 +78,14 @@ export default Ember.Component.extend({
 
 
 
-    Ember.run.later(this, function () {
-      var annotation = this.get('annotation');
-      annotation.start(this.get('map'), this.get('mapView'), 'polygon');
-      annotation.on('geometry', function () { alert('got geometry!'); });
-      // Ember.run.later(this, function () {
-      //   annotation.stop();
-      // }, 1500);
-    }, 500);
+    // Ember.run.later(this, function () {
+    //   var annotation = this.get('annotation');
+    //   annotation.start(this.get('map'), this.get('mapView'), 'polygon');
+    //   annotation.on('geometry', function () { alert('got geometry!'); });
+    //   // Ember.run.later(this, function () {
+    //   //   annotation.stop();
+    //   // }, 1500);
+    // }, 500);
   },
 
   _getDatasetInfoTemplate: function (dataset) {
