@@ -1,6 +1,7 @@
 <div class="jumbotron">
 
-	{{esri-map model=model}}
+	{{esri-map model=model map=map mapView=mapView}}
+  {{od-annotation-layer map=map mapView=mapView drawingToolsAreActivated=drawingToolsAreActivated}}
 		
 	<div class="container">
   <div class="btn-group dropdown pull-right open">
