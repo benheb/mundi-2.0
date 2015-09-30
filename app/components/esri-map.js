@@ -3,11 +3,13 @@ import Map from 'esri/Map';
 import MapView from 'esri/views/MapView';
 //import SceneView from 'esri/views/SceneView';
 import FeatureLayer from 'esri/layers/FeatureLayer';
-import PopupTemplate from 'esri/widgets/PopupTemplate';
+import PopupTemplate from 'esri/PopupTemplate';
 import Extent from 'esri/geometry/Extent';
 import SimpleRenderer from 'esri/renderers/SimpleRenderer';
 
 export default Ember.Component.extend({
+
+  annotation: Ember.inject.service('map-annotation'),
 
   classNames: ['esri-map-component'],
 
@@ -23,7 +25,7 @@ export default Ember.Component.extend({
     this.set('map', map);
 
     let mapViewOpts = {
-      container: 'map-div',  //reference to the DOM node that will contain the view
+      container: this.element,  //reference to the DOM node that will contain the view
       map: map,  //references the map object created in step 3
       height: this.element.clientHeight,
       width: this.element.clientWidth
@@ -73,6 +75,17 @@ export default Ember.Component.extend({
     let datasetLayer = new FeatureLayer(dataset.get('url'), opts);
     this.set('datasetLayer', datasetLayer);
     map.add(datasetLayer);
+
+
+
+    Ember.run.later(this, function () {
+      var annotation = this.get('annotation');
+      annotation.start(this.get('map'), this.get('mapView'), 'polygon');
+      annotation.on('geometry', function () { alert('got geometry!'); });
+      // Ember.run.later(this, function () {
+      //   annotation.stop();
+      // }, 1500);
+    }, 500);
   },
 
   _getDatasetInfoTemplate: function (dataset) {
