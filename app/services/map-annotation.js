@@ -1,56 +1,42 @@
 import Ember from 'ember';
 import GraphicsLayer from 'esri/layers/GraphicsLayer';
 import Polyline from 'esri/geometry/Polyline';
+import Polygon from 'esri/geometry/Polygon';
 import SimpleLineSymbol from 'esri/symbols/SimpleLineSymbol';
 import Point from 'esri/geometry/Point';
 import Graphic from 'esri/Graphic';
 import webMercatorUtils from 'esri/geometry/support/webMercatorUtils';
 //import SimpleRenderer from 'esri/renderers/SimpleRenderer';
 
-export default Ember.Service.extend({
+export default Ember.Service.extend(Ember.Evented, {
 
-  // init() {
-  //   console.debug('>>>>> map-annotation service init');
-  //   this.drawingLayer = new GraphicsLayer();
-  // },
-
-  start(map, view) {
-    console.debug('>>>>> map-annotation service start');
-debugger;
+  start(map, view, geomType) {
+    
     this.map = map;
     this.view = view;
-    this.drawingLayer = new GraphicsLayer({ wkid: 102100 });
-
+    this.geomType = geomType;
+    this.drawingLayer = new GraphicsLayer({ wkid: this.map.spatialReference.wkid });
     this.map.add(this.drawingLayer);
 
-    this.geom = new Polyline({ wkid: this.map.spatialReference.wkid });
-    this.geom.addPath([]);
-    let lineSymbol = new SimpleLineSymbol({
+    this.geom = this.initGeom();
+
+    this.lineSymbol = new SimpleLineSymbol({
       color: [226, 119, 40],
       width: 4
     });
 
-
-
-    // [-8545705.790652135, 4696867.871862646],
-    //   [-8557859.278149463, 4687542.554411868],
-    // debugger;
-    // this.geom.insertPoint(0, 0, new Point(-100, 40));
-    // this.geom.insertPoint(0, 1, new Point(-115, 41));
-
-
-
-
-    this.polylineGraphic = new Graphic({
-      geometry: this.geom,
-      symbol: lineSymbol
-    });
-
-    this.drawingLayer.add(this.polylineGraphic);
-
-
-
     this.clickHandler = this.view.on('click', this.onClick.bind(this));
+    //this.mouseOverHandler = this.view.on('mouseover', this.onMouseOver.bind(this));
+  },
+
+  initGeom: function () {
+    let geom = new Point({ wkid: this.map.spatialReference.wkid });
+    switch (this.geomType) {
+      case 'polygon':
+        geom = new Polyline({ wkid: this.map.spatialReference.wkid });
+        geom.addPath([]);
+    }
+    return geom;
   },
 
   stop() {
@@ -61,59 +47,62 @@ debugger;
   },
 
   reset() {
-    this.geom = null;
-    this.lastPoint = null;
-    this.lastClickTime = 0;
+    this.geom = this.initGeom();
     this.clear();
   },
 
   clear() {
+    this.drawingLayer.clear();
+  },
 
+  onMouseOver(evt) {
+    console.debug('>>>>> onMouseOver');
   },
 
   onClick(evt) {
-    let now = Date.now();
 
-    if (now - this.lastClickTime < 500) {
-      console.debug('>>>>> double click! (' + (now-this.lastClickTime) + ')');
-      this.onDoubleClick(evt);
+    if (this.geomType === 'point' || evt.srcEvent.ctrlKey) {
+      this.finishDrawing(evt);
       return;
     }
 
-    console.debug('>>>>> click! (' + (now-this.lastClickTime) + ')');
+    /* TODO:
+        use gestures (implement rubberband?, finish drawing on dblclick?)
+        devtopia build for latest-latest
+    */
 
-    this.lastClickTime = now;
-    
-
-    this.drawingLayer.remove(this.polylineGraphic);
-    //debugger;
+    if (this.polylineGraphic) {
+      this.drawingLayer.remove(this.polylineGraphic);
+    }
 
     if (this.geom.paths[0].length === 0) {
       this.geom = new Polyline({ wkid: this.map.spatialReference.wkid });
       this.geom.addPath([]);
-      // this.geom.insertPoint(0, 0, new Point(-100, 40));
-      // this.geom.insertPoint(0, 1, new Point(-115, 41));
     }
 
-    // this.geom.insertPoint(0, this.geom.paths[0].length, new Point(evt.mapPoint.longitude, evt.mapPoint.latitude));
     this.geom.insertPoint(0, this.geom.paths[0].length, evt.mapPoint);
-
-    let lineSymbol = new SimpleLineSymbol({
-      color: [226, 119, 40],
-      width: 4
-    });
     
     this.polylineGraphic = new Graphic({
       geometry: this.geom,
-      symbol: lineSymbol
+      symbol: this.lineSymbol
     });
-    debugger;
     
     this.drawingLayer.add(this.polylineGraphic);
-    // this.geom.insertPoint(0, this.geom.paths[0].length, evt.mapPoint);
   },
 
-  onDoubleClick(evt) {
+  finishDrawing(evt) {
+    let geom;
+    if (this.geomType === 'polygon') {
+      // create the polygon
+      geom = new Polygon(this.geom.paths[0]);
+    } else {
+      geom = evt.mapPoint;
+    }
+    
+    // raise an event
+    this.trigger('geometry', geom);
+
+    // prepare to draw another shape
     this.reset();
   }
 
