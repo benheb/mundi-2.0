@@ -1,7 +1,52 @@
 <div id="mundi-container">
   <div class="mundi-toolbar">
-    <div class="tool" {{action "toggleSidebar"}}><i class="glyphicon glyphicon-th-list"></i> My Data</div>
-    <div id="add-data" class="tool" {{action "toggleAddData"}}><i class="glyphicon glyphicon-search"></i> Add</div>
+    <div id="mundi-toolbar-top">
+      <div class="col-md-2">
+        <span class="mundi-step-title selected active">Map</span>
+        <span class="divider"> | </span>
+        <span class="mundi-step-title">Chart</span>
+      </div>
+      <div class="col-md-2">
+        <span class="mundi-step-title">Transform</span>
+        <span class="divider"> | </span>
+        <span class="mundi-step-title active">Filter</span>
+      </div>
+      <div class="col-md-2">
+        <span class="mundi-step-title active">Draw</span>
+      </div>
+      <div class="col-md-2">
+        <span class="mundi-step-title active">Quick Style</span>
+      </div>
+      <div class="col-md-2">
+        <span class="mundi-step-title">Save</span>
+        <span class="divider"> | </span>
+        <span class="mundi-step-title active">Share</span>
+      </div>
+    </div>
+    <div id="mundi-toolbar-bottom">
+      <div class="col-md-2">
+        {{#x-select value="" action="changeAttribute"}}
+        {{/x-select}}
+      </div>
+      <div class="col-md-2">
+        <input type="range" value=30 min=0 max=100 />
+      </div>
+      <div class="col-md-2"></div>
+      <div class="col-md-2">
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Select Quick Style
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><a href="#">NYT</a></li>
+            <li><a href="#">Night Commander</a></li>
+            <li><a href="#">Minimally Modern</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
   </div>
 
   {{od-search-container showAddData=showAddData action="addMundiData"}}

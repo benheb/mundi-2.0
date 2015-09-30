@@ -87,7 +87,7 @@ export default Ember.Component.extend({
       options.type = this._getType(dataset.get('geometryType'));
       options.layerId = dataset.get('id');
 
-      this._initMalette(options);
+      //this._initMalette(options);
 
       this.sendAction('addLegendLayer', {
         "id": dataset.get('id'),

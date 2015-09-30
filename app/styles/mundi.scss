@@ -5,11 +5,35 @@
     position: relative;
   }
   .mundi-toolbar {
-    padding-left: 10px;
-    padding-right: 10px;
+    //padding-left: 10px;
+    //padding-right: 10px;
     background-color: #EEE;
     overflow: hidden;
     border-bottom: 1px solid #C3C3C3;
+  }
+  #mundi-toolbar-top, #mundi-toolbar-bottom {
+    width:100%;
+    overflow: hidden;
+  }
+  #mundi-toolbar-top {
+    background-color: #34495e;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin-bottom: 4px;
+    color:#8F8E8E;
+    .mundi-step-title {
+      cursor: pointer;
+      &.selected {
+        border-bottom:2px solid #FFF;
+      }
+    }
+    .active {
+      color:#FFF;
+    }
+  }
+  #mundi-toolbar-bottom select {
+    width: 100%;
+    margin-top: 10px;
   }
   .tool {
     float:right;
