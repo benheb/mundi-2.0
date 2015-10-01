@@ -8,6 +8,10 @@ module.exports = function(environment) {
     baseURL: '/', //app
     locationType: 'auto',
 
+    i18n: {
+      defaultLocale: 'en'
+    },
+
     contentSecurityPolicy: {
       'default-src': "'none'",
       'script-src': "* 'unsafe-inline' 'unsafe-eval' use.typekit.net connect.facebook.net maps.googleapis.com maps.gstatic.com",

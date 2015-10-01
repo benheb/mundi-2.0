@@ -35,7 +35,9 @@
           {{link-to "Charts" "dataset.chart" model}}
         {{/active-link}}
         {{#active-link}}
-          {{link-to "Conversation" "dataset.conversation" model}}
+          {{#link-to "dataset.conversation" model}}
+            {{t "dataset.subnav.conversation"}}
+          {{/link-to}}
         {{/active-link}}
   		</ul>
 		</div>

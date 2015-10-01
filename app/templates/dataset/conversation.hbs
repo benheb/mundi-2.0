@@ -19,27 +19,23 @@
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
         </ul>
       </div>
-      <button class="btn btn-default" {{action "drawPoint"}}>Draw Point</button>
     </div>
   </div>
   <div class="row col-md-12">
-    <h2>New Comment</h2>
+    <h2>{{t "dataset.conversation.new"}}</h2>
 
     <hr />
 
     <textarea id="add-comment-textarea"></textarea>
 
-    <span>Do you want to annotate the map?</span> 
-
-    {{#x-select value="yes" action="toggleAnnotationOptions"}}
-      {{#x-option value="yes"}}Yes{{/x-option}}
-      {{#x-option value="no"}}No{{/x-option}}
-    {{/x-select}}
+    <span>{{t "dataset.conversation.opts.annotate"}}</span>&nbsp;{{input type="checkbox" checked=showAnnotationOptions}}
 
     {{#if showAnnotationOptions}}
-      <div class="annotate-option"><i class="glyphicon glyphicon-map-marker"></i> <input type="checkbox" checked="checked" /> Add a marker to the map</div>
-      <div class="annotate-option"><i class="glyphicon glyphicon-pushpin"></i> <input type="checkbox" /> Select a feature to comment on</div>
+      <div class="annotate-option"><i class="glyphicon glyphicon-map-marker"></i> <input type="checkbox" checked="checked" /> {{t "dataset.conversation.opts.marker"}}</div>
+      <div class="annotate-option"><i class="glyphicon glyphicon-pushpin"></i> <input type="checkbox" /> {{t "dataset.conversation.opts.feature"}}</div>
     {{/if}}
+
+    <button class="btn btn-default" {{action "drawPoint"}}>Draw Point</button>
 
   </div>
 </div>
