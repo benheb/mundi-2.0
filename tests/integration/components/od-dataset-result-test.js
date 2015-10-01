@@ -5,8 +5,13 @@ moduleForComponent('od-dataset-result', 'Integration | Component | od dataset re
   integration: true
 });
 
+moduleForModel('activity', 'Unit | Model | activity', {
+  // Specify the other units that are required for this test.
+  needs: []
+});
+
 test('it renders', function(assert) {
-  assert.expect(2);
+  assert.expect(1);
 
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
@@ -14,13 +19,4 @@ test('it renders', function(assert) {
   this.render(hbs`{{od-dataset-result}}`);
 
   assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#od-dataset-result}}
-      template block text
-    {{/od-dataset-result}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });

@@ -5,6 +5,11 @@ moduleForComponent('od-download-item', 'Integration | Component | od download it
   integration: true
 });
 
+moduleForModel('dataset', 'Unit | Model | dataset', {
+  // Specify the other units that are required for this test.
+  needs: []
+});
+
 test('it renders', function(assert) {
   assert.expect(2);
 
