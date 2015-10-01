@@ -34,7 +34,8 @@ module.exports = function(environment) {
       // when it is created
       
       API: 'http://opendata.dc.gov',
-      agoUrl: 'http://www.arcgis.com'
+      agoUrl: 'http://www.arcgis.com',
+      annotationServiceUrl: 'http://services.arcgis.com/bkrWlSKcjUDFDtgw/arcgis/rest/services/opendata_comments/FeatureServer/0'
 
       // API: 'http://opendataqa.arcgis.com',
       //agoUrl: 'http://qaext.arcgis.com'

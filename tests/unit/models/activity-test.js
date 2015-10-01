@@ -1,6 +1,6 @@
 import { moduleForModel, test } from 'ember-qunit';
 
-moduleForModel('featured-datasets', 'Unit | Model | featured datasets', {
+moduleForModel('activity', 'Unit | Model | activity', {
   // Specify the other units that are required for this test.
   needs: []
 });

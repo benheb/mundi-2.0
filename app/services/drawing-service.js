@@ -55,9 +55,9 @@ export default Ember.Service.extend(Ember.Evented, {
     this.drawingLayer.clear();
   },
 
-  onMouseOver(evt) {
-    console.debug('>>>>> onMouseOver');
-  },
+  // onMouseOver(evt) {
+  //   console.debug('>>>>> onMouseOver');
+  // },
 
   onClick(evt) {
 

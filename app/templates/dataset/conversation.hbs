@@ -31,11 +31,16 @@
     <span>{{t "dataset.conversation.opts.annotate"}}</span>&nbsp;{{input type="checkbox" checked=showAnnotationOptions}}
 
     {{#if showAnnotationOptions}}
-      <div class="annotate-option"><i class="glyphicon glyphicon-map-marker"></i> <input type="checkbox" checked="checked" /> {{t "dataset.conversation.opts.marker"}}</div>
-      <div class="annotate-option"><i class="glyphicon glyphicon-pushpin"></i> <input type="checkbox" /> {{t "dataset.conversation.opts.feature"}}</div>
-    {{/if}}
 
-    <button class="btn btn-default" {{action "drawPoint"}}>Draw Point</button>
+      <div class="radio">
+        <label>{{ radio-button name='annotation-type' value='marker' groupValue=annotationType }}&nbsp;<i class="glyphicon glyphicon-map-marker"></i>&nbsp;{{t "dataset.conversation.opts.marker"}}</label>
+      </div>
+      <div class="radio">
+        <label>{{ radio-button name='annotation-type' value='feature' groupValue=annotationType }}&nbsp;<i class="glyphicon glyphicon-pushpin"></i>&nbsp;{{t "dataset.conversation.opts.feature"}}</label>  
+      </div>
+
+      <button class="btn btn-default" {{action "drawPoint"}}>Draw Point</button>
+    {{/if}}
 
   </div>
 </div>

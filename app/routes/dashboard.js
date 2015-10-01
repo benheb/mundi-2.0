@@ -1,5 +1,7 @@
 import Ember from 'ember';
-import ajax from 'ic-ajax';
+//import ajax from 'ic-ajax';
+
+// NOTE: we should use ic-ajax and Ember.RSVP
 
 var items = [
   {
@@ -64,7 +66,7 @@ export default Ember.Route.extend({
 function callAjax() {
 
 
-  $.getJSON( "http://api.wunderground.com/api/2d16ecfa44430b7f/conditions/q/DC/Washington.json", function( data ) {
+  Ember.$.getJSON( "http://api.wunderground.com/api/2d16ecfa44430b7f/conditions/q/DC/Washington.json", function( data ) {
     var temp = data.current_observation.temp_f;
     var weather = data.current_observation.weather;
     Ember.set(items[0], 'count', Math.round(temp) + '&deg;');
@@ -73,7 +75,7 @@ function callAjax() {
 
 
   //311 stats 
-  $.when($.ajax({
+  Ember.$.when(Ember.$.ajax({
     url: 'http://services.arcgis.com/bkrWlSKcjUDFDtgw/ArcGIS/rest/services/All_Service_Requests_Last_30_Days/FeatureServer/0/query?where=1%3D1&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Meter&outFields=&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=true&returnExtentOnly=false&returnDistinctValues=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&resultOffset=&resultRecordCount=10&returnZ=false&returnM=false&quantizationParameters=&f=json',
     type: 'GET',
     async: false
@@ -84,28 +86,28 @@ function callAjax() {
   });
 
 
-  $.when($.ajax({
+  Ember.$.when(Ember.$.ajax({
     url: 'http://services.arcgis.com/bkrWlSKcjUDFDtgw/arcgis/rest/services/Vision_Zero_Safety_Transportation/FeatureServer/0/query?where=1%3D1&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Meter&outFields=&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=true&returnExtentOnly=false&returnDistinctValues=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&quantizationParameters=&f=json',
     type: 'GET',
     async: false
 
   })).then(function(result) {
     var output = JSON.parse(result);
-    $.each(items, function(j, item) {
+    Ember.$.each(items, function(j, item) {
       if ( item.title === 'Vision Zero') {
         Ember.set(item, 'count', output.count.toLocaleString());
       }
     });
   });
 
-  $.when($.ajax({
+  Ember.$.when(Ember.$.ajax({
     url: 'http://services.arcgis.com/bkrWlSKcjUDFDtgw/arcgis/rest/services/Green_Sites_or_Resources/FeatureServer/0/query?where=1%3D1&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Meter&outFields=&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=true&returnExtentOnly=false&returnDistinctValues=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&quantizationParameters=&f=json',
     type: 'GET',
     async: false
 
   })).then(function(result) {
     var output = JSON.parse(result);
-    $.each(items, function(j, item) {
+    Ember.$.each(items, function(j, item) {
       if ( item.title === 'Green Sites') {
         Ember.set(item, 'count', output.count.toLocaleString());
       }

@@ -6,6 +6,8 @@ export default Ember.Controller.extend({
 
   showAnnotationOptions: true,
 
+  annotationType: 'marker',
+
   actions: {
     toggleAnnotationOptions (val) {
       var show = (val === 'yes') ? true : false;
@@ -14,6 +16,10 @@ export default Ember.Controller.extend({
 
     drawPoint () {
       this.get('controllers.dataset').set('drawingToolsAreActivated', true);
+    },
+
+    foobar(a) {
+      alert(a);
     }
   }
 

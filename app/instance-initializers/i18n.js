@@ -1,7 +1,7 @@
 export default {
   name: 'i18n',
   initialize: function(application) {
-    var svc = application.container.lookup('service:i18n')
+    var svc = application.container.lookup('service:i18n');
     var locale = this.calculateLocale(svc);
     svc.set('locale', locale);
   },
@@ -32,4 +32,4 @@ export default {
 
     return svc.get('locale');
   }
-}
+};
