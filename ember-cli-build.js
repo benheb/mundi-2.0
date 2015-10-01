@@ -33,6 +33,8 @@ module.exports = function(defaults) {
   app.import('bower_components/ladda/dist/ladda.min.js');
   app.import('bower_components/ember-cli-ladda-shim/ladda-shim.js', { exports: { ladda: ['default']} });
 
+  app.import('bower_components/jquery-ui/jquery-ui.min.js');
+
   app.import('vendor/vega.js');
   app.import('vendor/cedar.min.js');
   app.import('vendor/malette.js');

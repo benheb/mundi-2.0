@@ -1,13 +1,55 @@
 <div id="mundi-container">
   <div class="mundi-toolbar">
-    <div class="tool" {{action "toggleSidebar"}}><i class="glyphicon glyphicon-th-list"></i> My Data</div>
-    <div id="add-data" class="tool" {{action "toggleAddData"}}><i class="glyphicon glyphicon-search"></i> Add</div>
+    <div id="mundi-toolbar-top">
+      <div class="col-md-2">
+        <span class="mundi-step-title selected active">Map</span>
+        <span class="divider"> | </span>
+        <span class="mundi-step-title">Chart</span>
+      </div>
+      <div class="col-md-2">
+        <span class="mundi-step-title">Transform</span>
+        <span class="divider"> | </span>
+        <span class="mundi-step-title active">Filter</span>
+      </div>
+      <div class="col-md-2">
+        <span class="mundi-step-title active">Draw</span>
+      </div>
+      <div class="col-md-2">
+        <span class="mundi-step-title active">Quick Style</span>
+      </div>
+      <div class="col-md-2">
+        <span class="mundi-step-title">Save</span>
+        <span class="divider"> | </span>
+        <span class="mundi-step-title active">Share</span>
+      </div>
+    </div>
+    <div id="mundi-toolbar-bottom">
+      <div class="col-md-2">
+        {{#x-select value="yes" action="setSelectedAttribute"}}
+          {{#each model.fields as |field|}}
+            {{#if field.statistics.min}}
+              {{#x-option value=field.alias}}{{field.alias}}{{/x-option}}
+            {{/if}}
+          {{/each}}
+        {{/x-select}}
+      </div>
+      <div class="col-md-2">
+        {{od-range-slider model=model selectedAttribute=selectedAttribute}}
+      </div>
+      <div class="col-md-2">
+        {{od-draw-options action="changeDrawMode" drawMode=drawMode}}
+      </div>
+      <div class="col-md-2">
+        {{od-quick-styles action="quickThemeChanged" quickTheme=quickTheme}}
+      </div>
+      <div class="col-md-2"></div>
+    </div>
   </div>
 
   {{od-search-container showAddData=showAddData action="addMundiData"}}
 
   {{od-legend-container legendLayers=legendLayers}}
   
-  {{od-mundi datasetIds=datasetIds store=store addLegendLayer="addLegendLayer" updateLegendLayer="updateLegendLayer"}}
+  {{od-mundi model=model store=store addLegendLayer="addLegendLayer" updateLegendLayer="updateLegendLayer" quickTheme=quickTheme drawMode=drawMode}}
 
 </div>

@@ -1,15 +1,62 @@
 .page-mundi {
+  .header {
+    border-bottom:#287b93;
+    background: #37a3a5 url(/images/mundi-header.png) no-repeat;
+    padding-top:20px;
+    padding-bottom:10px;
+    h1 {
+      padding:0px;
+      margin:0px;
+      a {
+        color: #FFF;
+      }
+      small {
+        color:#EEE;
+      }
+    }
+  }
   #mundi-map {
     height:100%;
     width:100%;
     position: relative;
   }
   .mundi-toolbar {
-    padding-left: 10px;
-    padding-right: 10px;
+    //padding-left: 10px;
+    //padding-right: 10px;
     background-color: #EEE;
-    overflow: hidden;
+    //overflow: hidden;
     border-bottom: 1px solid #C3C3C3;
+  }
+  #mundi-toolbar-bottom {
+    width:100%;
+    height: auto;
+    min-height: 36px;
+  }
+  #mundi-toolbar-top {
+    width:100%;
+    overflow: hidden;
+    background-color: #286e93;
+    padding-top: 3px;
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+    color:#8F8E8E;
+    .mundi-step-title {
+      cursor: pointer;
+      &.selected {
+        border-bottom:2px solid #FFF;
+      }
+    }
+    .active {
+      color:#FFF;
+    }
+  }
+  #mundi-toolbar-bottom select {
+    width: 100%;
+    margin-top: 5px;
+  }
+  #mundi-filter-slider {
+    margin-top:6px;
+    margin-bottom:8px;
   }
   .tool {
     float:right;
