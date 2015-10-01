@@ -8,6 +8,10 @@ module.exports = function(environment) {
     baseURL: '/', //app
     locationType: 'auto',
 
+    i18n: {
+      defaultLocale: 'en'
+    },
+
     contentSecurityPolicy: {
       'default-src': "'none'",
       'script-src': "* 'unsafe-inline' 'unsafe-eval' use.typekit.net connect.facebook.net maps.googleapis.com maps.gstatic.com",
@@ -30,7 +34,8 @@ module.exports = function(environment) {
       // when it is created
       
       API: 'http://opendata.dc.gov',
-      agoUrl: 'http://www.arcgis.com'
+      agoUrl: 'http://www.arcgis.com',
+      annotationServiceUrl: 'http://services.arcgis.com/bkrWlSKcjUDFDtgw/arcgis/rest/services/opendata_comments/FeatureServer/0'
 
       // API: 'http://opendataqa.arcgis.com',
       //agoUrl: 'http://qaext.arcgis.com'

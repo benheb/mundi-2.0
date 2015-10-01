@@ -3,7 +3,7 @@ import Ember from 'ember';
 var json = {
   'service_reqs': false,
   'vision_zero': false
-}
+};
 
 export default Ember.Route.extend({
 

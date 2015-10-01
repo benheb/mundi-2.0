@@ -22,22 +22,24 @@
     </div>
   </div>
   <div class="row col-md-12">
-    <h2>New Comment</h2>
+    <h2>{{t "dataset.conversation.new"}}</h2>
 
     <hr />
 
     <textarea id="add-comment-textarea"></textarea>
 
-    <span>Do you want to annotate the map?</span> 
-
-    {{#x-select value="yes" action="toggleAnnotationOptions"}}
-      {{#x-option value="yes"}}Yes{{/x-option}}
-      {{#x-option value="no"}}No{{/x-option}}
-    {{/x-select}}
+    <span>{{t "dataset.conversation.opts.annotate"}}</span>&nbsp;{{input type="checkbox" checked=showAnnotationOptions}}
 
     {{#if showAnnotationOptions}}
-      <div class="annotate-option"><i class="glyphicon glyphicon-map-marker"></i> <input type="checkbox" checked="checked" /> Add a marker to the map</div>
-      <div class="annotate-option"><i class="glyphicon glyphicon-pushpin"></i> <input type="checkbox" /> Select a feature to comment on</div>
+
+      <div class="radio">
+        <label>{{ radio-button name='annotation-type' value='marker' groupValue=annotationType }}&nbsp;<i class="glyphicon glyphicon-map-marker"></i>&nbsp;{{t "dataset.conversation.opts.marker"}}</label>
+      </div>
+      <div class="radio">
+        <label>{{ radio-button name='annotation-type' value='feature' groupValue=annotationType }}&nbsp;<i class="glyphicon glyphicon-pushpin"></i>&nbsp;{{t "dataset.conversation.opts.feature"}}</label>  
+      </div>
+
+      <button class="btn btn-default" {{action "drawPoint"}}>Draw Point</button>
     {{/if}}
 
   </div>

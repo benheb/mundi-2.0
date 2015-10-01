@@ -7,9 +7,13 @@ import PopupTemplate from 'esri/PopupTemplate';
 import Extent from 'esri/geometry/Extent';
 import SimpleRenderer from 'esri/renderers/SimpleRenderer';
 
+// import GraphicsLayer from 'esri/layers/GraphicsLayer';
+// import SimpleMarkerSymbol from 'esri/symbols/SimpleMarkerSymbol';
+// import Graphic from 'esri/Graphic';
+
 export default Ember.Component.extend({
 
-  annotation: Ember.inject.service('map-annotation'),
+  //drawingService: Ember.inject.service('drawing-service'),
 
   classNames: ['esri-map-component'],
 
@@ -70,22 +74,38 @@ export default Ember.Component.extend({
     // }
   },
 
+  // activateDrawingTools: Ember.observer('drawingToolsAreActivated', function() {
+  //   // NOTE: need to give some thought to this - should the annotation layer be another component that is a child of the esri-map???
+
+
+
+  //   let drawing = this.get('drawingService');
+  //   drawing.start(this.get('map'), this.get('mapView'), 'point');
+  //   this.annotationLayer = new GraphicsLayer({ wkid: this.get('map').spatialReference.wkid });
+  //   this.get('map').add(this.annotationLayer);
+  //   this.pointSymbol = new SimpleMarkerSymbol({
+  //     color: [200, 0, 0],
+  //     size: 10
+  //   });
+    
+  //   drawing.on('geometry', function (geom) {
+  //     let pointGraphic = new Graphic({
+  //       geometry: geom,
+  //       symbol: this.pointSymbol
+  //     });
+  //     this.annotationLayer.add(pointGraphic);
+  //   }.bind(this));
+
+
+
+
+  // }),
+
   _addDataset: function (map, dataset) {
     let opts = this._getDatasetLayerOpts(dataset);
     let datasetLayer = new FeatureLayer(dataset.get('url'), opts);
     this.set('datasetLayer', datasetLayer);
     map.add(datasetLayer);
-
-
-
-    // Ember.run.later(this, function () {
-    //   var annotation = this.get('annotation');
-    //   annotation.start(this.get('map'), this.get('mapView'), 'polygon');
-    //   annotation.on('geometry', function () { alert('got geometry!'); });
-    //   // Ember.run.later(this, function () {
-    //   //   annotation.stop();
-    //   // }, 1500);
-    // }, 500);
   },
 
   _getDatasetInfoTemplate: function (dataset) {

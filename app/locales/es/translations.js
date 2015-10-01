@@ -1,0 +1,5 @@
+export default {
+  "dataset.subnav.conversation": "Conversation (es)",
+  "dataset.conversation.new": "New Comment (es)",
+  "dataset.conversation.opts.annotate": "Do you want to annotate the map? (es)"
+};

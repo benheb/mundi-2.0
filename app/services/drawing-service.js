@@ -5,7 +5,7 @@ import Polygon from 'esri/geometry/Polygon';
 import SimpleLineSymbol from 'esri/symbols/SimpleLineSymbol';
 import Point from 'esri/geometry/Point';
 import Graphic from 'esri/Graphic';
-import webMercatorUtils from 'esri/geometry/support/webMercatorUtils';
+// import webMercatorUtils from 'esri/geometry/support/webMercatorUtils';
 //import SimpleRenderer from 'esri/renderers/SimpleRenderer';
 
 export default Ember.Service.extend(Ember.Evented, {
@@ -55,9 +55,9 @@ export default Ember.Service.extend(Ember.Evented, {
     this.drawingLayer.clear();
   },
 
-  onMouseOver(evt) {
-    console.debug('>>>>> onMouseOver');
-  },
+  // onMouseOver(evt) {
+  //   console.debug('>>>>> onMouseOver');
+  // },
 
   onClick(evt) {
 

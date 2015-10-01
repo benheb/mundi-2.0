@@ -1,9 +1,10 @@
 <div class="jumbotron">
 
-	{{esri-map model=model}}
+	{{esri-map model=model map=map mapView=mapView}}
+  {{od-annotation-layer map=map mapView=mapView drawingToolsAreActivated=drawingToolsAreActivated}}
 		
 	<div class="container">
-  <div class="btn-group dropdown pull-right open">
+  <div class="btn-group dropdown pull-right">
 		  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 		    <span class="glyphicon glyphicon-option-horizontal"></span>
 		  </button>
@@ -34,7 +35,9 @@
           {{link-to "Charts" "dataset.chart" model}}
         {{/active-link}}
         {{#active-link}}
-          {{link-to "Conversation" "dataset.conversation" model}}
+          {{#link-to "dataset.conversation" model}}
+            {{t "dataset.subnav.conversation"}}
+          {{/link-to}}
         {{/active-link}}
   		</ul>
 		</div>
