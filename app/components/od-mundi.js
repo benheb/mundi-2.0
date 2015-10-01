@@ -45,12 +45,7 @@ export default Ember.Component.extend({
     let view = new MapView(mapViewOpts);
     this.set('mapView', view);
 
-    //each ids 
-    let datasetIds = this.get('datasetIds');
-    datasetIds.forEach(function(id) {
-      this._addDataset(map, id);
-    }.bind(this));
-
+    this._addDataset(map);
   },
 
   willRemoveElement() {
@@ -67,12 +62,15 @@ export default Ember.Component.extend({
 
   _addDataset: function (map, id) {
 
-    this.store.findRecord('dataset', id).then(function(dataset) {
-      
-      let opts = this._getDatasetLayerOpts(dataset);
-      let datasetLayer = new FeatureLayer(dataset.get('url'), opts);
-      datasetLayer.id = dataset.get('id');
+    let dataset = this.get('model');
+    console.log('dataset', dataset);
 
+    //this.store.findRecord('dataset', id).then(function(dataset) {
+      let url = dataset.get('url');
+      let opts = this._getDatasetLayerOpts(dataset);
+      let datasetLayer = new FeatureLayer(url, opts);
+      datasetLayer.id = dataset.get('id');
+      
       map.add(datasetLayer);
 
       this.dataset = dataset; 
@@ -97,7 +95,7 @@ export default Ember.Component.extend({
 
       this._setExtent(dataset);
 
-    }.bind(this));
+    //}.bind(this));
 
   },
 
@@ -106,6 +104,79 @@ export default Ember.Component.extend({
     let datasetIds = this.get('datasetIds');
     this._addDataset(this.map, datasetIds[datasetIds.length - 1]);
   }.observes('datasetIds.[]'),
+
+
+
+  _onChangeTheme: function() {
+    let settings = this._getTheme(this.get('quickTheme'));
+    console.log('settings:', settings);
+
+    //set basemap 
+    this.map.basemap = settings.basemap;
+    
+    //style layer 
+    let dataset = this.get('dataset');
+    let layer = this.map.getLayer( dataset.get('id') );
+    console.log('layer', layer);
+
+    let rend = this._createRendererFromJson( settings.point.single );
+    
+    layer.visible = false;
+      
+    let opts = this._getDatasetLayerOpts(dataset);
+    opts.renderer = rend; 
+
+    let datasetLayer = new FeatureLayer(dataset.get('url'), opts);
+    datasetLayer.id = dataset.get('id');
+
+    this.map.add(datasetLayer);
+
+    this.sendAction('updateLegendLayer', {
+      "id": dataset.get('id'),
+      "name": dataset.get('name'),
+      "renderer": settings.point.single
+    });
+    
+  }.observes('quickTheme'),
+
+
+
+  _onDrawModeChange: function() {
+    let mode = this.get('drawMode');
+    console.log('mode...', mode);
+
+    let theme = this.get('quickTheme') || 'Minimally Modern';
+    let settings = this._getTheme(theme);
+    console.log('settings:', settings);
+
+    //set basemap 
+    this.map.basemap = settings.basemap;
+    
+    //style layer 
+    let dataset = this.get('dataset');
+    let layer = this.map.getLayer( dataset.get('id') );
+    console.log('layer', layer);
+
+    let rend = this._createRendererFromJson( settings.point[ mode ] );
+    
+    layer.visible = false;
+      
+    let opts = this._getDatasetLayerOpts(dataset);
+    opts.renderer = rend; 
+
+    let datasetLayer = new FeatureLayer(dataset.get('url'), opts);
+    datasetLayer.id = dataset.get('id');
+
+    this.map.add(datasetLayer);
+
+    this.sendAction('updateLegendLayer', {
+      "id": dataset.get('id'),
+      "name": dataset.get('name'),
+      "renderer": settings.point[ mode ]
+    });
+  }.observes('drawMode'),
+
+
 
   _setExtent: function(dataset) {
     let extent, ext = dataset.get('extent');
@@ -171,6 +242,334 @@ export default Ember.Component.extend({
 
     }.bind(this));
 
+  },
+
+
+
+  _getTheme: function(theme) {
+    let themes = {
+      'NYT': {
+        'basemap': 'gray',
+        'point': {
+          'single': {
+            'type': 'simple',
+            'label': '',
+            'description': '',
+            'symbol': {
+              'color': [255,255,255,10],
+              'size': 20,
+              'angle': 0,
+              'xoffset': 0,
+              'yoffset': 0,
+              'type': 'esriSMS',
+              'style': 'esriSMSCircle',
+              'outline': {
+                'color': [227,89,86,90],
+                'width': 1,
+                'type': 'esriSLS',
+                'style': 'esriSLSSolid'
+              }
+            }
+          }, 
+          'graduated': {
+            "type": "classBreaks",
+            "label": "",
+            "description": "",
+            "symbol": {
+              "color": [
+                43,
+                140,
+                190,
+                200
+              ],
+              "size": 6,
+              "angle": 0,
+              "xoffset": 0,
+              "yoffset": 0,
+              "type": "esriSMS",
+              "style": "esriSMSCircle",
+              "outline": {
+                "color": [
+                  255,
+                  255,
+                  255,
+                  255
+                ],
+                "width": 1.3,
+                "type": "esriSLS",
+                "style": "esriSLSSolid"
+              }
+            },
+            "field": "POPULATION_ENROLLED_2008",
+            "minValue": 1,
+            "classBreakInfos": [
+              {
+                "symbol": {
+                  "color": {
+                    "r": 43,
+                    "g": 140,
+                    "b": 190,
+                    "a": 0.7843137254901961
+                  },
+                  "size": 5.333333333333333,
+                  "type": "simplemarkersymbol",
+                  "style": "circle",
+                  "outline": {
+                    "color": {
+                      "r": 255,
+                      "g": 255,
+                      "b": 255,
+                      "a": 1
+                    },
+                    "width": 1.7333333333333334,
+                    "type": "simplelinesymbol",
+                    "style": "solid",
+                    "_inherited": {
+                      "p": 2
+                    }
+                  },
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "_inherited": {
+                    "p": 2
+                  }
+                },
+                "label": 155,
+                "classMaxValue": 155,
+                "minValue": 1,
+                "maxValue": 155
+              },
+              {
+                "symbol": {
+                  "color": {
+                    "r": 43,
+                    "g": 140,
+                    "b": 190,
+                    "a": 0.7843137254901961
+                  },
+                  "size": 13.333333333333332,
+                  "type": "simplemarkersymbol",
+                  "style": "circle",
+                  "outline": {
+                    "color": {
+                      "r": 255,
+                      "g": 255,
+                      "b": 255,
+                      "a": 1
+                    },
+                    "width": 1.7333333333333334,
+                    "type": "simplelinesymbol",
+                    "style": "solid",
+                    "_inherited": {
+                      "p": 2
+                    }
+                  },
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "_inherited": {
+                    "p": 2
+                  }
+                },
+                "label": "> 155 to 330.25",
+                "classMaxValue": 330.25,
+                "minValue": 155,
+                "maxValue": 330.25
+              },
+              {
+                "symbol": {
+                  "color": {
+                    "r": 43,
+                    "g": 140,
+                    "b": 190,
+                    "a": 0.7843137254901961
+                  },
+                  "size": 21.333333333333332,
+                  "type": "simplemarkersymbol",
+                  "style": "circle",
+                  "outline": {
+                    "color": {
+                      "r": 255,
+                      "g": 255,
+                      "b": 255,
+                      "a": 1
+                    },
+                    "width": 1.7333333333333334,
+                    "type": "simplelinesymbol",
+                    "style": "solid",
+                    "_inherited": {
+                      "p": 2
+                    }
+                  },
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "_inherited": {
+                    "p": 2
+                  }
+                },
+                "label": "> 330.25 to 505.5",
+                "classMaxValue": 505.5,
+                "minValue": 330.25,
+                "maxValue": 505.5
+              },
+              {
+                "symbol": {
+                  "color": {
+                    "r": 43,
+                    "g": 140,
+                    "b": 190,
+                    "a": 0.7843137254901961
+                  },
+                  "size": 29.333333333333332,
+                  "type": "simplemarkersymbol",
+                  "style": "circle",
+                  "outline": {
+                    "color": {
+                      "r": 255,
+                      "g": 255,
+                      "b": 255,
+                      "a": 1
+                    },
+                    "width": 1.7333333333333334,
+                    "type": "simplelinesymbol",
+                    "style": "solid",
+                    "_inherited": {
+                      "p": 2
+                    }
+                  },
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "_inherited": {
+                    "p": 2
+                  }
+                },
+                "label": "> 505.5 to 680.75",
+                "classMaxValue": 680.75,
+                "minValue": 505.5,
+                "maxValue": 680.75
+              },
+              {
+                "symbol": {
+                  "color": {
+                    "r": 43,
+                    "g": 140,
+                    "b": 190,
+                    "a": 0.7843137254901961
+                  },
+                  "size": 40,
+                  "type": "simplemarkersymbol",
+                  "style": "circle",
+                  "outline": {
+                    "color": {
+                      "r": 255,
+                      "g": 255,
+                      "b": 255,
+                      "a": 1
+                    },
+                    "width": 1.7333333333333334,
+                    "type": "simplelinesymbol",
+                    "style": "solid",
+                    "_inherited": {
+                      "p": 2
+                    }
+                  },
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "_inherited": {
+                    "p": 2
+                  }
+                },
+                "label": "> 680.75 to 856",
+                "classMaxValue": 856,
+                "minValue": 680.75,
+                "maxValue": 856
+              }
+            ],
+            "defaultSymbol": {
+              "color": [
+                43,
+                140,
+                190,
+                200
+              ],
+              "size": 6,
+              "angle": 0,
+              "xoffset": 0,
+              "yoffset": 0,
+              "type": "esriSMS",
+              "style": "esriSMSCircle",
+              "outline": {
+                "color": [
+                  255,
+                  255,
+                  255,
+                  255
+                ],
+                "width": 1.3,
+                "type": "esriSLS",
+                "style": "esriSLSSolid"
+              }
+            }
+          }
+        }, 
+        'polygon': {
+
+        }
+      },
+      'Night Commander': {
+        'basemap': 'dark-gray',
+        'point': {
+          'type': 'simple',
+          'label': '',
+          'description': '',
+          'symbol': {
+            'color': [131,143,230,225],
+            'size': 6,
+            'angle': 0,
+            'xoffset': 0,
+            'yoffset': 0,
+            'type': 'esriSMS',
+            'style': 'esriSMSCircle',
+            'outline': {
+              'color': [196,211,253,180],
+              'width': 2,
+              'type': 'esriSLS',
+              'style': 'esriSLSSolid'
+            }
+          }
+        }, 
+        'polygon': {
+
+        }
+      },
+      'Minimally Modern': {
+        'basemap': 'gray',
+        'point': {
+          'type': 'simple',
+          'label': '',
+          'description': '',
+          'symbol': {
+            'color': [255,255,255,0],
+            'size': 10,
+            'angle': 0,
+            'xoffset': 0,
+            'yoffset': 0,
+            'type': 'esriSMS',
+            'style': 'esriSMSCircle',
+            'outline': {
+              'color': [140,196,56,255],
+              'width': 2,
+              'type': 'esriSLS',
+              'style': 'esriSLSSolid'
+            }
+          }
+        }, 
+        'polygon': {
+
+        }
+      }
+    }
+
+    return themes[theme];
   },
 
 

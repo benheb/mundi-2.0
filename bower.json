@@ -18,7 +18,8 @@
     "moment-timezone": ">= 0.1.0",
     "qunit": "~1.18.0",
     "sanitize.js": "~1.0.0",
-    "blob-polyfill": "~1.0.20150320"
+    "blob-polyfill": "~1.0.20150320",
+    "jquery-ui": "~1.11.4"
   },
   "devDependencies": {
     "bootstrap-sass": "bootstrap-sass-official#~3.3.5",

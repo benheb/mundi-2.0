@@ -25,25 +25,22 @@
     </div>
     <div id="mundi-toolbar-bottom">
       <div class="col-md-2">
-        {{#x-select value="" action="changeAttribute"}}
+        {{#x-select value="yes" action="setSelectedAttribute"}}
+          {{#each model.fields as |field|}}
+            {{#if field.statistics.min}}
+              {{#x-option value=field.alias}}{{field.alias}}{{/x-option}}
+            {{/if}}
+          {{/each}}
         {{/x-select}}
       </div>
       <div class="col-md-2">
-        <input type="range" value=30 min=0 max=100 />
+        {{od-range-slider model=model selectedAttribute=selectedAttribute}}
       </div>
-      <div class="col-md-2"></div>
       <div class="col-md-2">
-        <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Select Quick Style
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li><a href="#">NYT</a></li>
-            <li><a href="#">Night Commander</a></li>
-            <li><a href="#">Minimally Modern</a></li>
-          </ul>
-        </div>
+        {{od-draw-options action="changeDrawMode" drawMode=drawMode}}
+      </div>
+      <div class="col-md-2">
+        {{od-quick-styles action="quickThemeChanged" quickTheme=quickTheme}}
       </div>
       <div class="col-md-2"></div>
     </div>
@@ -53,6 +50,6 @@
 
   {{od-legend-container legendLayers=legendLayers}}
   
-  {{od-mundi datasetIds=datasetIds store=store addLegendLayer="addLegendLayer" updateLegendLayer="updateLegendLayer"}}
+  {{od-mundi model=model store=store addLegendLayer="addLegendLayer" updateLegendLayer="updateLegendLayer" quickTheme=quickTheme drawMode=drawMode}}
 
 </div>

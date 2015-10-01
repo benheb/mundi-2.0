@@ -1,0 +1,8 @@
+.draw-option {
+  float:left;
+  margin-right:2px;
+  cursor:pointer;
+  &.selected {
+    font-weight:800;
+  }
+}
