@@ -11,11 +11,12 @@ export default {
     let locale = this._calculateLocale();
     // if we got null, we want to use the default locale
     // which we should already have in the browser...
-    if (locale && locale !== svc.get('locale'))
-    this._fetchTranslation(locale).then(function (resp) {
-      svc.addTranslations(locale, resp);
-      svc.set('locale', locale);
-    }.bind(this));
+    if (locale && locale !== svc.get('locale')) {
+      this._fetchTranslation(locale).then(function (resp) {
+        svc.addTranslations(locale, resp);
+        svc.set('locale', locale);
+      }.bind(this));
+    }
   },
 
   _fetchTranslation(locale) {
