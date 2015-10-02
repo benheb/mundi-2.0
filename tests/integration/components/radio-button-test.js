@@ -2,44 +2,49 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('radio-button', 'Integration | Component | radio button', {
-  integration: false
+  integration: true
 });
 
 test('it renders', function(assert) {
   assert.expect(8);
 
-  var component = this.subject({ name: 'dish', value: 'spam', groupValue: 'spam' });
-  this.render();
+  this.set('annotationType', 'marker');  
+  this.render(hbs`{{ radio-button name='annotation-type' value='marker' groupValue=annotationType }}`);
 
-  assert.equal(this.$().attr('type'), 'radio');
-  assert.equal(this.$().attr('name'), 'dish');
-  assert.equal(this.$().attr('value'), 'spam');
-  assert.ok(this.$().prop('checked'));
+  assert.equal(this.$('input').attr('type'), 'radio');
+  assert.equal(this.$('input').attr('name'), 'annotation-type');
+  assert.equal(this.$('input').attr('value'), 'marker');
+  assert.ok(this.$('input').prop('checked'));
 
-  Ember.run(function () {
-    component.set('value', 'eggs');  
-  });
+  this.set('annotationType', 'feature');
+  this.render(hbs`{{ radio-button name='annotation-type' value='marker' groupValue=annotationType }}`);
   
-  assert.equal(this.$().attr('type'), 'radio');
-  assert.equal(this.$().attr('name'), 'dish');
-  assert.equal(this.$().attr('value'), 'eggs');
-  assert.ok(!this.$().prop('checked'));
+  assert.equal(this.$('input').attr('type'), 'radio');
+  assert.equal(this.$('input').attr('name'), 'annotation-type');
+  assert.equal(this.$('input').attr('value'), 'marker');
+  assert.ok(!this.$('input').prop('checked'));
 
 });
 
 test('clicking the radio button updates the groupValue', function(assert) {
-  assert.expect(3);
+  assert.expect(5);
 
-  var component = this.subject({ name: 'dish', value: 'spam', groupValue: 'eggs' });
-  this.render();
+  this.set('annotationType', 'feature');
 
-  //initial groupValue was set by attribute
-  assert.equal(component.get('groupValue'), 'eggs');
+  this.render(hbs`{{ radio-button name='annotation-type' value='marker' groupValue=annotationType action="onChange" }}`);
 
-  this.$().click();
+  //check initial values
+  assert.equal(this.get('annotationType'), 'feature');
+  assert.ok(!this.$('input').prop('checked'));
+
+  this.on('onChange', a => {
+    //clicking should update the annotationType and the checked attribute
+    assert.equal(a, 'marker');
+
+    assert.equal(this.get('annotationType'), 'marker');
+    assert.ok(this.$('input').prop('checked'));
+  });
   
-  //clicking should update the groupValue and the checked attribute
-  assert.equal(component.get('groupValue'), 'spam');
-  assert.ok(this.$().prop('checked'));
+  this.$('input').click();
 
 });
