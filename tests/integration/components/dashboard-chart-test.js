@@ -6,7 +6,7 @@ moduleForComponent('dashboard-chart', 'Integration | Component | dashboard chart
 });
 
 test('it renders', function(assert) {
-  assert.expect(2);
+  assert.expect(1);
 
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
@@ -15,12 +15,4 @@ test('it renders', function(assert) {
 
   assert.equal(this.$().text().trim(), '');
 
-  // Template block usage:
-  this.render(hbs`
-    {{#dashboard-chart}}
-      template block text
-    {{/dashboard-chart}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });

@@ -4,8 +4,9 @@ export default Ember.Component.extend({
 
   filterMin: null,
   filterMax: null,
+  selectedAttribute: '',
 
-  didInsertElement(model, selectedAttribute) {
+  didInsertElement() {
     var self = this;
 
     this._getValues();
