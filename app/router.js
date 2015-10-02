@@ -36,8 +36,8 @@ Router.map(function() {
     path: '/explore/:id'
   });
 
-  this.route('dataset-table', function() {
-    this.route(':id');
+  this.route('dataset-table', {
+    path: '/dataset-table/:id'
   });
 });
 
