@@ -2,8 +2,6 @@ import Ember from 'ember';
 import { request } from 'ic-ajax';
 const { keys } = Ember;
 
-//const PATH = '/my/api/translations.json';
-
 export default {
 
   name: 'i18n',
