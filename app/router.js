@@ -6,11 +6,10 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-
   this.route('dashboard');
 
   this.resource('datasets', function () {});
-  
+
   this.resource('dataset', { path: '/datasets/:id' }, function () {
     this.route('overview', { path: '/' });
     this.route('data');
@@ -35,6 +34,10 @@ Router.map(function() {
 
   this.route('explore', {
     path: '/explore/:id'
+  });
+
+  this.route('dataset-table', {
+    path: '/dataset-table/:id'
   });
 });
 
