@@ -1,6 +1,7 @@
 {
   "name": "opendata-tng",
   "dependencies": {
+    "blob-polyfill": "~1.0.20150320",
     "d3": "~3.5.6",
     "ember": "1.13.10",
     "ember-cli-ladda-shim": "~0.1.0",
@@ -12,14 +13,14 @@
     "ember-qunit-notifications": "0.0.7",
     "ember-resolver": "~0.1.18",
     "jquery": "^1.11.3",
+    "jquery-ui": "~1.11.4",
+    "js-cookie": "~2.0.3",
     "ladda": "~0.9.8",
     "loader.js": "ember-cli/loader.js#3.2.1",
     "moment": ">= 2.8.0",
     "moment-timezone": ">= 0.1.0",
     "qunit": "~1.18.0",
-    "sanitize.js": "~1.0.0",
-    "blob-polyfill": "~1.0.20150320",
-    "jquery-ui": "~1.11.4"
+    "sanitize.js": "~1.0.0"
   },
   "devDependencies": {
     "bootstrap-sass": "bootstrap-sass-official#~3.3.5",

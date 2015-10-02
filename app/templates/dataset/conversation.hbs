@@ -45,9 +45,7 @@
     <ul>
       {{#each model as |comment|}}
         <li>
-          {{comment.comment}}
-          {{comment.username}}
-          {{moment-from-now comment.createdAt}}
+          {{od-conversation-item model=comment}}
         </li>
       {{/each}}
     </ul>

@@ -7,6 +7,8 @@ export default Ember.Service.extend({
 
   // NOTE: this needs a refactor
 
+  // cookie: Ember.inject.service(),
+
 
   _getQueryUrl: function (dataset, params) {
     let url = dataset.get('url');
@@ -45,19 +47,30 @@ export default Ember.Service.extend({
     });
   },
 
-  fetch: function (url, params) {
-    url += '/query?text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=*&returnGeometry=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&f=pjson&orderByFields=createdAt';
+  fetch: function (url, params, queryObj) {
+    url += '/query?f=json';
 
+    if (queryObj) {
+      let query = [];
+      Object.keys(queryObj).forEach(function (key) {
+        query.push(key + '=\'' + queryObj[key] + '\'');
+      });
+      params.where = query.join(' AND ');
+    }
 
-    /*
-      TODO:
-        get token from cookie (still temporary but...)
-        conversation item component
-        construct where clause from params
-    */
+    var defaultParams = {
+      where: '1=1',
+      outFields: '*',
+      returnGeometry: false,
+      returnIdsOnly: false,
+      returnCountOnly: false,
+      returnZ: false,
+      returnM: false,
+      returnDistinctValues: false
+    };
 
-    url += '&where=datasetId%3D\'' + params.datasetId + '\'';
-
+    var mungedParams = Ember.merge(defaultParams, params);
+    url += '&' + Ember.$.param(mungedParams);
 
     var token = 'lBwSQUn9v-dmNH8cO56Pir1fIdr94uFC5ywzT6WwkqIpJHdszfHffZhqswJxxlnpyqjWPVhnXi48sfhREEcLdEUtNuH_tzMk4ptY52ze4ghtPaMyFoJHanSFKZoBtLLyWFOA3tfNnEeYDpUlZYL89kn_eDtRfOJ5vI4mCTFdGovP9ueP3eZ4a54t1z7wxP8i';
     url += '&token=' + token;

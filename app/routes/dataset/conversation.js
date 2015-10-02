@@ -22,8 +22,9 @@ export default Ember.Route.extend({
     var annotationLayerUrl = ENV.APP.annotationServiceUrl;
 
     // TODO: not sure if this is a good way to get this...
-    let featureLayerParams = { datasetId: transition.params.dataset.id };
-    let model = this.get('featureService').fetch(annotationLayerUrl, featureLayerParams)
+    let queryParams = { orderByFields: 'createdAt' };
+    let filterParams = { datasetId: transition.params.dataset.id };
+    let model = this.get('featureService').fetch(annotationLayerUrl, queryParams, filterParams)
       .then(function (response) {
         return response.features.map(function (feat) {
           return feat.attributes;
