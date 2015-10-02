@@ -2,11 +2,11 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('od-mundi', 'Integration | Component | od mundi', {
-  integration: true
+  integration: false
 });
 
 test('it renders', function(assert) {
-  assert.expect(2);
+  assert.expect(1);
 
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
@@ -14,13 +14,4 @@ test('it renders', function(assert) {
   this.render(hbs`{{od-mundi}}`);
 
   assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#od-mundi}}
-      template block text
-    {{/od-mundi}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });
