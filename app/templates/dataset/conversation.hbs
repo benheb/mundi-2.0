@@ -42,5 +42,15 @@
       <button class="btn btn-default" {{action "drawPoint"}}>Draw Point</button>
     {{/if}}
 
+    <ul>
+      {{#each model as |comment|}}
+        <li>
+          {{comment.comment}}
+          {{comment.username}}
+          {{moment-from-now comment.createdAt}}
+        </li>
+      {{/each}}
+    </ul>
+
   </div>
 </div>
