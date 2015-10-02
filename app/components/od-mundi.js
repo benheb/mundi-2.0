@@ -484,6 +484,7 @@ export default Ember.Component.extend({
                 "maxValue": 856
               }
             ],
+            "layerId": "4ac321b2d409438ebd76a6569ad94034_5",
             "defaultSymbol": {
               "color": [
                 43,
