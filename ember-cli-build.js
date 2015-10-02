@@ -42,6 +42,8 @@ module.exports = function(defaults) {
   app.import('vendor/sortable.js');
   app.import('vendor/legend.js');
 
+  app.import('bower_components/js-cookie/src/js.cookie.js');
+
 
   return app.toTree();
 };

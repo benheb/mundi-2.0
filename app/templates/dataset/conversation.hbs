@@ -42,5 +42,13 @@
       <button class="btn btn-default" {{action "drawPoint"}}>Draw Point</button>
     {{/if}}
 
+    <ul>
+      {{#each model as |comment|}}
+        <li>
+          {{od-conversation-item model=comment}}
+        </li>
+      {{/each}}
+    </ul>
+
   </div>
 </div>

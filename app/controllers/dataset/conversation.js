@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  needs: [ 'dataset' ],
+  datasetController: Ember.inject.controller('dataset'),
 
   showAnnotationOptions: true,
 
@@ -15,7 +15,7 @@ export default Ember.Controller.extend({
     },
 
     drawPoint () {
-      this.get('controllers.dataset').set('drawingToolsAreActivated', true);
+      this.get('datasetController').set('drawingToolsAreActivated', true);
     },
 
     foobar(a) {
