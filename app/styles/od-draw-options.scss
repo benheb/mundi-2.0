@@ -1,8 +1,14 @@
 .draw-option {
-  float:left;
-  margin-right:2px;
-  cursor:pointer;
+  float: left;
+  margin-right: 4px;
+  margin-top: 2px;
+  cursor: pointer;
+  border: 1px solid #FEFEFE;
+  padding: 4px;
+  img {
+    height:18px;
+  }
   &.selected {
-    font-weight:800;
+    border:1px solid #D0CFCF;
   }
 }

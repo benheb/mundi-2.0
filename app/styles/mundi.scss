@@ -15,22 +15,30 @@
       }
     }
   }
+  .mundi-share-icon {
+    float:left;
+    margin-right: 5px;
+    margin-top:3px;
+    img {
+      height:25px;
+    }
+  }
   #mundi-map {
     height:100%;
     width:100%;
     position: relative;
   }
   .mundi-toolbar {
-    //padding-left: 10px;
-    //padding-right: 10px;
-    background-color: #EEE;
-    //overflow: hidden;
+    background-color: #FEFEFE;
     border-bottom: 1px solid #C3C3C3;
+    min-height: 65px;
   }
   #mundi-toolbar-bottom {
     width:100%;
     height: auto;
     min-height: 36px;
+    background:#FEFEFE;
+    padding-top:4px;
   }
   #mundi-toolbar-top {
     width:100%;
@@ -38,7 +46,6 @@
     background-color: #286e93;
     padding-top: 3px;
     padding-bottom: 1px;
-    margin-bottom: 4px;
     color:#8F8E8E;
     .mundi-step-title {
       cursor: pointer;

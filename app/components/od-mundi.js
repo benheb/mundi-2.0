@@ -177,6 +177,23 @@ export default Ember.Component.extend({
   }.observes('drawMode'),
 
 
+  onMinChange: function() {
+    let def = this._buildExpression();
+    let dataset = this.get('dataset');
+    let layer = this.map.getLayer( dataset.get('id') );
+    //def = 'POPULATION_ENROLLED_2008 > 1167 AND POPULATION_ENROLLED_2008 < 1557';
+    //layer.definitionExpression = def;
+  }.observes('filterMin'),
+
+
+  onMaxChange: function() {
+    let def = this._buildExpression();
+    let dataset = this.get('dataset');
+    let layer = this.map.getLayer( dataset.get('id') );
+    //def = 'POPULATION_ENROLLED_2008 > 1167 AND POPULATION_ENROLLED_2008 < 1557';
+    //layer.definitionExpression = def;
+  }.observes('filterMax'),
+
 
   _setExtent: function(dataset) {
     let extent, ext = dataset.get('extent');
@@ -484,6 +501,7 @@ export default Ember.Component.extend({
                 "maxValue": 856
               }
             ],
+            "layerId": "4ac321b2d409438ebd76a6569ad94034_5",
             "defaultSymbol": {
               "color": [
                 43,
@@ -631,8 +649,34 @@ export default Ember.Component.extend({
       popupTemplate: this._getDatasetInfoTemplate(dataset),
       renderer: this._getRenderer(dataset, opts)
     };
+
+    if ( this.get('selectedAttribute')) {
+      //opts.definitionExpression = 'POPULATION_ENROLLED_2008 > 1288 AND POPULATION_ENROLLED_2008 < 1557'; //this._buildExpression();
+      opts.definitionExpression = this._buildExpression(); //'POPULATION_ENROLLED_2008 > 200 AND POPULATION_ENROLLED_2008 < 1557';
+    };
     
+    console.log('opts', opts);
     return opts;
+  },
+
+
+  _buildExpression: function() {
+    let def = null;
+
+    let selected = this.get('selectedAttribute');
+    let min = this.get('filterMin');
+    let max = this.get('filterMax');
+    
+    if ( min && !max ) { 
+      def = selected + ' > ' + min;
+    } else if ( !min && max ) {
+      def = selected + ' < ' + max;
+    } else if ( min && max ) {
+      def = selected + ' > ' + min + ' AND ' + selected + ' < ' + max;
+    }
+
+    console.log('DEFINITION EXPRESSION: ', def);
+    return def;
   },
 
   _createRendererFromJson: function(rendererJson){
@@ -644,7 +688,7 @@ export default Ember.Component.extend({
     'label': '',
     'description': '',
     'symbol': {
-      'color': [49,130,189,225],
+      'color': [229,159,115,225],
       'size': 6,
       'angle': 0,
       'xoffset': 0,
