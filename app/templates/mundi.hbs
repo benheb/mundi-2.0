@@ -34,7 +34,7 @@
         {{/x-select}}
       </div>
       <div class="col-md-2">
-        {{od-range-slider model=model selectedAttribute=selectedAttribute}}
+        {{od-range-slider model=model selectedAttribute=selectedAttribute filterMin=filterMin filterMax=filterMax}}
       </div>
       <div class="col-md-2">
         {{od-draw-options action="changeDrawMode" drawMode=drawMode}}
@@ -42,7 +42,14 @@
       <div class="col-md-2">
         {{od-quick-styles action="quickThemeChanged" quickTheme=quickTheme}}
       </div>
-      <div class="col-md-2"></div>
+      <div class="col-md-2">
+        <div class="mundi-share-icon"><img src="images/pdf.png" /></div>
+        <div class="mundi-share-icon"><img src="images/ppt.png" /></div>
+        <div class="mundi-share-icon"><img src="images/favorite.png" /></div>
+        <div class="mundi-share-icon"><img src="images/myOrg.png" /></div>
+        <div class="mundi-share-icon"><img src="images/gplus.png" /></div>
+        <div class="mundi-share-icon"><img src="images/wordPress.png" /></div>
+      </div>
     </div>
   </div>
 
@@ -50,6 +57,6 @@
 
   {{od-legend-container legendLayers=legendLayers}}
   
-  {{od-mundi model=model store=store addLegendLayer="addLegendLayer" updateLegendLayer="updateLegendLayer" quickTheme=quickTheme drawMode=drawMode}}
+  {{od-mundi model=model store=store addLegendLayer="addLegendLayer" updateLegendLayer="updateLegendLayer" quickTheme=quickTheme drawMode=drawMode selectedAttribute=selectedAttribute filterMin=filterMin filterMax=filterMax}}
 
 </div>
