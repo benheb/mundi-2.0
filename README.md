@@ -1,5 +1,7 @@
 # Mundi 2.0
 
+![Mundi](https://www.evernote.com/l/AOzW53gGsUFOvo5M2ZbfagBujIJgb-vBczo)
+
 ## Prerequisites
 
 You will need the following things properly installed on your computer.
