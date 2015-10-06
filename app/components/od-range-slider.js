@@ -39,7 +39,6 @@ export default Ember.Component.extend({
     let selectedField = this.get('selectedAttribute');
     let fields = this.model.get('fields');
     
-    let field = null;
     fields.forEach(function(f) {
       if ( f.alias === selectedField ) {
         this.set('filterMin', f.statistics.min);
