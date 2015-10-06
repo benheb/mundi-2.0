@@ -78,7 +78,7 @@ export default Ember.Component.extend({
 
   _onChangeTheme: function() {
     let settings = this._getTheme(this.get('quickTheme'));
-    console.log('settings:', settings);
+    let mode = this.get('drawMode') || 'single';
 
     //set basemap 
     this.map.setBasemap(settings.basemap);
@@ -88,8 +88,7 @@ export default Ember.Component.extend({
     let layer = this.map.getLayer( dataset.get('id') );
     console.log('layer', layer);
 
-    let rend = this._createRendererFromJson( settings.point.single );
-    console.log('rend', rend);
+    let rend = this._createRendererFromJson( settings.point[ mode ] );
     layer.setRenderer(rend);
     layer.redraw();
     
@@ -120,8 +119,6 @@ export default Ember.Component.extend({
     let dataset = this.get('dataset');
     let layer = this.map.getLayer( dataset.get('id') );
     
-    console.log('settings.point[ mode ]', settings.point[ mode ]);
-
     //let rend = this._createRendererFromJson( settings.point[ mode ] );
     let rend = jsonUtils.fromJson(settings.point[ mode ]);
     console.log('rend', rend);
@@ -185,10 +182,139 @@ export default Ember.Component.extend({
               'type': 'esriSMS',
               'style': 'esriSMSCircle',
               'outline': {
-                'color': [227,89,86,90],
+                'color': [227,89,86,100],
                 'width': 1,
                 'type': 'esriSLS',
                 'style': 'esriSLSSolid'
+              }
+            }
+          },
+          'graduated': {
+            "type": "classBreaks",
+            "label": "",
+            "description": "",
+            "field": "POPULATION_ENROLLED_2008",
+            "minValue": 1,
+            "classBreakInfos": [
+              {
+                "symbol": {
+                  'color': [255,255,255,10],
+                  "size": 1.5,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    'color': [227,89,86,100],
+                    'width': 1,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "label": 155,
+                "classMaxValue": 155,
+                "minValue": 1,
+                "maxValue": 155
+              },
+              {
+                "symbol": {
+                  'color': [255,255,255,10],
+                  "size": 8,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    'color': [227,89,86,100],
+                    'width': 1,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "label": "> 155 to 330.25",
+                "classMaxValue": 330.25,
+                "minValue": 155,
+                "maxValue": 330.25
+              },
+              {
+                "symbol": {
+                  'color': [255,255,255,10],
+                  "size": 15,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    'color': [227,89,86,100],
+                    'width': 1,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "label": "> 330.25 to 505.5",
+                "classMaxValue": 505.5,
+                "minValue": 330.25,
+                "maxValue": 505.5
+              },
+              {
+                "symbol": {
+                  'color': [255,255,255,10],
+                  "size": 25,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    'color': [227,89,86,100],
+                    'width': 1,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "label": "> 505.5 to 680.75",
+                "classMaxValue": 680.75,
+                "minValue": 505.5,
+                "maxValue": 680.75
+              },
+              {
+                "symbol": {
+                  'color': [255,255,255,10],
+                  "size": 35,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    'color': [227,89,86,100],
+                    'width': 1,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "label": "> 680.75 to 856",
+                "classMaxValue": 856,
+                "minValue": 680.75,
+                "maxValue": 856
+              }
+            ],
+            "defaultSymbol": {
+              'color': [255,255,255,10],
+              "size": 6,
+              "angle": 0,
+              "xoffset": 0,
+              "yoffset": 0,
+              "type": "esriSMS",
+              "style": "esriSMSCircle",
+              "outline": {
+                'color': [227,89,86,100],
+                'width': 1,
+                "type": "esriSLS",
+                "style": "esriSLSSolid"
               }
             }
           }
@@ -373,6 +499,135 @@ export default Ember.Component.extend({
                 'width': 1,
                 'type': 'esriSLS',
                 'style': 'esriSLSSolid'
+              }
+            }
+          },
+          'graduated': {
+            "type": "classBreaks",
+            "label": "",
+            "description": "",
+            "field": "POPULATION_ENROLLED_2008",
+            "minValue": 1,
+            "classBreakInfos": [
+              {
+                "symbol": {
+                  'color': [255,255,255,0],
+                  "size": 1.5,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    'color': [140,196,56,255],
+                    'width': 1,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "label": 155,
+                "classMaxValue": 155,
+                "minValue": 1,
+                "maxValue": 155
+              },
+              {
+                "symbol": {
+                  'color': [255,255,255,0],
+                  "size": 8,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    'color': [140,196,56,255],
+                    'width': 1,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "label": "> 155 to 330.25",
+                "classMaxValue": 330.25,
+                "minValue": 155,
+                "maxValue": 330.25
+              },
+              {
+                "symbol": {
+                  'color': [255,255,255,0],
+                  "size": 15,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    'color': [140,196,56,255],
+                    'width': 1,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "label": "> 330.25 to 505.5",
+                "classMaxValue": 505.5,
+                "minValue": 330.25,
+                "maxValue": 505.5
+              },
+              {
+                "symbol": {
+                  'color': [255,255,255,0],
+                  "size": 25,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    'color': [140,196,56,255],
+                    'width': 1,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "label": "> 505.5 to 680.75",
+                "classMaxValue": 680.75,
+                "minValue": 505.5,
+                "maxValue": 680.75
+              },
+              {
+                "symbol": {
+                  'color': [255,255,255,0],
+                  "size": 35,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    'color': [140,196,56,255],
+                    'width': 1,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "label": "> 680.75 to 856",
+                "classMaxValue": 856,
+                "minValue": 680.75,
+                "maxValue": 856
+              }
+            ],
+            "defaultSymbol": {
+              'color': [255,255,255,0],
+              "size": 6,
+              "angle": 0,
+              "xoffset": 0,
+              "yoffset": 0,
+              "type": "esriSMS",
+              "style": "esriSMSCircle",
+              "outline": {
+                'color': [140,196,56,255],
+                'width': 1,
+                "type": "esriSLS",
+                "style": "esriSLSSolid"
               }
             }
           }
