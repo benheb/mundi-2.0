@@ -14,6 +14,11 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     
+    let top = Ember.$('#mundi-map').offset().top;
+    let win = Ember.$(window).height();
+    let height = win - ( top + 50 );
+    Ember.$('#mundi-map').css({height: height+'px'});
+
     this.map = new Map("mundi-map", {
       center: [-118, 34.5],
       zoom: 3,

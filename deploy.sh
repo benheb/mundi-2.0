@@ -1,6 +1,6 @@
 #!/bin/bash
 git branch -D gh-pages
-git push upstream --delete gh-pages
+git push origin --delete gh-pages
 git checkout -b gh-pages
 ember build --environment production
 git rm -rf app config tests
@@ -10,5 +10,5 @@ mv dist/* .
 rm -rf dist
 git add .
 git commit -m "deploy to gh-pages"
-git push upstream gh-pages
+git push origin gh-pages
 git checkout master
