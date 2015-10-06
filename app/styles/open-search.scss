@@ -21,8 +21,8 @@
   text-transform: uppercase;
   font-family: Helvetica, Arial, sans-serif;
   font-weight: 700;
-  font-size: 1em;
-  line-height: 1em;
+  font-size: 1rem;
+  line-height: 1rem;
   pointer-events: auto;
   color: #FFF;
 }
@@ -45,7 +45,7 @@
   margin-top: 10px;
   border-radius: 2px;
   padding: 5px;
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 400;
   border-radius: 4px;
   border: 1px solid #B7B7B7;
@@ -128,17 +128,17 @@
 }
 
 .open-search-result-stat {
-  font-size:18px;
+  font-size:1.286rem;
 }
 
 .open-search-stat-title {
-  font-size: 8px;
+  font-size: 0.5714rem;
 }
 
 
 .open-search-result-title {
   font-weight: 600;
-  font-size: 14px;
+  font-size: 1rem;
   pointer-events:none;
   white-space: nowrap;
   overflow: hidden;
@@ -148,19 +148,19 @@
 }
 
 .open-search-result-desc {
-  font-size: 12px;
   width:auto;
   height: 17px;
-  line-height: 20px;
+  line-height: 1.429rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   pointer-events:none;
   font-weight: 500;
+  font-size: 0.8571rem;
 }
 
 .open-search-result-feature-count {
-  font-size: 12px; 
+  font-size: 0.8571rem; 
   position: absolute;
   right: 10px;
   top: 18px;
@@ -184,12 +184,12 @@
   position: absolute;
   right: 0px;
   bottom: 1px;
-  font-size: 35px;
+  font-size: 2.5rem;
   width: 30px;
   height: 33px;
   background-color: #F7F5F5;
   text-align: center;
-  line-height: 0.6;
+  line-height: 0.5rem;
   padding: 5px;
   color: #AFAFAF;
 }
@@ -212,7 +212,7 @@
   animation: load7 1.8s infinite ease-in-out;
 }
 .open-search-loader {
-  font-size: 10px;
+  font-size: 0.7143rem;
   margin: 80px auto;
   position: relative;
   text-indent: -9999em;

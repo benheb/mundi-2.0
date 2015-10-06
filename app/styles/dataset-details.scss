@@ -26,13 +26,6 @@
 		position: static;
 		width: 100%;
 		padding: 15px;
-		/*background: -moz-linear-gradient(top, transparent 0%, transparent 75%, #a1a1a1 100%);
-		background: -webkit-gradient(left top, left bottom, color-stop(0%, transparent), color-stop(75%, transparent), color-stop(100%, #a1a1a1));
-		background: -webkit-linear-gradient(top, transparent 0%, transparent 75%, #a1a1a1 100%);
-		background: -o-linear-gradient(top, transparent 0%, transparent 75%, #a1a1a1 100%);
-		background: -ms-linear-gradient(top, transparent 0%, transparent 75%, #a1a1a1 100%);
-		background: linear-gradient(to bottom, transparent 0%, transparent 75%, #a1a1a1 100%);
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='transparent', endColorstr='#a1a1a1', GradientType=0 );*/
 	}
 
 	.grounded {
@@ -41,11 +34,18 @@
 	    left:0;
 	    width: 100%;
 	    padding: 0px 15px;
+	    background: -moz-linear-gradient(top, transparent 0%, rgba(255,255,255,0.6) 100%);
+		background: -webkit-gradient(left top, left bottom, color-stop(0%, transparent), color-stop(100%, rgba(255,255,255,0.6)));
+		background: -webkit-linear-gradient(top, transparent 0%, rgba(255,255,255,0.6) 100%);
+		background: -o-linear-gradient(top, transparent 0%, rgba(255,255,255,0.6) 100%);
+		background: -ms-linear-gradient(top, transparent 0%, rgba(255,255,255,0.6) 100%);
+		background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.6) 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='transparent', endColorstr='rgb(255,255,255)', GradientType=0 );
 	}
 
 	.jumbotron h1 {
-		font-size: 32px;
-		line-height: 36px;
+		font-size: 2.286rem;
+		line-height: 2.571rem;
 		margin-bottom: 8px;
 		font-weight: normal;
 	}
@@ -99,7 +99,7 @@
 
 	.right-sidebar {
 		h2 {
-			font-size: 20px;
+			font-size: 1.429rem;
 		}
 		.placeholder-img {
 			margin-right: 10px;
