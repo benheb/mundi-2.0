@@ -1,6 +1,6 @@
 # Mundi 2.0
 
-![Mundi](https://www.evernote.com/l/AOzW53gGsUFOvo5M2ZbfagBujIJgb-vBczo)
+![Mundi](https://www.evernote.com/shard/s236/sh/d6e77806-b141-4ebe-8e4c-d996df6a006e/8c82606febc1733a/res/ffccf855-df33-44f5-8b88-4f8d7c1c06e9/skitch.png)
 
 ## Prerequisites
 
