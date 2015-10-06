@@ -1,3 +1,86 @@
 <div id="dataset-table-container">
-  {{od-dataset-table model=model orderBy=model.objectIdField}}
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+			<h5>Showing 1 to 15 of 5274</h5>
+				<div class="table-controls">
+						<button class="btn btn-default pull-left"><span class="glyphicon glyphicon-fullscreen"></span></button>
+						<div class="dropdown pull-left">
+							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				            Add Filter <span class="caret"></span>
+				            </button>
+				            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+					            <li><a href="#">Ref_BlockID</a></li>
+					            <li><a href="#">All_Water</a></li>
+					            <li><a href="#">MXDN</a></li>
+					            <li><a href="#">MXUP</a></li>
+					            <li><a href="#">MXDNST02</a></li>
+				          	</ul>
+						</div>
+
+					<div class="dropdown pull-right">
+			          <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+			            APIs <span class="caret"></span>
+			          </button>
+			          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+			            <li>GeoJSON <input type="text"></li>
+			            <li>GeoService <input type="text"></li>
+			            <li>OGC WMS <input type="text"></li>
+			          </ul>
+			        </div>
+
+					<div class="pull-right">
+						{{od-download-button model=model action="downloadItem"}}
+					</div>
+
+				</div>
+				<div class="active-filters">
+					<div class="dropdown">
+					    <span class="sample-filter">
+							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				            Ref_BlockID <span class="glyphicon glyphicon-remove-circle"></span>
+				          	</button>
+				          	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+					            <li><label>Filter</label><br />
+					            <img src="images/histogram-placeholder.jpg" alt="histogram" />
+					            </li>
+				          	</ul>
+				        </span>
+				    </div>
+				    <div class="dropdown">
+				        <span class="sample-filter">
+							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				            ALL_Water <span class="glyphicon glyphicon-remove-circle"></span>
+				          	</button>
+				          	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+					            <li><label>Filter</label><br />
+					            <img src="images/histogram-placeholder.jpg" alt="histogram" />
+					            </li>
+				          	</ul>
+				        </span>
+				    </div>
+				    <div class="dropdown">
+				        <span class="sample-filter">
+							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				            MDDNST03 <span class="glyphicon glyphicon-remove-circle"></span>
+				          	</button>
+				          	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+					            <li><label>Filter</label><br />
+					            <img src="images/histogram-placeholder.jpg" alt="histogram" />
+					            </li>
+				          	</ul>
+				        </span>
+			        </div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="expanded">
+					<!--<div class="tab-control"><span class="glyphicon glyphicon-chevron-left"></span></div>-->
+  					{{od-dataset-table model=model orderBy=model.objectIdField}}
+  				</div>
+  			</div>
+  		</div>
+  	</div>
 </div>
