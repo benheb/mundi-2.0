@@ -3,7 +3,7 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
-    srcTag: 'https://jsdev.arcgis.com/4.0beta2/', // only needed for CDN, will default to 'built.js' if useRequire = true
+    srcTag: 'http://js.arcgis.com/3.14/', // only needed for CDN, will default to 'built.js' if useRequire = true
     amdPackages: [ // user defined AMD packages
       'esri'
     ]

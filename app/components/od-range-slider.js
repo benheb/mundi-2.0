@@ -32,19 +32,19 @@ export default Ember.Component.extend({
     Ember.$( "#mundi-filter-slider" ).slider('values',0,this.get('filterMin'));
     Ember.$( "#mundi-filter-slider" ).slider('values',1,this.get('filterMax'));
     
-
   }.observes('selectedAttribute'),
 
   _getValues: function() {
+    let self = this;
     let selectedField = this.get('selectedAttribute');
     let fields = this.model.get('fields');
     
     fields.forEach(function(f) {
       if ( f.alias === selectedField ) {
-        this.set('filterMin', f.statistics.min);
-        this.set('filterMax', f.statistics.max);
+        self.set('filterMin', f.statistics.min);
+        self.set('filterMax', f.statistics.max);
       }
-    }.bind(this));
+    });
   }
 
 });

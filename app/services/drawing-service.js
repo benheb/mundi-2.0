@@ -4,7 +4,6 @@ import Polyline from 'esri/geometry/Polyline';
 import Polygon from 'esri/geometry/Polygon';
 import SimpleLineSymbol from 'esri/symbols/SimpleLineSymbol';
 import Point from 'esri/geometry/Point';
-import Graphic from 'esri/Graphic';
 // import webMercatorUtils from 'esri/geometry/support/webMercatorUtils';
 //import SimpleRenderer from 'esri/renderers/SimpleRenderer';
 

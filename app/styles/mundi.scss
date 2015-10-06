@@ -1,4 +1,10 @@
 .page-mundi {
+  #mundi-container {
+    height:100%;
+  }
+  .esri-map-component {
+    height:100%;
+  }
   .header {
     border-bottom:#287b93;
     background: #37a3a5 url(../images/mundi-header.png) no-repeat;
