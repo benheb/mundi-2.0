@@ -2,25 +2,27 @@ import Ember from 'ember';
 import Map from 'esri/map';
 import FeatureLayer from 'esri/layers/FeatureLayer';
 import SimpleRenderer from 'esri/renderers/SimpleRenderer';
+import ClassBreaksRenderer from 'esri/renderers/ClassBreaksRenderer';
 import PopupTemplate from 'esri/dijit/PopupTemplate';
 import Extent from 'esri/geometry/Extent';
 import SpatialReference from 'esri/SpatialReference';
+import jsonUtils from 'esri/renderers/jsonUtils';
 
 export default Ember.Component.extend({
 
   classNames: ['esri-map-component'],
 
   didInsertElement() {
-    console.log('DID INSERT ME!');
+    
     this.map = new Map("mundi-map", {
       center: [-118, 34.5],
       zoom: 3,
       basemap: "gray",
       smartNavigation: false
     });
-
     
     this._addDataset();
+
   },
 
   willRemoveElement() {
@@ -107,30 +109,27 @@ export default Ember.Component.extend({
     console.log('settings:', settings);
 
     //set basemap 
-    this.map.basemap = settings.basemap;
+    this.map.setBasemap(settings.basemap);
     
     //style layer 
     let dataset = this.get('dataset');
     let layer = this.map.getLayer( dataset.get('id') );
-    console.log('layer', layer);
-
-    let rend = this._createRendererFromJson( settings.point[ mode ] );
     
-    layer.visible = false;
-      
-    let opts = this._getDatasetLayerOpts(dataset);
-    opts.renderer = rend; 
+    console.log('settings.point[ mode ]', settings.point[ mode ]);
 
-    let datasetLayer = new FeatureLayer(dataset.get('url'), opts);
-    datasetLayer.id = dataset.get('id');
+    //let rend = this._createRendererFromJson( settings.point[ mode ] );
+    let rend = jsonUtils.fromJson(settings.point[ mode ]);
+    console.log('rend', rend);
+    layer.setRenderer(rend);
+    layer.redraw();
 
-    this.map.add(datasetLayer);
-
+    /*
     this.sendAction('updateLegendLayer', {
       "id": dataset.get('id'),
       "name": dataset.get('name'),
       "renderer": settings.point[ mode ]
     });
+    */
   }.observes('drawMode'),
 
 
@@ -213,6 +212,135 @@ export default Ember.Component.extend({
                 'width': 1,
                 'type': 'esriSLS',
                 'style': 'esriSLSSolid'
+              }
+            }
+          },
+          'graduated': {
+            "type": "classBreaks",
+            "label": "",
+            "description": "",
+            "field": "POPULATION_ENROLLED_2008",
+            "minValue": 1,
+            "classBreakInfos": [
+              {
+                "symbol": {
+                  'color': [131,143,230,225],
+                  "size": 1.5,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    'color': [196,211,253,180],
+                    'width': 1,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "label": 155,
+                "classMaxValue": 155,
+                "minValue": 1,
+                "maxValue": 155
+              },
+              {
+                "symbol": {
+                  'color': [131,143,230,225],
+                  "size": 8,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    'color': [196,211,253,180],
+                    'width': 1,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "label": "> 155 to 330.25",
+                "classMaxValue": 330.25,
+                "minValue": 155,
+                "maxValue": 330.25
+              },
+              {
+                "symbol": {
+                  'color': [131,143,230,225],
+                  "size": 15,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    'color': [196,211,253,180],
+                    'width': 1,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "label": "> 330.25 to 505.5",
+                "classMaxValue": 505.5,
+                "minValue": 330.25,
+                "maxValue": 505.5
+              },
+              {
+                "symbol": {
+                  'color': [131,143,230,225],
+                  "size": 25,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    'color': [196,211,253,180],
+                    'width': 1,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "label": "> 505.5 to 680.75",
+                "classMaxValue": 680.75,
+                "minValue": 505.5,
+                "maxValue": 680.75
+              },
+              {
+                "symbol": {
+                  'color': [131,143,230,225],
+                  "size": 35,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    'color': [196,211,253,180],
+                    'width': 1,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "label": "> 680.75 to 856",
+                "classMaxValue": 856,
+                "minValue": 680.75,
+                "maxValue": 856
+              }
+            ],
+            "defaultSymbol": {
+              'color': [131,143,230,225],
+              "size": 6,
+              "angle": 0,
+              "xoffset": 0,
+              "yoffset": 0,
+              "type": "esriSMS",
+              "style": "esriSMSCircle",
+              "outline": {
+                'color': [196,211,253,180],
+                'width': 1,
+                "type": "esriSLS",
+                "style": "esriSLSSolid"
               }
             }
           }
@@ -309,7 +437,7 @@ export default Ember.Component.extend({
       outFields: ['*'],
       popupTemplate: this._getDatasetInfoTemplate(dataset)
     };
-    
+
     return opts;
   },
 
@@ -333,7 +461,11 @@ export default Ember.Component.extend({
   },
 
   _createRendererFromJson: function(rendererJson){
-    return new SimpleRenderer(rendererJson);
+    if ( this.get('drawMode') === 'graduated' ) {
+      return new ClassBreaksRenderer(rendererJson);
+    } else {
+      return new SimpleRenderer(rendererJson);
+    }
   },
 
   _defaultPointRenderer : {
