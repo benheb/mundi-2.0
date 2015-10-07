@@ -122,6 +122,7 @@
       var keyContainer = this._createElement('div', el, 'key-container-'+layer.id, '', 'key-container');
       var field = this._createElement('div', keyContainer, 'field-'+layer.id, 'Styled by '+layer.renderer.field, 'legend-field');
       this._buildGraduatedRamp(keyContainer, renderer, layer.id, colors);
+      el.style['padding-top'] = '10px';
 
     } else if ( !layer.renderer.visualVariables && !layer.renderer.classBreakInfos ) {
       
