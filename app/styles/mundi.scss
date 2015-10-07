@@ -1,6 +1,12 @@
 .page-mundi {
   #mundi-container {
     height:100%;
+    &.NYT {
+      img {
+        filter: brightness(110%);
+        -webkit-filter: brightness(110%);
+      }
+    }
   }
   .esri-map-component {
     height:100%;
