@@ -213,11 +213,19 @@
       if ( colors ) {
         color = self._dojoColorToRgba(colors[i].color); 
       } else {
-        color = self._dojoColorToRgba(stop.symbol.color); 
+        if ( Array.isArray(stop.symbol.color) ) {
+          color = self._dojoColorToRgba(stop.symbol.color); 
+        } else {
+          color = stop.symbol.color;
+        }
       }
       
       stroke = stop.symbol.outline.color;
-      stroke = self._dojoColorToRgba(stroke); //'rgb('+stroke.r+','+stroke.g+','+stroke.b+')';
+      stroke = stop.symbol.outline.color;
+      if ( Array.isArray(stroke) ) {
+        stroke = self._dojoColorToRgba(stroke);
+      } 
+      //'rgb('+stroke.r+','+stroke.g+','+stroke.b+')';
 
       var item = document.createElement('div');
       el.appendChild( item ).className = 'legend-graduated-symbol-container';

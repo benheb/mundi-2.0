@@ -8,6 +8,12 @@
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li {{action "quickThemeChanged" "Default Theme"}}>
+      <div class="quick-theme-name">
+        Default Theme
+      </div>
+      <img src="images/default-quick-style.jpg" class="quick-theme-thumb" />
+    </li>
     <li {{action "quickThemeChanged" "NYT"}}>
       <div class="quick-theme-name">
         NYT

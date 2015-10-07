@@ -33,7 +33,7 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
       
-      API: 'http://opendata.dc.gov',
+      API: 'http://opendataqa.arcgis.com',
       agoUrl: 'http://www.arcgis.com',
       annotationServiceUrl: 'http://services.arcgis.com/bkrWlSKcjUDFDtgw/arcgis/rest/services/opendata_comments/FeatureServer/0'
 
@@ -68,7 +68,7 @@ module.exports = function(environment) {
 
     // ENV.APP.API = 'http://opendata.dc.gov';
 
-    ENV.APP.API = 'http://opendata.dc.gov';
+    ENV.APP.API = 'http://opendataqa.arcgis.com';
     ENV.APP.agoUrl = 'http://www.arcgis.com';
 
     ENV.locationType = 'hash';

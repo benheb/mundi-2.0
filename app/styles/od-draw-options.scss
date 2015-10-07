@@ -8,7 +8,21 @@
   img {
     height:18px;
   }
-  &.selected {
-    border:1px solid #D0CFCF;
-  }
 }
+
+#draw-option-single.single {
+  border:1px solid #D0CFCF;
+}
+
+#draw-option-graduated.graduated {
+  border:1px solid #D0CFCF;
+}
+
+#draw-option-choropleth.choropleth {
+  border:1px solid #D0CFCF;
+}
+
+#draw-option-type.type {
+  border:1px solid #D0CFCF;
+}
+

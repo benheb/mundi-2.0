@@ -20,7 +20,7 @@ export default Ember.Component.extend({
     Ember.$('#mundi-map').css({height: height+'px'});
 
     this.map = new Map("mundi-map", {
-      center: [-118, 34.5],
+      center: [-80, 34.5],
       zoom: 3,
       basemap: "gray",
       smartNavigation: false
@@ -45,7 +45,10 @@ export default Ember.Component.extend({
 
     let url = dataset.get('url');
     let opts = this._getDatasetLayerOpts(dataset);
+    console.log('url', url);
+    console.log('opts', opts);
     let datasetLayer = new FeatureLayer(url, opts);
+    console.log('datasetLayer', datasetLayer);
     datasetLayer.id = dataset.get('id');
     
     map.addLayer( datasetLayer );
@@ -86,19 +89,18 @@ export default Ember.Component.extend({
     //style layer 
     let dataset = this.get('dataset');
     let layer = this.map.getLayer( dataset.get('id') );
-    console.log('layer', layer);
-
+    
     let rend = this._createRendererFromJson( settings.point[ mode ] );
     layer.setRenderer(rend);
     layer.redraw();
     
-    /*  
+    console.log('UPDATE LEGEND: ', settings.point[ mode ]);
+
     this.sendAction('updateLegendLayer', {
       "id": dataset.get('id'),
       "name": dataset.get('name'),
-      "renderer": settings.point.single
+      "renderer": settings.point[ mode ]
     });
-    */
     
   }.observes('quickTheme'),
 
@@ -125,14 +127,13 @@ export default Ember.Component.extend({
     layer.setRenderer(rend);
     layer.redraw();
 
-    /*
     this.sendAction('updateLegendLayer', {
       "id": dataset.get('id'),
       "name": dataset.get('name'),
       "renderer": settings.point[ mode ]
     });
-    */
-  }.observes('drawMode'),
+
+  }.observes('drawMode,selectedAttributeName'),
 
 
   onMinChange: function() {
@@ -140,15 +141,7 @@ export default Ember.Component.extend({
     let dataset = this.get('dataset');
     let layer = this.map.getLayer( dataset.get('id') );
     layer.setDefinitionExpression(def);
-  }.observes('filterMin'),
-
-
-  onMaxChange: function() {
-    let def = this._buildExpression();
-    let dataset = this.get('dataset');
-    let layer = this.map.getLayer( dataset.get('id') );
-    layer.setDefinitionExpression(def);
-  }.observes('filterMax'),
+  }.observes('filterMin,filterMax'),
 
 
   _setExtent: function(dataset) {
@@ -159,13 +152,163 @@ export default Ember.Component.extend({
     }
 
     if (extent) {
-      this.map.setExtent(extent.expand(2));
+      this.map.setExtent(extent.expand(1));
     }
   },
 
 
   _getTheme: function(theme) {
+    let values = this._classify();
+    console.log('classes', values);
+
     let themes = {
+      'Default Theme': {
+        'basemap': 'gray',
+        'point': {
+          'single': {
+            'type': 'simple',
+            'label': '',
+            'description': '',
+            'symbol': {
+              'color': [229,159,115,225],
+              'size': 6,
+              'angle': 0,
+              'xoffset': 0,
+              'yoffset': 0,
+              'type': 'esriSMS',
+              'style': 'esriSMSCircle',
+              'outline': {
+                'color': [220,220,220,255],
+                'width': 0.6,
+                'type': 'esriSLS',
+                'style': 'esriSLSSolid'
+              }
+            }
+          },
+          'graduated': {
+            "type": "classBreaks",
+            "label": "",
+            "description": "",
+            "field": this.get('selectedAttributeName'),
+            "minValue": 1,
+            "classBreakInfos": [
+              {
+                "symbol": {
+                  'color': [229,159,115,225],
+                  "size": 3.5,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    'color': [220,220,220,255],
+                    'width': 0.6,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "label": values[0],
+                "classMaxValue": values[0]
+              },
+              {
+                "symbol": {
+                  'color': [229,159,115,225],
+                  "size": 10,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    'color': [220,220,220,255],
+                    'width': 0.6,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "label": "> "+values[0]+" to "+values[1],
+                "classMaxValue": values[1]
+              },
+              {
+                "symbol": {
+                  'color': [229,159,115,225],
+                  "size": 25,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    'color': [220,220,220,255],
+                    'width': 0.6,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "label": "> "+values[1]+" to "+values[2],
+                "classMaxValue": values[2]
+              },
+              {
+                "symbol": {
+                  'color': [229,159,115,225],
+                  "size": 35,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    'color': [220,220,220,255],
+                    'width': 0.6,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "label": "> "+values[2]+" to "+values[3],
+                "classMaxValue": values[3]
+              },
+              {
+                "symbol": {
+                  'color': [229,159,115,225],
+                  "size": 45,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    'color': [220,220,220,255],
+                    'width': 0.6,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "label": "> "+values[3]+" to "+values[4],
+                "classMaxValue": values[4]
+              }
+            ],
+            "defaultSymbol": {
+              'color': [229,159,115,225],
+              "size": 6,
+              "angle": 0,
+              "xoffset": 0,
+              "yoffset": 0,
+              "type": "esriSMS",
+              "style": "esriSMSCircle",
+              "outline": {
+                'color': [220,220,220,255],
+                'width': 0.6,
+                "type": "esriSLS",
+                "style": "esriSLSSolid"
+              }
+            }
+          }
+        },
+        'polygon': {
+
+        }
+      },
       'NYT': {
         'basemap': 'gray',
         'point': {
@@ -193,13 +336,13 @@ export default Ember.Component.extend({
             "type": "classBreaks",
             "label": "",
             "description": "",
-            "field": "POPULATION_ENROLLED_2008",
+            "field": this.get('selectedAttributeName'),
             "minValue": 1,
             "classBreakInfos": [
               {
                 "symbol": {
                   'color': [255,255,255,10],
-                  "size": 1.5,
+                  "size": 3.5,
                   "angle": 0,
                   "xoffset": 0,
                   "yoffset": 0,
@@ -212,15 +355,13 @@ export default Ember.Component.extend({
                     "style": "esriSLSSolid"
                   }
                 },
-                "label": 155,
-                "classMaxValue": 155,
-                "minValue": 1,
-                "maxValue": 155
+                "label": values[0],
+                "classMaxValue": values[0]
               },
               {
                 "symbol": {
                   'color': [255,255,255,10],
-                  "size": 8,
+                  "size": 10,
                   "angle": 0,
                   "xoffset": 0,
                   "yoffset": 0,
@@ -233,31 +374,8 @@ export default Ember.Component.extend({
                     "style": "esriSLSSolid"
                   }
                 },
-                "label": "> 155 to 330.25",
-                "classMaxValue": 330.25,
-                "minValue": 155,
-                "maxValue": 330.25
-              },
-              {
-                "symbol": {
-                  'color': [255,255,255,10],
-                  "size": 15,
-                  "angle": 0,
-                  "xoffset": 0,
-                  "yoffset": 0,
-                  "type": "esriSMS",
-                  "style": "esriSMSCircle",
-                  "outline": {
-                    'color': [227,89,86,100],
-                    'width': 1,
-                    "type": "esriSLS",
-                    "style": "esriSLSSolid"
-                  }
-                },
-                "label": "> 330.25 to 505.5",
-                "classMaxValue": 505.5,
-                "minValue": 330.25,
-                "maxValue": 505.5
+                "label": "> "+values[0]+" to "+values[1],
+                "classMaxValue": values[1]
               },
               {
                 "symbol": {
@@ -275,10 +393,8 @@ export default Ember.Component.extend({
                     "style": "esriSLSSolid"
                   }
                 },
-                "label": "> 505.5 to 680.75",
-                "classMaxValue": 680.75,
-                "minValue": 505.5,
-                "maxValue": 680.75
+                "label": "> "+values[1]+" to "+values[2],
+                "classMaxValue": values[2]
               },
               {
                 "symbol": {
@@ -296,10 +412,27 @@ export default Ember.Component.extend({
                     "style": "esriSLSSolid"
                   }
                 },
-                "label": "> 680.75 to 856",
-                "classMaxValue": 856,
-                "minValue": 680.75,
-                "maxValue": 856
+                "label": "> "+values[2]+" to "+values[3],
+                "classMaxValue": values[3]
+              },
+              {
+                "symbol": {
+                  'color': [255,255,255,10],
+                  "size": 45,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    'color': [227,89,86,100],
+                    'width': 1,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "label": "> "+values[3]+" to "+values[4],
+                "classMaxValue": values[4]
               }
             ],
             "defaultSymbol": {
@@ -350,13 +483,13 @@ export default Ember.Component.extend({
             "type": "classBreaks",
             "label": "",
             "description": "",
-            "field": "POPULATION_ENROLLED_2008",
+            "field": this.get('selectedAttributeName'),
             "minValue": 1,
             "classBreakInfos": [
               {
                 "symbol": {
                   'color': [131,143,230,225],
-                  "size": 1.5,
+                  "size": 3.5,
                   "angle": 0,
                   "xoffset": 0,
                   "yoffset": 0,
@@ -369,15 +502,13 @@ export default Ember.Component.extend({
                     "style": "esriSLSSolid"
                   }
                 },
-                "label": 155,
-                "classMaxValue": 155,
-                "minValue": 1,
-                "maxValue": 155
+                "label": values[0],
+                "classMaxValue": values[0]
               },
               {
                 "symbol": {
                   'color': [131,143,230,225],
-                  "size": 8,
+                  "size": 10,
                   "angle": 0,
                   "xoffset": 0,
                   "yoffset": 0,
@@ -390,31 +521,8 @@ export default Ember.Component.extend({
                     "style": "esriSLSSolid"
                   }
                 },
-                "label": "> 155 to 330.25",
-                "classMaxValue": 330.25,
-                "minValue": 155,
-                "maxValue": 330.25
-              },
-              {
-                "symbol": {
-                  'color': [131,143,230,225],
-                  "size": 15,
-                  "angle": 0,
-                  "xoffset": 0,
-                  "yoffset": 0,
-                  "type": "esriSMS",
-                  "style": "esriSMSCircle",
-                  "outline": {
-                    'color': [196,211,253,180],
-                    'width': 1,
-                    "type": "esriSLS",
-                    "style": "esriSLSSolid"
-                  }
-                },
-                "label": "> 330.25 to 505.5",
-                "classMaxValue": 505.5,
-                "minValue": 330.25,
-                "maxValue": 505.5
+                "label": "> "+values[0]+" to "+values[1],
+                "classMaxValue": values[1]
               },
               {
                 "symbol": {
@@ -432,10 +540,8 @@ export default Ember.Component.extend({
                     "style": "esriSLSSolid"
                   }
                 },
-                "label": "> 505.5 to 680.75",
-                "classMaxValue": 680.75,
-                "minValue": 505.5,
-                "maxValue": 680.75
+                "label": "> "+values[1]+" to "+values[2],
+                "classMaxValue": values[2]
               },
               {
                 "symbol": {
@@ -453,10 +559,27 @@ export default Ember.Component.extend({
                     "style": "esriSLSSolid"
                   }
                 },
-                "label": "> 680.75 to 856",
-                "classMaxValue": 856,
-                "minValue": 680.75,
-                "maxValue": 856
+                "label": "> "+values[2]+" to "+values[3],
+                "classMaxValue": values[3]
+              },
+              {
+                "symbol": {
+                  'color': [131,143,230,225],
+                  "size": 45,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    'color': [196,211,253,180],
+                    'width': 1,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "label": "> "+values[3]+" to "+values[4],
+                "classMaxValue": values[4]
               }
             ],
             "defaultSymbol": {
@@ -506,13 +629,13 @@ export default Ember.Component.extend({
             "type": "classBreaks",
             "label": "",
             "description": "",
-            "field": "POPULATION_ENROLLED_2008",
+            "field": this.get('selectedAttributeName'),
             "minValue": 1,
             "classBreakInfos": [
               {
                 "symbol": {
                   'color': [255,255,255,0],
-                  "size": 1.5,
+                  "size": 3.5,
                   "angle": 0,
                   "xoffset": 0,
                   "yoffset": 0,
@@ -525,15 +648,13 @@ export default Ember.Component.extend({
                     "style": "esriSLSSolid"
                   }
                 },
-                "label": 155,
-                "classMaxValue": 155,
-                "minValue": 1,
-                "maxValue": 155
+                "label": values[0],
+                "classMaxValue": values[0]
               },
               {
                 "symbol": {
                   'color': [255,255,255,0],
-                  "size": 8,
+                  "size": 10,
                   "angle": 0,
                   "xoffset": 0,
                   "yoffset": 0,
@@ -546,31 +667,8 @@ export default Ember.Component.extend({
                     "style": "esriSLSSolid"
                   }
                 },
-                "label": "> 155 to 330.25",
-                "classMaxValue": 330.25,
-                "minValue": 155,
-                "maxValue": 330.25
-              },
-              {
-                "symbol": {
-                  'color': [255,255,255,0],
-                  "size": 15,
-                  "angle": 0,
-                  "xoffset": 0,
-                  "yoffset": 0,
-                  "type": "esriSMS",
-                  "style": "esriSMSCircle",
-                  "outline": {
-                    'color': [140,196,56,255],
-                    'width': 1,
-                    "type": "esriSLS",
-                    "style": "esriSLSSolid"
-                  }
-                },
-                "label": "> 330.25 to 505.5",
-                "classMaxValue": 505.5,
-                "minValue": 330.25,
-                "maxValue": 505.5
+                "label": "> "+values[0]+" to "+values[1],
+                "classMaxValue": values[1]
               },
               {
                 "symbol": {
@@ -588,10 +686,8 @@ export default Ember.Component.extend({
                     "style": "esriSLSSolid"
                   }
                 },
-                "label": "> 505.5 to 680.75",
-                "classMaxValue": 680.75,
-                "minValue": 505.5,
-                "maxValue": 680.75
+                "label": "> "+values[1]+" to "+values[2],
+                "classMaxValue": values[2]
               },
               {
                 "symbol": {
@@ -609,10 +705,27 @@ export default Ember.Component.extend({
                     "style": "esriSLSSolid"
                   }
                 },
-                "label": "> 680.75 to 856",
-                "classMaxValue": 856,
-                "minValue": 680.75,
-                "maxValue": 856
+                "label": "> "+values[2]+" to "+values[3],
+                "classMaxValue": values[3]
+              },
+              {
+                "symbol": {
+                  'color': [255,255,255,0],
+                  "size": 45,
+                  "angle": 0,
+                  "xoffset": 0,
+                  "yoffset": 0,
+                  "type": "esriSMS",
+                  "style": "esriSMSCircle",
+                  "outline": {
+                    'color': [140,196,56,255],
+                    'width': 1,
+                    "type": "esriSLS",
+                    "style": "esriSLSSolid"
+                  }
+                },
+                "label": "> "+values[3]+" to "+values[4],
+                "classMaxValue": values[4]
               }
             ],
             "defaultSymbol": {
@@ -705,17 +818,19 @@ export default Ember.Component.extend({
   _buildExpression: function() {
     let def = null;
 
-    let selected = this.get('selectedAttribute');
+    let selected = this.get('selectedAttributeName');
     let min = this.get('filterMin');
     let max = this.get('filterMax');
     
     if ( min && !max ) { 
-      def = selected + ' > ' + min;
+      def = selected + ' > ' + ( min - 1 );
     } else if ( !min && max ) {
       def = selected + ' < ' + ( max + 1 );
     } else if ( min && max ) {
-      def = selected + ' > ' + min + ' AND ' + selected + ' < ' + ( max + 1 );
+      def = selected + ' > ' + ( min - 1 ) + ' AND ' + selected + ' < ' + ( max + 1 );
     }
+
+    console.log('def', def);
 
     return def;
   },
@@ -726,6 +841,30 @@ export default Ember.Component.extend({
     } else {
       return new SimpleRenderer(rendererJson);
     }
+  },
+
+
+  _classify: function() {
+    let fieldName = this.get('selectedAttributeName');
+    let fields = this.get('fields');
+
+    console.log('fields', fields);
+
+    let breaks = 4; 
+    let values = [];
+
+    fields.forEach(function(f) {
+      if ( f.name === fieldName ) {
+        console.log('f', f);
+        var step = ( f.statistics.max - f.statistics.min ) / breaks;
+        for (var i = 0; i<=breaks; i++ ) {
+          values.push( f.statistics.min + (step * i) );
+        }
+      }
+    });
+
+    console.log('values', values);
+    return values;
   },
 
   _defaultPointRenderer : {

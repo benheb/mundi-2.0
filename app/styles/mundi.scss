@@ -21,6 +21,14 @@
       }
     }
   }
+  #dropdownMenu1 {
+    width: 100%;
+  }
+  .dropdown-menu {
+    height: 400px;
+    overflow: hidden;
+    overflow-y: auto;
+  }
   .mundi-share-icon {
     float:left;
     margin-right: 5px;
