@@ -41,11 +41,19 @@ export default Ember.Component.extend({
     
     fields.forEach(function(f) {
       if ( f.alias === selectedField ) {
-        console.log('SET ME');
         self.set('filterMin', f.statistics.min);
         self.set('filterMax', f.statistics.max);
       }
     });
+  },
+
+  actions: {
+    rangeOver: function() {
+      this.sendAction('rangeOver', '');
+    },
+    rangeOut: function() {
+      this.sendAction('rangeOut', '');
+    }
   }
 
 });

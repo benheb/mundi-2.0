@@ -34,7 +34,8 @@
         {{/x-select}}
       </div>
       <div class="col-md-2">
-        {{od-range-slider model=model selectedAttribute=selectedAttribute filterMin=filterMin filterMax=filterMax}}
+        {{od-range-slider model=model selectedAttribute=selectedAttribute filterMin=filterMin filterMax=filterMax rangeOver="rangeOver" rangeOut="rangeOut"}}
+        {{od-attr-chart id="od-attr-chart" selectedAttributeName=selectedAttributeName class=showChart}}
       </div>
       <div class="col-md-2">
         {{od-draw-options action="changeDrawMode" drawMode=drawMode}}

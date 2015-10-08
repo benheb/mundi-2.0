@@ -64,6 +64,16 @@ export default Ember.Route.extend({
       let ctrl = this.controllerFor('mundi');
       ctrl.set('quickTheme', theme);
     },
+    rangeOver: function() {
+      console.log('range over.....');
+      let ctrl = this.controllerFor('mundi');
+      ctrl.set('showChart', 'visible' );
+    },
+    rangeOut: function() {
+      console.log('range out!.....');
+      let ctrl = this.controllerFor('mundi');
+      ctrl.set('showChart', 'hidden' );
+    },
     changeDrawMode: function(mode) {
       let ctrl = this.controllerFor('mundi');
       ctrl.set('drawMode', mode);

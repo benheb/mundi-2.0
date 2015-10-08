@@ -1,0 +1,26 @@
+#od-attr-chart {
+  display: none;
+  position: absolute;
+  z-index: 500;
+  height: 115px;
+  width: 86%;
+  margin: auto;
+  background: #FFF;
+  margin-top: 2px;
+  overflow: hidden;
+  font-size: 14px;
+  text-align: left;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  background-clip: padding-box;
+  &.hidden {
+    display: none;
+  }
+  &.visible {
+    display: block;
+  }
+}
