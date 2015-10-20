@@ -4,10 +4,6 @@ export default Ember.Route.extend({
 
   setupController: function (controller, model) {
     this._super(controller, model); // Do not forget this call
-    this.store.findAll('activity')
-      .then(function (result) {
-        controller.set('activities', result);
-      }.bind(this));
   },
 
   actions: {

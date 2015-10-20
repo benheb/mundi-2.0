@@ -16,7 +16,9 @@ export default Ember.Component.extend({
     
     let top = Ember.$('#mundi-map').offset().top;
     let win = Ember.$(window).height();
-    let height = win - ( top + 50 );
+    //let height = win - ( top + 50 );
+    let height = win - ( top ); //no footer 
+
     Ember.$('#mundi-map').css({height: height+'px'});
 
     this.map = new Map("mundi-map", {

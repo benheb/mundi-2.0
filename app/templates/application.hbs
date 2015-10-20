@@ -2,26 +2,13 @@
   <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 
-{{#if isFullScreen}}
-  <div class="full-screen {{bodyClass}}">
-    <div class="header">
-      <h1 class="text-muted">
-        {{link-to 'Open Data' 'mundi'}}<small>{{subHeader}}</small>
-      </h1>
-    </div>
-    <div class="fullscreen-container">
-      {{outlet}}
-    </div>
-    <div class="footer">
-      <p>♥ from the <a href="http://dc.esri.com/">Open Data team</a></p>
-    </div>
+<div class="full-screen {{bodyClass}}">
+  <div class="header">
+    <h1 class="text-muted">
+      {{link-to 'Open Data' 'mundi'}}<small>{{subHeader}}</small>
+    </h1>
   </div>
-{{else}}
-  <div class="container {{bodyClass}}">
-    {{partial '-header'}}
-      <div id="main-region">
-        {{outlet}}
-      </div>
-    {{partial 'footer'}}
+  <div class="fullscreen-container">
+    {{outlet}}
   </div>
-{{/if}}
+</div>
