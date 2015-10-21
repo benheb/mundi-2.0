@@ -2,14 +2,12 @@
   <div class="mundi-toolbar">
     <div id="mundi-toolbar-top">
       <div class="col-md-2">
-        <span class="mundi-step-title selected active">Map</span>
-        <span class="divider"> | </span>
-        <span class="mundi-step-title">Chart</span>
+        <span class="mundi-step-title active">Selected Attribute</span>
       </div>
       <div class="col-md-2">
-        <span class="mundi-step-title">Transform</span>
+        <span class="mundi-step-title {{transformActive}}" {{action "showTransformUI"}}>Transform</span>
         <span class="divider"> | </span>
-        <span class="mundi-step-title active">Filter</span>
+        <span class="mundi-step-title {{filterActive}}" {{action "showFilterUI"}}>Filter</span>
       </div>
       <div class="col-md-2">
         <span class="mundi-step-title active">Draw</span>
@@ -34,8 +32,12 @@
         {{/x-select}}
       </div>
       <div class="col-md-2">
-        {{od-range-slider model=model selectedAttribute=selectedAttribute filterMin=filterMin filterMax=filterMax rangeOver="rangeOver" rangeOut="rangeOut"}}
-        {{od-attr-chart id="od-attr-chart" selectedAttributeName=selectedAttributeName class=showChart}}
+        {{#if isFilter}}
+          {{od-range-slider model=model selectedAttribute=selectedAttribute filterMin=filterMin filterMax=filterMax rangeOver="rangeOver" rangeOut="rangeOut"}}
+          {{od-attr-chart id="od-attr-chart" selectedAttributeName=selectedAttributeName class=showChart}}
+        {{else}}
+          {{od-transform action="buffer"}}
+        {{/if}}
       </div>
       <div class="col-md-2">
         {{od-draw-options action="changeDrawMode" drawMode=drawMode}}
@@ -56,6 +58,6 @@
 
   {{od-legend-container legendLayers=legendLayers}}
   
-  {{od-mundi model=model store=store addLegendLayer="addLegendLayer" updateLegendLayer="updateLegendLayer" quickTheme=quickTheme drawMode=drawMode selectedAttribute=selectedAttribute selectedAttributeName=selectedAttributeName filterMin=filterMin filterMax=filterMax fields=fields}}
+  {{od-mundi model=model store=store addLegendLayer="addLegendLayer" updateLegendLayer="updateLegendLayer" quickTheme=quickTheme drawMode=drawMode selectedAttribute=selectedAttribute selectedAttributeName=selectedAttributeName filterMin=filterMin filterMax=filterMax fields=fields buffer=buffer}}
 
 </div>

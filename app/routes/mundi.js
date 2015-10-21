@@ -33,6 +33,8 @@ export default Ember.Route.extend({
     mundiCtrl.set('drawMode', 'single');
     mundiCtrl.set('quickTheme', 'Default Theme');
     mundiCtrl.set('fields', fields);
+    mundiCtrl.set('isFilter', true);
+    mundiCtrl.set('filterActive', 'active');
   },
 
   resetController: function (controller, isExiting, transition) {
@@ -59,6 +61,23 @@ export default Ember.Route.extend({
 
       ctrl.set('selectedAttributeName', name);
 
+    },
+    showTransformUI: function() {
+      let ctrl = this.controllerFor('mundi');
+      ctrl.set('filterActive', '');
+      ctrl.set('transformActive', 'active');
+      ctrl.set('isFilter', false);
+    },
+    showFilterUI: function() {
+      let ctrl = this.controllerFor('mundi');
+      ctrl.set('filterActive', 'active');
+      ctrl.set('transformActive', '');
+      ctrl.set('isFilter', true);
+    },
+    buffer: function(params) {
+      let ctrl = this.controllerFor('mundi');
+      params = JSON.parse(params);
+      ctrl.set('buffer', params);
     },
     quickThemeChanged: function(theme) {
       let ctrl = this.controllerFor('mundi');

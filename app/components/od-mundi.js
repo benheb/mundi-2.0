@@ -7,6 +7,13 @@ import PopupTemplate from 'esri/dijit/PopupTemplate';
 import Extent from 'esri/geometry/Extent';
 import SpatialReference from 'esri/SpatialReference';
 import jsonUtils from 'esri/renderers/jsonUtils';
+import graphicsUtils from 'esri/graphicsUtils';
+import geometryEngine from 'esri/geometry/geometryEngine';
+import GraphicsLayer from 'esri/layers/GraphicsLayer';
+import Graphic from 'esri/graphic';
+import SimpleFillSymbol from 'esri/symbols/SimpleFillSymbol';
+import SimpleLineSymbol from 'esri/symbols/SimpleLineSymbol';
+import Color from 'esri/Color';
 
 export default Ember.Component.extend({
 
@@ -79,6 +86,46 @@ export default Ember.Component.extend({
     this._addDataset(this.map, datasetIds[datasetIds.length - 1]);
   }.observes('datasetIds.[]'),
 
+
+
+  _onBuffer: function() {
+    let buffer = this.get('buffer');
+    let dataset = this.get('dataset');
+    let layer = this.map.getLayer( dataset.get('id') );
+    
+    this.graphicsLayer = new GraphicsLayer({
+      id: 'bufferLayer'
+    });
+
+    this.map.addLayer(this.graphicsLayer);
+    let geometries = graphicsUtils.getGeometries(layer.graphics);
+    let bufferedGeometries = geometryEngine.geodesicBuffer(geometries, buffer.value, buffer.scale, false);
+
+    let renderer = this._createRendererFromJson({
+      'type': 'simple',
+      'symbol': {
+        'color': [255,240,176,100],
+        'outline': {
+          'color': [28,28,28,120],
+          'width': 0.6,
+          'type': 'esriSLS',
+          'style': 'esriSLSDashed'
+        },
+        'type': 'esriSFS',
+        'style': 'esriSFSSolid'
+      }
+    });
+    this.graphicsLayer.setRenderer(renderer);
+
+    bufferedGeometries.forEach(function(geometry){
+      this.graphicsLayer.add(new Graphic(geometry));
+    }.bind(this));
+
+    this.map.reorderLayer(layer, 1);
+    window.map = this.map;
+
+
+  }.observes('buffer'),
 
 
   _onChangeTheme: function() {

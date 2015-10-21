@@ -7,6 +7,7 @@
   "template":{
     "axes": [
       {
+        "autoLabel": false,
         "type": "x",
         "scale": "x",
         "titleOffset": 0,
@@ -34,6 +35,7 @@
         }
       },
       {
+        "autoLabel": false,
         "type": "y",
         "scale": "y",
         "titleOffset": 0,
