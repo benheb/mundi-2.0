@@ -54,10 +54,7 @@ export default Ember.Component.extend({
 
     let url = dataset.get('url');
     let opts = this._getDatasetLayerOpts(dataset);
-    console.log('url', url);
-    console.log('opts', opts);
     let datasetLayer = new FeatureLayer(url, opts);
-    console.log('datasetLayer', datasetLayer);
     datasetLayer.id = dataset.get('id');
     
     map.addLayer( datasetLayer );
@@ -90,16 +87,23 @@ export default Ember.Component.extend({
 
   _onBuffer: function() {
     let buffer = this.get('buffer');
+    console.log('SET BUFFER: ', buffer);
+    
     let dataset = this.get('dataset');
     let layer = this.map.getLayer( dataset.get('id') );
     
+    if ( this.graphicsLayer ) {
+      this.map.removeLayer(this.graphicsLayer);
+      this.graphicsLayer = null;
+    }
+
     this.graphicsLayer = new GraphicsLayer({
       id: 'bufferLayer'
     });
 
     this.map.addLayer(this.graphicsLayer);
     let geometries = graphicsUtils.getGeometries(layer.graphics);
-    let bufferedGeometries = geometryEngine.geodesicBuffer(geometries, buffer.value, buffer.scale, false);
+    let bufferedGeometries = geometryEngine.geodesicBuffer(geometries, buffer.distance, buffer.unit, false);
 
     let renderer = this._createRendererFromJson({
       'type': 'simple',
