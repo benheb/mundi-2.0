@@ -1,0 +1,28 @@
+#od-transform-dropdown {
+  width:100%;
+  .dropdown-menu {
+    height: 300px;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+  li {
+    cursor: pointer;
+    margin-bottom:10px;
+  }
+  li:last-of-type {
+    margin-bottom:0px;
+  }
+  #buffer-distance {
+    width:50px;
+  }
+  #buffer-unit-select {
+    width:100px;
+  }
+  .transform-option {
+    margin: 5px;
+    margin-top: 0px;
+    border-bottom: 1px solid #EEE;
+    padding-bottom: 5px;
+    min-width: 210px;
+  }
+}
