@@ -87,8 +87,6 @@ export default Ember.Component.extend({
 
   _onBuffer: function() {
     let buffer = this.get('buffer');
-    console.log('SET BUFFER: ', buffer);
-    
     let dataset = this.get('dataset');
     let layer = this.map.getLayer( dataset.get('id') );
     

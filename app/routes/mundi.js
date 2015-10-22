@@ -33,7 +33,7 @@ export default Ember.Route.extend({
     mundiCtrl.set('drawMode', 'single');
     mundiCtrl.set('quickTheme', 'Default Theme');
     mundiCtrl.set('fields', fields);
-    mundiCtrl.set('isFilter', false);
+    mundiCtrl.set('isFilter', true);
     mundiCtrl.set('filterActive', 'active');
   },
 
