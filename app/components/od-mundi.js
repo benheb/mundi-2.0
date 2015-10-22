@@ -30,7 +30,7 @@ export default Ember.Component.extend({
 
     this.map = new Map("mundi-map", {
       center: [-80, 34.5],
-      zoom: 3,
+      zoom: 4,
       basemap: "gray",
       smartNavigation: false
     });
@@ -75,6 +75,58 @@ export default Ember.Component.extend({
 
     this._setExtent(dataset);
 
+    this._addGeometryLayer('counties');
+  },
+
+
+
+  _addGeometryLayer: function(geomName) {
+    $.getJSON(geomName+'.json', function(data) {
+    
+      var featureCollection = {
+        "layerDefinition": null,
+        "featureSet": {
+          "features": [],
+          "geometryType": "esriGeometryPolygon"
+        }
+      };
+
+      featureCollection.layerDefinition = {
+        "geometryType": "esriGeometryPolygon",
+        //"objectIdField": "ObjectID",
+        "drawingInfo": {
+          "renderer" : {
+            "type": "simple",
+            "symbol": {
+              "color": [100,100,100,0],
+              "outline": {
+                "color": [220,220,220,255],
+                "width": 0.6,
+                "type": "esriSLS",
+                "style": "esriSLSSolid"
+              },
+              "type": "esriSFS",
+              "style": "esriSFSSolid"
+            },
+          },
+        },
+        "fields": data.fields
+      };
+
+      var layerName = geomName + 'Layer';
+      this[layerName] = new FeatureLayer(featureCollection, {
+        id: layerName
+      });
+
+      this.map.addLayer(this[layerName]);
+      console.log('layer name', layerName);
+      data.features.forEach(function(feature) {
+        feature.geometry.spatialReference = {"wkid": 102100}
+        var gra = new Graphic(feature);
+        this[layerName].add(gra);
+      }.bind(this));
+
+    }.bind(this));
   },
 
 
@@ -83,6 +135,35 @@ export default Ember.Component.extend({
     this._addDataset(this.map, datasetIds[datasetIds.length - 1]);
   }.observes('datasetIds.[]'),
 
+
+  _onAggregate: function() {
+    let agg = this.get('aggregate');
+
+    if ( agg ) {
+      let dataset = this.get('dataset');
+      let layer = this.map.getLayer( dataset.get('id') );
+      let features = layer.graphics; 
+      let countiesLayer = this.map.getLayer("countiesLayer");
+      let counties = countiesLayer.graphics;
+
+      counties.forEach(function(county) {
+        features.forEach(function(feature) {
+          if ( geometryEngine.within(feature.geometry, county.geometry) ) {
+            if ( county.attributes.count ) {
+              county.attributes.count++;
+            } else {
+              county.attributes.count = 1;
+            }
+          }
+        });
+      });
+
+      let rend = this._createRendererFromJson( this._defaultAggregateRenderer );
+      countiesLayer.setRenderer(rend);
+      countiesLayer.redraw();
+
+    }
+  }.observes('aggregate'),
 
 
   _onBuffer: function() {
@@ -961,6 +1042,136 @@ export default Ember.Component.extend({
       },
       'type': 'esriSFS',
       'style': 'esriSFSSolid'
+    }
+  },
+
+  _defaultAggregateRenderer: {
+    "type": "simple",
+    "label": "",
+    "description": "",
+    "symbol": {
+      "color": [0,0,0,0],
+      "size": 6,
+      "angle": 0,
+      "xoffset": 0,
+      "yoffset": 0,
+      "style": "esriSFSSolid",
+      "type": "esriSFS",
+      "outline": {
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "width": 0.5,
+        "type": "esriSLS",
+        "style": "esriSLSSolid"
+      }
+    },
+    "visualVariables": [
+      {
+        "type": "colorInfo",
+        "field": "count",
+        "stops": [
+          {
+            "value": 1,
+            "color": {
+              "r": 255,
+              "g": 255,
+              "b": 204,
+              "a": 0.7843137254901961
+            },
+            "label": null
+          },
+          {
+            "value": 3,
+            "color": {
+              "r": 255,
+              "g": 237,
+              "b": 160,
+              "a": 0.7843137254901961
+            },
+            "label": null
+          },
+          {
+            "value": 8,
+            "color": {
+              "r": 254,
+              "g": 217,
+              "b": 118,
+              "a": 0.7843137254901961
+            },
+            "label": null
+          },
+          {
+            "value": 12,
+            "color": {
+              "r": 254,
+              "g": 178,
+              "b": 76,
+              "a": 0.7843137254901961
+            },
+            "label": null
+          },
+          {
+            "value": 15,
+            "color": {
+              "r": 253,
+              "g": 141,
+              "b": 60,
+              "a": 0.7843137254901961
+            },
+            "label": null
+          },
+          {
+            "value": 30,
+            "color": {
+              "r": 252,
+              "g": 78,
+              "b": 42,
+              "a": 0.7843137254901961
+            },
+            "label": null
+          },
+          {
+            "value": 45,
+            "color": {
+              "r": 227,
+              "g": 26,
+              "b": 28,
+              "a": 0.7843137254901961
+            },
+            "label": null
+          },
+          {
+            "value": 60,
+            "color": {
+              "r": 177,
+              "g": 0,
+              "b": 38,
+              "a": 0.7843137254901961
+            },
+            "label": null
+          }
+        ]
+      }
+    ],
+    "layerId": "6b25ff770436442d96f8e803fafdab46_0",
+    "defaultSymbol": {
+      "color": [0,0,0,0],
+      "size": 6,
+      "angle": 0,
+      "xoffset": 0,
+      "yoffset": 0,
+      "style": "esriSFSSolid",
+      "type": "esriSFS",
+      "outline": {
+        "color": [255,255,255,255],
+        "width": 0.5,
+        "type": "esriSLS",
+        "style": "esriSLSSolid"
+      }
     }
   }
 

@@ -2,8 +2,9 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-  bufferDistance: 5,
+  bufferDistance: 20,
   bufferUnit: 'miles',
+  aggregate: false,
 
   didInsertElement: function() {
     Ember.$('.dropdown-menu').on('click', function(e) { 
@@ -11,12 +12,19 @@ export default Ember.Component.extend({
         e.stopPropagation();
       }
     });
+
+    this.set('aggregate', false);
   },
+
+  watchAggregate: function() {
+    let aggregate = this.get('aggregate');
+    this.sendAction('aggregate', aggregate);
+  }.observes('aggregate'),
 
   actions: {
     buffer (distance, unit) {
       let params = {'distance': distance, 'unit': unit};
-      this.sendAction('action', params);
+      this.sendAction('buffer', params);
     },
     changeBufferDistance (distance) {
       this.set('bufferDistance', distance);

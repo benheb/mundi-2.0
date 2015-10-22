@@ -36,7 +36,7 @@
           {{od-range-slider model=model selectedAttribute=selectedAttribute filterMin=filterMin filterMax=filterMax rangeOver="rangeOver" rangeOut="rangeOut"}}
           {{od-attr-chart id="od-attr-chart" selectedAttributeName=selectedAttributeName class=showChart}}
         {{else}}
-          {{od-transform action="buffer"}}
+          {{od-transform buffer="buffer" aggregate="aggregate"}}
         {{/if}}
       </div>
       <div class="col-md-2">
@@ -58,6 +58,6 @@
 
   {{od-legend-container legendLayers=legendLayers}}
   
-  {{od-mundi model=model store=store addLegendLayer="addLegendLayer" updateLegendLayer="updateLegendLayer" quickTheme=quickTheme drawMode=drawMode selectedAttribute=selectedAttribute selectedAttributeName=selectedAttributeName filterMin=filterMin filterMax=filterMax fields=fields buffer=buffer}}
+  {{od-mundi model=model store=store addLegendLayer="addLegendLayer" updateLegendLayer="updateLegendLayer" quickTheme=quickTheme drawMode=drawMode selectedAttribute=selectedAttribute selectedAttributeName=selectedAttributeName filterMin=filterMin filterMax=filterMax fields=fields buffer=buffer aggregate=aggregate}}
 
 </div>
