@@ -41,8 +41,10 @@ export default Ember.Component.extend({
     
     fields.forEach(function(f) {
       if ( f.alias === selectedField ) {
-        self.set('filterMin', f.statistics.min);
-        self.set('filterMax', f.statistics.max);
+        let min = parseFloat(f.statistics.min.toFixed(4));
+        let max = parseFloat(f.statistics.max.toFixed(4));
+        self.set('filterMin', min);
+        self.set('filterMax', max);
       }
     });
   },

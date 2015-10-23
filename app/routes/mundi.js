@@ -78,9 +78,13 @@ export default Ember.Route.extend({
       let ctrl = this.controllerFor('mundi');
       ctrl.set('buffer', params);
     },
-    aggregate: function(agg) {
+    aggregateCounty: function(agg) {
       let ctrl = this.controllerFor('mundi');
-      ctrl.set('aggregate', agg);
+      ctrl.set('aggregateCounty', agg);
+    },
+    aggregateState: function(agg) {
+      let ctrl = this.controllerFor('mundi');
+      ctrl.set('aggregateState', agg);
     },
     quickThemeChanged: function(theme) {
       let ctrl = this.controllerFor('mundi');

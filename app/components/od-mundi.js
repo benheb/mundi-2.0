@@ -29,7 +29,7 @@ export default Ember.Component.extend({
     Ember.$('#mundi-map').css({height: height+'px'});
 
     this.map = new Map("mundi-map", {
-      center: [-80, 34.5],
+      center: [-95, 36.5],
       zoom: 4,
       basemap: "gray",
       smartNavigation: false
@@ -75,7 +75,10 @@ export default Ember.Component.extend({
 
     this._setExtent(dataset);
 
-    this._addGeometryLayer('counties');
+    let geoms = ['counties', 'states'];
+    geoms.forEach(function(geom) {
+      this._addGeometryLayer(geom);
+    }.bind(this));
   },
 
 
@@ -100,8 +103,8 @@ export default Ember.Component.extend({
             "symbol": {
               "color": [100,100,100,0],
               "outline": {
-                "color": [220,220,220,255],
-                "width": 0.6,
+                "color": [200,200,200,100],
+                "width": 0.4,
                 "type": "esriSLS",
                 "style": "esriSLSSolid"
               },
@@ -119,12 +122,13 @@ export default Ember.Component.extend({
       });
 
       this.map.addLayer(this[layerName]);
-      console.log('layer name', layerName);
       data.features.forEach(function(feature) {
         feature.geometry.spatialReference = {"wkid": 102100}
         var gra = new Graphic(feature);
         this[layerName].add(gra);
       }.bind(this));
+
+      this.map.reorderLayer(this[layerName], 0);
 
     }.bind(this));
   },
@@ -136,17 +140,18 @@ export default Ember.Component.extend({
   }.observes('datasetIds.[]'),
 
 
-  _onAggregate: function() {
-    let agg = this.get('aggregate');
+  _onCountyAggregate: function(param) {
+    console.log('agg counties');
+    let agg = this.get('aggregateCounty');
+    let aggLayer = this.map.getLayer("countiesLayer");
+    let graphics = aggLayer.graphics;
 
     if ( agg ) {
       let dataset = this.get('dataset');
       let layer = this.map.getLayer( dataset.get('id') );
       let features = layer.graphics; 
-      let countiesLayer = this.map.getLayer("countiesLayer");
-      let counties = countiesLayer.graphics;
-
-      counties.forEach(function(county) {
+      
+      graphics.forEach(function(county) {
         features.forEach(function(feature) {
           if ( geometryEngine.within(feature.geometry, county.geometry) ) {
             if ( county.attributes.count ) {
@@ -159,11 +164,65 @@ export default Ember.Component.extend({
       });
 
       let rend = this._createRendererFromJson( this._defaultAggregateRenderer );
-      countiesLayer.setRenderer(rend);
-      countiesLayer.redraw();
+      aggLayer.setRenderer(rend);
+      aggLayer.redraw();
 
+      this.map.reorderLayer(aggLayer, 0);
+    } else {
+      //clear counties 
+      graphics.forEach(function(county) {
+        county.attributes.count = null;
+      });
+
+      let rend = this._createRendererFromJson( this._defaultAggregateRenderer );
+      aggLayer.setRenderer(rend);
+      aggLayer.redraw();
+
+      this.map.reorderLayer(aggLayer, 0);
     }
-  }.observes('aggregate'),
+  }.observes('aggregateCounty'),
+
+
+  _onStateAggregate: function(param) {
+    let agg = this.get('aggregateState');
+    let aggLayer = this.map.getLayer("statesLayer");
+    let graphics = aggLayer.graphics;
+
+    if ( agg ) {
+      let dataset = this.get('dataset');
+      let layer = this.map.getLayer( dataset.get('id') );
+      let features = layer.graphics; 
+      
+      graphics.forEach(function(county) {
+        features.forEach(function(feature) {
+          if ( geometryEngine.within(feature.geometry, county.geometry) ) {
+            if ( county.attributes.count ) {
+              county.attributes.count++;
+            } else {
+              county.attributes.count = 1;
+            }
+          }
+        });
+      });
+
+      let rend = this._createRendererFromJson( this._defaultAggregateRenderer );
+      aggLayer.setRenderer(rend);
+      aggLayer.redraw();
+
+      this.map.reorderLayer(aggLayer, 0);
+    } else {
+      //clear counties 
+      graphics.forEach(function(county) {
+        county.attributes.count = null;
+      });
+
+      let rend = this._createRendererFromJson( this._defaultAggregateRenderer );
+      aggLayer.setRenderer(rend);
+      aggLayer.redraw();
+
+      this.map.reorderLayer(aggLayer, 0);
+    }
+  }.observes('aggregateState'),
 
 
   _onBuffer: function() {
@@ -284,7 +343,7 @@ export default Ember.Component.extend({
     }
 
     if (extent) {
-      this.map.setExtent(extent.expand(1));
+      //this.map.setExtent(extent.expand(1));
     }
   },
 
@@ -302,7 +361,7 @@ export default Ember.Component.extend({
             'label': '',
             'description': '',
             'symbol': {
-              'color': [229,159,115,225],
+              'color': [49,130,189,225],
               'size': 6,
               'angle': 0,
               'xoffset': 0,
@@ -310,7 +369,7 @@ export default Ember.Component.extend({
               'type': 'esriSMS',
               'style': 'esriSMSCircle',
               'outline': {
-                'color': [220,220,220,255],
+                'color': [255,255,255,90],
                 'width': 0.6,
                 'type': 'esriSLS',
                 'style': 'esriSLSSolid'
@@ -326,7 +385,7 @@ export default Ember.Component.extend({
             "classBreakInfos": [
               {
                 "symbol": {
-                  'color': [229,159,115,225],
+                  'color': [49,130,189,225],
                   "size": 3.5,
                   "angle": 0,
                   "xoffset": 0,
@@ -334,7 +393,7 @@ export default Ember.Component.extend({
                   "type": "esriSMS",
                   "style": "esriSMSCircle",
                   "outline": {
-                    'color': [220,220,220,255],
+                    'color': [255,255,255,90],
                     'width': 0.6,
                     "type": "esriSLS",
                     "style": "esriSLSSolid"
@@ -345,7 +404,7 @@ export default Ember.Component.extend({
               },
               {
                 "symbol": {
-                  'color': [229,159,115,225],
+                  'color': [49,130,189,225],
                   "size": 10,
                   "angle": 0,
                   "xoffset": 0,
@@ -353,7 +412,7 @@ export default Ember.Component.extend({
                   "type": "esriSMS",
                   "style": "esriSMSCircle",
                   "outline": {
-                    'color': [220,220,220,255],
+                    'color': [255,255,255,90],
                     'width': 0.6,
                     "type": "esriSLS",
                     "style": "esriSLSSolid"
@@ -364,7 +423,7 @@ export default Ember.Component.extend({
               },
               {
                 "symbol": {
-                  'color': [229,159,115,225],
+                  'color': [49,130,189,225],
                   "size": 25,
                   "angle": 0,
                   "xoffset": 0,
@@ -372,7 +431,7 @@ export default Ember.Component.extend({
                   "type": "esriSMS",
                   "style": "esriSMSCircle",
                   "outline": {
-                    'color': [220,220,220,255],
+                    'color': [255,255,255,90],
                     'width': 0.6,
                     "type": "esriSLS",
                     "style": "esriSLSSolid"
@@ -383,7 +442,7 @@ export default Ember.Component.extend({
               },
               {
                 "symbol": {
-                  'color': [229,159,115,225],
+                  'color': [49,130,189,225],
                   "size": 35,
                   "angle": 0,
                   "xoffset": 0,
@@ -391,7 +450,7 @@ export default Ember.Component.extend({
                   "type": "esriSMS",
                   "style": "esriSMSCircle",
                   "outline": {
-                    'color': [220,220,220,255],
+                    'color': [255,255,255,90],
                     'width': 0.6,
                     "type": "esriSLS",
                     "style": "esriSLSSolid"
@@ -402,7 +461,7 @@ export default Ember.Component.extend({
               },
               {
                 "symbol": {
-                  'color': [229,159,115,225],
+                  'color': [49,130,189,225],
                   "size": 45,
                   "angle": 0,
                   "xoffset": 0,
@@ -410,7 +469,7 @@ export default Ember.Component.extend({
                   "type": "esriSMS",
                   "style": "esriSMSCircle",
                   "outline": {
-                    'color': [220,220,220,255],
+                    'color': [255,255,255,90],
                     'width': 0.6,
                     "type": "esriSLS",
                     "style": "esriSLSSolid"
@@ -421,7 +480,7 @@ export default Ember.Component.extend({
               }
             ],
             "defaultSymbol": {
-              'color': [229,159,115,225],
+              'color': [49,130,189,225],
               "size": 6,
               "angle": 0,
               "xoffset": 0,
@@ -430,7 +489,7 @@ export default Ember.Component.extend({
               "style": "esriSMSCircle",
               "outline": {
                 'color': [220,220,220,255],
-                'width': 0.6,
+                'color': [255,255,255,90],
                 "type": "esriSLS",
                 "style": "esriSLSSolid"
               }
@@ -1004,7 +1063,7 @@ export default Ember.Component.extend({
     'label': '',
     'description': '',
     'symbol': {
-      'color': [229,159,115,225],
+      'color': [49,130,189,225],
       'size': 6,
       'angle': 0,
       'xoffset': 0,
@@ -1012,8 +1071,8 @@ export default Ember.Component.extend({
       'type': 'esriSMS',
       'style': 'esriSMSCircle',
       'outline': {
-        'color': [220,220,220,255],
-        'width': 0.6,
+        'color': [255,255,255,100],
+        'width': 0.4,
         'type': 'esriSLS',
         'style': 'esriSLSSolid'
       }
@@ -1058,13 +1117,8 @@ export default Ember.Component.extend({
       "style": "esriSFSSolid",
       "type": "esriSFS",
       "outline": {
-        "color": [
-          255,
-          255,
-          255,
-          255
-        ],
-        "width": 0.5,
+        "color": [100,100,100,90],
+        "width": 0.3,
         "type": "esriSLS",
         "style": "esriSLSSolid"
       }
@@ -1079,77 +1133,77 @@ export default Ember.Component.extend({
             "color": {
               "r": 255,
               "g": 255,
-              "b": 204,
+              "b": 217,
               "a": 0.7843137254901961
             },
             "label": null
           },
           {
-            "value": 3,
+            "value": 7.25,
             "color": {
-              "r": 255,
-              "g": 237,
-              "b": 160,
+              "r": 237,
+              "g": 248,
+              "b": 177,
               "a": 0.7843137254901961
             },
             "label": null
           },
           {
-            "value": 8,
+            "value": 13.5,
             "color": {
-              "r": 254,
-              "g": 217,
-              "b": 118,
+              "r": 199,
+              "g": 233,
+              "b": 180,
               "a": 0.7843137254901961
             },
             "label": null
           },
           {
-            "value": 12,
+            "value": 19.75,
             "color": {
-              "r": 254,
-              "g": 178,
-              "b": 76,
+              "r": 127,
+              "g": 205,
+              "b": 187,
               "a": 0.7843137254901961
             },
             "label": null
           },
           {
-            "value": 15,
+            "value": 26,
             "color": {
-              "r": 253,
-              "g": 141,
-              "b": 60,
+              "r": 65,
+              "g": 182,
+              "b": 196,
               "a": 0.7843137254901961
             },
             "label": null
           },
           {
-            "value": 30,
+            "value": 32.25,
             "color": {
-              "r": 252,
-              "g": 78,
-              "b": 42,
+              "r": 29,
+              "g": 145,
+              "b": 192,
               "a": 0.7843137254901961
             },
             "label": null
           },
           {
-            "value": 45,
+            "value": 38.5,
             "color": {
-              "r": 227,
-              "g": 26,
-              "b": 28,
+              "r": 34,
+              "g": 94,
+              "b": 168,
               "a": 0.7843137254901961
             },
             "label": null
           },
           {
-            "value": 60,
+            "value": 44.75,
             "color": {
-              "r": 177,
-              "g": 0,
-              "b": 38,
+              "r": 12,
+              "g": 44,
+              "b": 132,
               "a": 0.7843137254901961
             },
             "label": null
@@ -1157,7 +1211,6 @@ export default Ember.Component.extend({
         ]
       }
     ],
-    "layerId": "6b25ff770436442d96f8e803fafdab46_0",
     "defaultSymbol": {
       "color": [0,0,0,0],
       "size": 6,
@@ -1167,8 +1220,8 @@ export default Ember.Component.extend({
       "style": "esriSFSSolid",
       "type": "esriSFS",
       "outline": {
-        "color": [255,255,255,255],
-        "width": 0.5,
+        "color": [100,100,100,90],
+        "width": 0.3,
         "type": "esriSLS",
         "style": "esriSLSSolid"
       }

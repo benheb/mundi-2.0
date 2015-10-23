@@ -4,7 +4,8 @@ export default Ember.Component.extend({
 
   bufferDistance: 20,
   bufferUnit: 'miles',
-  aggregate: false,
+  countyAggregate: false,
+  stateAggregate: false,
 
   didInsertElement: function() {
     Ember.$('.dropdown-menu').on('click', function(e) { 
@@ -16,10 +17,15 @@ export default Ember.Component.extend({
     this.set('aggregate', false);
   },
 
-  watchAggregate: function() {
-    let aggregate = this.get('aggregate');
-    this.sendAction('aggregate', aggregate);
-  }.observes('aggregate'),
+  watchCountyAggregate: function() {
+    let aggregate = this.get('countyAggregate');
+    this.sendAction('aggregateCounty', aggregate);
+  }.observes('countyAggregate'),
+
+  watchStateAggregate: function() {
+    let aggregate = this.get('stateAggregate');
+    this.sendAction('aggregateState', aggregate);
+  }.observes('stateAggregate'),
 
   actions: {
     buffer (distance, unit) {
